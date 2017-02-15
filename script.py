@@ -27,10 +27,11 @@ class Game(object):
         # Edicios
         # criar objetos dos edificios
         self.mina_metal = Edificios(self.i, lv=0, evol=False,
-                                    falta=MINA_METAL['TEMPO'], **MINA_METAL)
+                                    falta=MINA_METAL['tempo'],
+                                    **MINA_METAL)
 
         self.fab_robot = Edificios(self.i, lv=0, evol=False,
-                                   falta=FAB_ROBOT['TEMPO'], **FAB_ROBOT)
+                                   falta=FAB_ROBOT['tempo'], **FAB_ROBOT)
 
         # Cabecalho
         cab = Cabecalho(self.i, 3, 0)

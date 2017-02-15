@@ -10,13 +10,13 @@ METAL['TAXA_POR_S'] = 1.5  # exponencial  TAXA__METAL ^ nivel
 # Edificios
 EDIFICIOS = ['mina de metal', 'fabrica de robots']
 
-MINA_METAL = {'NOME': EDIFICIOS[0],
-              'CUSTO': 10, 'TAXA_CUSTO': 1.5, 'TEMPO': 5, 'TAXA_T': 2}
+MINA_METAL = {'nome': EDIFICIOS[0],
+              'custo': 10, 'taxa_custo': 1.5, 'tempo': 5, 'taxa_t': 2}
 # efeitos: METAL[POR_S] *= METAL[TAXA]
 
 
-FAB_ROBOT = {'NOME': EDIFICIOS[1],
-             'CUSTO': 10, 'TAXA_CUSTO': 2, 'TEMPO': 5, 'TAXA_T': 2}
+FAB_ROBOT = {'nome': EDIFICIOS[1],
+             'custo': 10, 'taxa_custo': 2, 'tempo': 5, 'taxa_t': 2}
 
 # efeitos EDIFICIOS[TEMPO] /= 2
 TAXA_FB = 2
