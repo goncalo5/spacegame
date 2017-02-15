@@ -1,22 +1,22 @@
-# recursos
-RECURSOS = ['metal', 'cristal']
+# resources
+RESOURCES = ['metal', 'crystal']
 # Metal
-# iniciais
-# distancia=TOTAL, velocidade=por segundo=D_TOTAL, aceleracao=taxa por segundo=D2_TOTAL
-METAL = {'TOTAL': 1000, 'POR_S': 1}
-# taxa de quanto aumenta o metal ganho
-METAL['TAXA_POR_S'] = 1.5  # exponencial  TAXA__METAL ^ nivel
+# initials
+# distance=TOTAL, velocity=por segundo=D_TOTAL, aceleracao=rate por segundo=D2_TOTAL
+METAL = {'TOTAL': 1000, 'PER_S': 1}
+# rate de quanto aumenta o metal ganho
+METAL['RATE_PER_S'] = 1.5  # exponencial  RATE__METAL ^ nivel
 
-# Edificios
-EDIFICIOS = ['mina de metal', 'fabrica de robots']
+# buildings
+BUILDINGS = ['metal mine', 'robots factory']
 
-MINA_METAL = {'nome': EDIFICIOS[0],
-              'custo': 10, 'taxa_custo': 1.5, 'tempo': 5, 'taxa_t': 2}
-# efeitos: METAL[POR_S] *= METAL[TAXA]
+METAL_MINE = {'name': BUILDINGS[0],
+              'cost': 10, 'rate_cost': 1.5, 'time': 5, 'rate_t': 2}
+# efeitos: METAL[PER_S] *= METAL[RATE]
 
 
-FAB_ROBOT = {'nome': EDIFICIOS[1],
-             'custo': 10, 'taxa_custo': 2, 'tempo': 5, 'taxa_t': 2}
+ROBOT_FAC = {'name': BUILDINGS[1],
+             'cost': 10, 'rate_cost': 2, 'time': 5, 'rate_t': 2}
 
-# efeitos EDIFICIOS[TEMPO] /= 2
-TAXA_FB = 2
+# efeitos BUILDINGS[TIME] /= 2
+RATE_FB = 2
