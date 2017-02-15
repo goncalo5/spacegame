@@ -1,6 +1,6 @@
 # from Tkinter import *
 # from constantes import *
-from cabecalho import *
+from header import *
 
 
 class Game(object):
