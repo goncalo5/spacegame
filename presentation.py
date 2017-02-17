@@ -14,8 +14,7 @@ class Game(object):
         Label(self.root, text='per sec').grid(row=1, column=0)
         Label(self.root, text='Total').grid(row=2, column=0)
         # create resources's objects
-        self.metal = Resources(RESOURCES[0], METAL['TOTAL'],
-                               METAL['PER_S'], METAL['RATE_PER_S'])
+        self.metal = Resources(RESOURCES[0])
         self.resources = [self.metal]
         for n, r in enumerate(self.resources):
             Label(self.root, text=r.name).grid(row=0, column=1 + n)
@@ -26,9 +25,7 @@ class Game(object):
 
         # Buildings
         # create buildings's objects
-        self.metal_mine = Buildings(self.root, lv=0, evol=False,
-                                    left=METAL_MINE['time'],
-                                    **METAL_MINE)
+        self.metal_mine = Resources('metal_mine')
 
         self.robot_fac = Buildings(self.root, lv=0, evol=False,
                                    left=ROBOT_FAC['time'], **ROBOT_FAC)
