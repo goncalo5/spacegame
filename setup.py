@@ -1,5 +1,4 @@
 # from constantes import *
-from header import *
 from presentation import Game
 
 
