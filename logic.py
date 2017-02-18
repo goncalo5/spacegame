@@ -3,6 +3,36 @@ import database
 import constants
 
 
+class Logic(object):
+    def __init__(self):
+        # Resources
+        # create resources's objects
+        self.metal = Resources('metal')
+        self.resources = [self.metal]
+
+        # Buildings
+        # create buildings's objects
+        self.metal_mine = Buildings('metal_mine')
+        self.robot_fac = Buildings('robot_factory')
+        self.buildings = [self.metal_mine, self.robot_fac]
+        self.mines = [self.metal_mine]
+
+    def evolve_building(self, building):
+        if building == "metal_mine":
+            self.metal_mine.evolve()
+            self.metal.calculate_per_s()
+        elif building == "robot_factory":
+            pass
+
+    def check_if_can_evolve(self):
+        if self.metal >= self.cost and not self.evolving:
+            return True
+
+    def take_resources2evolve(self):
+        self.metal.total -= self.cost
+        self.evolving = True
+
+
 class Resources(object):
     def __init__(self, name):
         self.name = name
@@ -58,6 +88,7 @@ class Buildings(object):
 
         #
         self.evolving = False
+        self.left = self.time
 
     # Data Base
     # GET
@@ -82,17 +113,31 @@ class Buildings(object):
     def evolve(self):
         self.check_if_can_evolve()
         self.take_resources2evolve()
+        self.loop_evolve()  # time to built
         self.up1level()
+        self.calculate_cost()
+        self.calculate_time2build()
 
     def check_if_can_evolve(self):
         if self.metal >= self.cost and not self.evolving:
             return True
 
     def take_resources2evolve(self):
-        pass
+        self.metal.total -= self.cost
+        self.evolving = True
 
     def up1level(self):
-        pass
+        self.level += 1
+
+    def loop_evolve(self):
+        if self.evolving:
+            self.left -= 1
+            if self.left <= 0:
+                self.left = self.time
+                self.evolving = False
+                return
+            time.sleep(1)
+            self.loop_evolve(e)
 
 
 class Mines(Buildings):
