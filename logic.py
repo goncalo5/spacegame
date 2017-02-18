@@ -7,7 +7,36 @@ class Resources(object):
     def __init__(self, name):
         self.name = name
 
+        # Null variables
         self.total = None
+        self.per_s = None
+
+        # initial methods
+        self.see_total_in_db()
+        self.calculate_per_s()
+
+    def updating_total(self):
+        self.total += self.per_s
+        time.sleep(1)
+        self.updating_total()
+
+    # calculators
+    def calculate_per_s(self):
+        self.per_s = 1
+
+    # Data Base
+    # GET
+    def see_total_in_db(self):
+        self.total = database.RESOURCES[self.name]
+
+    # PUT
+    def save_total_in_db(self):
+        database.BUILDINGS[self.name]['total'] = self.total
+
+    def updating_total_in_db(self):
+        self.save_total_in_db()
+        time.sleep(constants.TIME2UPDATE_DB)
+        self.updating_total_in_db()
 
 
 class Buildings(object):
@@ -18,9 +47,11 @@ class Buildings(object):
         self.level = None
         self.cost = self.cost_lv0 = self.rate_cost = None
         self.time_lv0 = self.rate_time = self.time = None
+        self.metal = None
 
         # initial methods
         self.see_level_in_db()
+        self.see_metal_in_db()
 
         self.calculate_cost()
         self.calculate_time2build()
@@ -32,6 +63,9 @@ class Buildings(object):
     # GET
     def see_level_in_db(self):
         self.level = database.BUILDINGS[self.name]['level']
+
+    def see_metal_in_db(self):
+        self.metal = database.RESOURCES['metal']
 
     # calculators
     def calculate_cost(self):
@@ -64,35 +98,7 @@ class Buildings(object):
 class Mines(Buildings):
     def __init__(self, name):
         super(Mines, self).__init__(name)
-        # Null variables
-        self.total = None
-        self.per_s = self.rate_per_s = None
-
-        # initial methods
-        self.see_total_in_db()
-
-    def updating_total(self):
-        self.total += self.per_s
-        time.sleep(1)
-        self.updating_total()
-
-    def calculate_per_s(self):
-        self.per_s = 1
+        self.rate_per_s = None
 
     def calculate_rate_per_s(self):
         self.rate_per_s = 1.5
-
-    # Data Base
-    # GET
-    def see_total_in_db(self):
-        self.total = database.BUILDINGS[self.name]['total']
-
-    # PUT
-    def save_total_in_db(self):
-        database.BUILDINGS[self.name]['total'] = self.total
-
-    def updating_total_in_db(self):
-        self.save_total_in_db()
-        time.sleep(constants.TIME2UPDATE_DB)
-        self.updating_total_in_db()
-

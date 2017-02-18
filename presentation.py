@@ -26,7 +26,7 @@ class Game(object):
 
         # Buildings
         # create buildings's objects
-        self.metal_mine = Resources('metal_mine')
+        self.metal_mine = Buildings('metal_mine')
         self.robot_fac = Buildings('robot_factory')
 
         # Header
@@ -35,16 +35,16 @@ class Game(object):
         self.mines = [self.metal_mine]
         for n, e in enumerate(self.buildings):
             l = head.l + 2 + n
-            Label(self.root, text=e.NAME).\
+            Label(self.root, text=e.name).\
                 grid(row=l, column=head.c)
             # Level
-            e.l_lv = Label(self.root, text=e.lv)
+            e.l_lv = Label(self.root, text=e.level)
             e.l_lv.grid(row=l, column=head.c + 1)
             # evolving cost
             e.l_cost = Label(self.root, text=int(e.cost))
             e.l_cost.grid(row=l, column=head.c_costs)
             # evolving time
-            e.l_t = Label(self.root, text=int(e.t))
+            e.l_t = Label(self.root, text=int(e.time))
             e.l_t.grid(row=l, column=head.c_t)
             # evolving
         # create buttons
