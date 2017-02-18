@@ -1,5 +1,5 @@
 import time
-import multiprocessing
+import threading
 import database
 import constants
 
@@ -19,7 +19,7 @@ class Logic(object):
         self.mines = [self.metal_mine]
 
         # start updating resources
-        self.p_updating_metal = multiprocessing.Process(target=self.updating_total)
+        self.p_updating_metal = threading.Thread(target=self.updating_total)
         self.p_updating_metal.start()
 
     def updating_total(self):
