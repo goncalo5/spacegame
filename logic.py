@@ -13,24 +13,39 @@ class Logic(object):
         # Buildings
         # create buildings's objects
         self.metal_mine = Buildings('metal_mine')
-        self.robot_fac = Buildings('robot_factory')
-        self.buildings = [self.metal_mine, self.robot_fac]
+        self.robot_factory = Buildings('robot_factory')
+        self.buildings = [self.metal_mine, self.robot_factory]
         self.mines = [self.metal_mine]
 
     def evolve_building(self, building):
-        if building == "metal_mine":
-            self.metal_mine.evolve()
-            self.metal.calculate_per_s()
-        elif building == "robot_factory":
-            pass
+        self.check_if_can_evolve(building)
+        self.take_resources2evolve(building)
+        self.loop_evolve(building)  # time to built
+        self.up1level(building)
+        building.calculate_cost()
+        building.calculate_time2build()
+        self.metal.calculate_per_s()
 
-    def check_if_can_evolve(self):
-        if self.metal >= self.cost and not self.evolving:
+    def check_if_can_evolve(self, building):
+        if self.metal >= building.cost and not building.evolving:
             return True
 
-    def take_resources2evolve(self):
-        self.metal.total -= self.cost
-        self.evolving = True
+    def take_resources2evolve(self, building):
+        self.metal.total -= building.cost
+        building.evolving = True
+
+    def up1level(self, building):
+        building.level += 1
+
+    def loop_evolve(self, building):
+        if building.evolving:
+            building.left -= 1
+            if building.left <= 0:
+                building.left = building.time
+                building.evolving = False
+                return
+            time.sleep(1)
+            self.loop_evolve(building)
 
 
 class Resources(object):
@@ -108,36 +123,6 @@ class Buildings(object):
         self.time_lv0 = constants.BUILDINGS[self.name]['time']
         self.rate_time = constants.BUILDINGS[self.name]['rate_time']
         self.time = self.time_lv0 * self.rate_time**self.level
-
-    # evolutions
-    def evolve(self):
-        self.check_if_can_evolve()
-        self.take_resources2evolve()
-        self.loop_evolve()  # time to built
-        self.up1level()
-        self.calculate_cost()
-        self.calculate_time2build()
-
-    def check_if_can_evolve(self):
-        if self.metal >= self.cost and not self.evolving:
-            return True
-
-    def take_resources2evolve(self):
-        self.metal.total -= self.cost
-        self.evolving = True
-
-    def up1level(self):
-        self.level += 1
-
-    def loop_evolve(self):
-        if self.evolving:
-            self.left -= 1
-            if self.left <= 0:
-                self.left = self.time
-                self.evolving = False
-                return
-            time.sleep(1)
-            self.loop_evolve(e)
 
 
 class Mines(Buildings):

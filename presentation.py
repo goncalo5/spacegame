@@ -26,27 +26,27 @@ class Game(object):
 
         # Header
         head = Header(self.root, 3, 0)
-        for n, e in enumerate(self.game.buildings):
+        for n, builting in enumerate(self.game.buildings):
             l = head.l + 2 + n
-            Label(self.root, text=e.name).\
+            Label(self.root, text=builting.name).\
                 grid(row=l, column=head.c)
             # Level
-            e.l_lv = Label(self.root, text=e.level)
-            e.l_lv.grid(row=l, column=head.c + 1)
+            builting.l_lv = Label(self.root, text=builting.level)
+            builting.l_lv.grid(row=l, column=head.c + 1)
             # evolving cost
-            e.l_cost = Label(self.root, text=int(e.cost))
-            e.l_cost.grid(row=l, column=head.c_costs)
+            builting.l_cost = Label(self.root, text=int(builting.cost))
+            builting.l_cost.grid(row=l, column=head.c_costs)
             # evolving time
-            e.l_t = Label(self.root, text=int(e.time))
-            e.l_t.grid(row=l, column=head.c_t)
+            builting.l_t = Label(self.root, text=int(builting.time))
+            builting.l_t.grid(row=l, column=head.c_t)
             # evolving
         # create buttons
         l = head.l + 2
         self.b_lv_metal_mine = \
-            Button(text='evolve mine', command=lambda: self.evolve_building('metal_mine'))
+            Button(text='evolve mine', command=lambda: self.evolve_building(self.game.metal_mine))
         self.b_lv_metal_mine.grid(row=l, column=head.c_evol)
         self.b_lv_robot_fac = \
-            Button(text='evolve factory', command=lambda: self.evolve_building('robot_factory'))
+            Button(text='evolve factory', command=lambda: self.evolve_building(self.game.robot_factory))
         self.b_lv_robot_fac.grid(row=l + 1, column=head.c_evol)
 
         self.update_resources()
@@ -56,14 +56,7 @@ class Game(object):
     def evolve_building(self, building):
         self.game.evolve_building(building)
 
-        self.update_buildings()
-        self.l_t['text'] = int(self.left)
-        self.metal.l_per_s['text'] = int(self.metal.per_s)
-        self.metal.l_total['text'] = int(self.metal.total)
-        # Labels
-        self.l_lv['text'] = self.lv
-        self.l_cost['text'] = int(self.cost)
-        self.l_t['text'] = int(self.t)
+        self.update_building(building)
 
     def update_resources(self):
         for r in self.game.resources:
@@ -74,7 +67,15 @@ class Game(object):
         self.update_resources()
         self.root.after(1000, self.updating_resources)
 
+    def update_building(self, building):
+        building.l_lv['text'] = building.level
+        building.l_cost['text'] = building.cost
+        building.l_t['text'] = building.time
+        self.game.metal.l_total['text'] = self.game.metal.total
+        self.game.metal.l_per_s['text'] = self.game.metal.per_s
+
     def update_buildings(self):
-        for e in self.game.buildings:
-            e.t = e.left = (e.T * e.RATE_T ** e.lv) / (RATE_FB ** self.robot_fac.lv)
-            e.l_t['text'] = int(e.t)
+        for builting in self.game.buildings:
+            # e.t = e.left = (e.T * e.RATE_T ** e.lv) / (RATE_FB ** self.robot_fac.lv)
+            #builting.l_t['text'] = int(e.t)
+            pass
