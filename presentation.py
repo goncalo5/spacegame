@@ -47,15 +47,12 @@ class Game(object):
             Button(text='evolve mine', command=lambda: self.evolve_building(self.game.metal_mine))
         self.b_lv_metal_mine.grid(row=l, column=head.c_evol)
         self.b_lv_robot_fac = \
-            Button(text='evolve factory', command=lambda: self.test())
+            Button(text='evolve factory', command=lambda: self.game.robot_factory)
         self.b_lv_robot_fac.grid(row=l + 1, column=head.c_evol)
 
         self.updating_resources()
 
         self.root.mainloop()
-
-    def test(self):
-        print self.game.metal.total
 
     def evolve_building(self, building):
         self.game.evolve_building(building)
@@ -63,7 +60,7 @@ class Game(object):
 
     def update_resource(self, resource):
         #print self.game.metal.total
-        resource.l_total['text'] = self.game.metal.total
+        resource.l_total['text'] = int(self.game.metal.total)
         resource.l_per_s['text'] = resource.per_s
 
     def update_resources(self):
