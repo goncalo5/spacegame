@@ -1,3 +1,4 @@
+import time
 from Tkinter import *
 import constants
 from logic import Logic
@@ -21,8 +22,8 @@ class Game(object):
             Label(self.root, text=r.name).grid(row=0, column=1 + n)
             r.l_per_s = Label(self.root, text=r.per_s)
             r.l_per_s.grid(row=1, column=1 + n)
-            r.l_total = Label(self.root, text=r.total)
-            r.l_total.grid(row=2, column=1 + n)
+            r.l_total = Label(self.root, text='asd')
+            r.l_total.grid(row=2, column=1)
 
         # Header
         head = Header(self.root, 3, 0)
@@ -46,22 +47,28 @@ class Game(object):
             Button(text='evolve mine', command=lambda: self.evolve_building(self.game.metal_mine))
         self.b_lv_metal_mine.grid(row=l, column=head.c_evol)
         self.b_lv_robot_fac = \
-            Button(text='evolve factory', command=lambda: self.evolve_building(self.game.robot_factory))
+            Button(text='evolve factory', command=lambda: self.test())
         self.b_lv_robot_fac.grid(row=l + 1, column=head.c_evol)
 
-        self.update_resources()
+        self.updating_resources()
 
         self.root.mainloop()
 
+    def test(self):
+        print self.game.metal.total
+
     def evolve_building(self, building):
         self.game.evolve_building(building)
-
         self.update_building(building)
+
+    def update_resource(self, resource):
+        #print self.game.metal.total
+        resource.l_total['text'] = self.game.metal.total
+        resource.l_per_s['text'] = resource.per_s
 
     def update_resources(self):
         for r in self.game.resources:
-            r.total += r.per_s
-            r.l_total['text'] = int(r.total)
+            self.update_resource(r)
 
     def updating_resources(self):
         self.update_resources()
@@ -71,11 +78,8 @@ class Game(object):
         building.l_lv['text'] = building.level
         building.l_cost['text'] = building.cost
         building.l_t['text'] = building.time
-        self.game.metal.l_total['text'] = self.game.metal.total
-        self.game.metal.l_per_s['text'] = self.game.metal.per_s
+        self.update_resources()
 
     def update_buildings(self):
-        for builting in self.game.buildings:
-            # e.t = e.left = (e.T * e.RATE_T ** e.lv) / (RATE_FB ** self.robot_fac.lv)
-            #builting.l_t['text'] = int(e.t)
-            pass
+        for building in self.game.buildings:
+            self.update_building(building)

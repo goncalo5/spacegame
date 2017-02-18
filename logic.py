@@ -1,4 +1,5 @@
 import time
+import multiprocessing
 import database
 import constants
 
@@ -16,6 +17,16 @@ class Logic(object):
         self.robot_factory = Buildings('robot_factory')
         self.buildings = [self.metal_mine, self.robot_factory]
         self.mines = [self.metal_mine]
+
+        # start updating resources
+        self.p_updating_metal = multiprocessing.Process(target=self.updating_total)
+        self.p_updating_metal.start()
+
+    def updating_total(self):
+        #print self.metal.total
+        self.metal.total += self.metal.per_s
+        time.sleep(1)
+        self.updating_total()
 
     def evolve_building(self, building):
         self.check_if_can_evolve(building)
@@ -59,11 +70,6 @@ class Resources(object):
         # initial methods
         self.see_total_in_db()
         self.calculate_per_s()
-
-    def updating_total(self):
-        self.total += self.per_s
-        time.sleep(1)
-        self.updating_total()
 
     # calculators
     def calculate_per_s(self):
