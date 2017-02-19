@@ -11,6 +11,7 @@ class Logic(object):
         # create resources's objects
         self.metal = Resource('metal')
         self.resources = [self.metal]
+        self.n_resources = len(self.resources)
 
         # Buildings
         # create buildings's objects

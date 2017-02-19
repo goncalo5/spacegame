@@ -7,6 +7,7 @@ class Header(object):
         self.root = root
         self.l = line_i  # upper Header line
         self.c = column_i  # initial Header column
+        self.n_lines = 2
         Label(self.root, text='Building').grid(row=self.l, column=self.c, rowspan=2)
         Label(self.root, text='Level').grid(row=self.l, column=self.c + 1, rowspan=2)
 
