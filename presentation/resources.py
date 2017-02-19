@@ -16,7 +16,7 @@ class Resources(object):
             Label(self.root, text=r.name).grid(row=0, column=1 + n)
             r.l_per_s = Label(self.root, text=r.per_s)
             r.l_per_s.grid(row=1, column=1 + n)
-            r.l_total = Label(self.root, text='asd')
+            r.l_total = Label(self.root, text=self.game.metal.total)
             r.l_total.grid(row=2, column=1)
 
     def update(self, resource):

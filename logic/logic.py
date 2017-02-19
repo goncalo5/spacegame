@@ -24,9 +24,13 @@ class Logic(object):
         self.p_updating_metal = threading.Thread(target=self.updating_total)
         self.p_updating_metal.start()
 
+
+        self.p = threading.Thread(target=self.evolve_building(self.metal_mine))
+        self.p.start()
+
     def updating_total(self):
         self.metal.total += self.metal.per_s
-        time.sleep(1)
+        threading.Thread(target=time.sleep(1))
         self.updating_total()
 
     def evolve_building(self, building):
@@ -56,5 +60,5 @@ class Logic(object):
                 building.left = building.time
                 building.evolving = False
                 return
-            time.sleep(1)
+            threading.Thread(target=time.sleep(1))
             self.loop_evolve(building)

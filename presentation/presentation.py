@@ -1,4 +1,5 @@
 from Tkinter import *
+import threading
 from logic.logic import Logic
 from resources import Resources
 from buildings import Buildings
@@ -28,7 +29,9 @@ class Presentation(object):
             Button(text='evolve factory', command=lambda: self.game.robot_factory)
         self.b_lv_robot_fac.grid(row=l + 1, column=self.buildings.head.c_evol)
 
-        self.resources.updating()
+        #self.resources.updating()
+        self.p_updating_metal = threading.Thread(target=self.resources.updating)
+        self.p_updating_metal.start()
 
         self.root.mainloop()
 
