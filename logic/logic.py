@@ -1,6 +1,6 @@
 import time
 import threading
-import constants
+# import constants
 from buildings import Building, Mine
 from resources import Resource
 
@@ -24,7 +24,6 @@ class Logic(object):
         self.p_updating_metal.start()
 
     def updating_total(self):
-        #print self.metal.total
         self.metal.total += self.metal.per_s
         time.sleep(1)
         self.updating_total()

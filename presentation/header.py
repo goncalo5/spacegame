@@ -3,10 +3,10 @@ from constants import *
 
 
 class Header(object):
-    def __init__(self, root, linha_i, coluna_i):
+    def __init__(self, root, line_i, column_i):
         self.root = root
-        self.l = linha_i  # upper Header line
-        self.c = coluna_i  # initial Header column
+        self.l = line_i  # upper Header line
+        self.c = column_i  # initial Header column
         Label(self.root, text='Building').grid(row=self.l, column=self.c, rowspan=2)
         Label(self.root, text='Level').grid(row=self.l, column=self.c + 1, rowspan=2)
 

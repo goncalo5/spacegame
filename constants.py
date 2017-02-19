@@ -7,7 +7,7 @@ BUILDINGS = {'metal_mine': {'cost': 10, 'rate_cost': 1.5, 'time': 5, 'rate_time'
              'robot_factory': {'cost': 10, 'rate_cost': 2, 'time': 5, 'rate_time': 2}}
 
 
-# efeitos BUILDINGS[TIME] /= 2
+# effects BUILDINGS[TIME] /= 2
 RATE_FB = 2
 
 # times

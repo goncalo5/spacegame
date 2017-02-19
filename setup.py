@@ -1,6 +1,6 @@
 # from constantes import *
-from presentation import Game
+from presentation.presentation import Presentation
 
 
 if __name__ == '__main__':
-    Game()
+    Presentation()

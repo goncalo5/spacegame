@@ -1,11 +1,9 @@
-import time
 from Tkinter import *
-import constants
-from logic import Logic
 from header import Header
+from logic.logic import Logic
 
 
-class Game(object):
+class Presentation(object):
     def __init__(self):
         self.root = Tk()
         self.root.title('SPACEgame')
