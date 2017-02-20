@@ -20,6 +20,7 @@ class Logic(object):
         self.robot_factory = Factory('robot_factory')
         self.buildings = [self.metal_mine, self.robot_factory]
         self.mines = [self.metal_mine]
+        self.factories = [self.robot_factory]
 
         self.run = True
         self.is_evolving = False  # just 1 building at the same time
@@ -58,12 +59,11 @@ class Logic(object):
     def up1level(self, building):
         building.level += 1
         building.calculate_cost()
-        building.calculate_time2build()
         if building.name == "metal_mine":
             self.metal.calculate_per_s()
-        elif building.name == "robot_factory":
-            self.robot_factory.calculate_factor()
-            self.change_all_times(self.robot_factory.factor)
+            self.calculate_time(building)
+        elif building in self.factories:
+            self.calculate_all_times()
 
     def loop_evolve(self, building):
         self.is_evolving = building.is_evolving = True
@@ -77,11 +77,15 @@ class Logic(object):
             t = threading.Timer(interval=1, function=self.loop_evolve, kwargs={'building': building})
             t.start()
 
-    def change_all_times(self, factor):
+    def calculate_all_times(self):
         for b in self.buildings:
-            print b.name
-            b.change_time2build(factor)
-            print 'time', b.time
+            self.calculate_time(b)
+
+    def calculate_time(self, building):
+        building.calculate_time2build()
+        self.robot_factory.calculate_factor()
+        building.time = building.time * self.robot_factory.factor
+        print building.time
 
     def save(self):
         self.run =  False

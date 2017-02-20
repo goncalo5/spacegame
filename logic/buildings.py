@@ -6,10 +6,15 @@ class Building(object):
     def __init__(self, name):
         # initiate variables
         self.name = name
+        # get constants
+        self.cost_lv0 = constants.BUILDINGS[self.name]['cost']
+        self.rate_cost = constants.BUILDINGS[self.name]['rate_cost']
+        self.time_lv0 = constants.BUILDINGS[self.name]['time']
+        self.rate_time = constants.BUILDINGS[self.name]['rate_time']
         # Null variables
         self.level = None
-        self.cost = self.cost_lv0 = self.rate_cost = None
-        self.time_lv0 = self.rate_time = self.time = None
+        self.cost  = None
+        self.time = None
         self.metal = None
 
         # initial methods
@@ -33,17 +38,11 @@ class Building(object):
 
     # calculators
     def calculate_cost(self):
-        self.cost_lv0 = constants.BUILDINGS[self.name]['cost']
-        self.rate_cost = constants.BUILDINGS[self.name]['rate_cost']
         self.cost = self.cost_lv0 * self.rate_cost**self.level
 
     def calculate_time2build(self):
-        self.time_lv0 = constants.BUILDINGS[self.name]['time']
-        self.rate_time = constants.BUILDINGS[self.name]['rate_time']
         self.time = self.time_lv0 * self.rate_time**self.level
 
-    def change_time2build(self, factor):
-        self.time *= 1. / factor
 
 class Mine(Building):
     def __init__(self, name):
@@ -62,4 +61,4 @@ class Factory(Building):
         self.factor = None
 
     def calculate_factor(self):
-        self.factor = self.factor0 * self.rate_factor ** self.level
+        self.factor = 1. / self.factor0 * self.rate_factor ** self.level
