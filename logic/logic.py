@@ -7,6 +7,7 @@ from resources import Resource
 
 class Logic(object):
     def __init__(self):
+        print 'Logic\n'
         # Resources
         # create resources's objects
         self.metal = Resource('metal')
@@ -20,31 +21,40 @@ class Logic(object):
         self.buildings = [self.metal_mine, self.robot_factory]
         self.mines = [self.metal_mine]
 
+        self.run = True
+        self.is_evolving = False  # just 1 building at the same time
         # start updating resources
-        self.p_updating_metal = threading.Thread(target=self.updating_total)
-        self.p_updating_metal.start()
-
-
-        self.p = threading.Thread(target=self.evolve_building(self.metal_mine))
-        self.p.start()
+        up_total = threading.Timer(interval=1, function=self.updating_total)
+        up_total.start()
 
     def updating_total(self):
+        print threading.active_count()
+        print 'updating_total:', self.metal.total, self.metal.per_s, self.run
         self.metal.total += self.metal.per_s
-        threading.Thread(target=time.sleep(1))
-        self.updating_total()
+        if self.run:
+            print 'esta a entrar'
+            t = threading.Timer(interval=1, function=self.updating_total)
+            t.start()
 
     def evolve_building(self, building):
-        self.check_if_can_evolve(building)
-        self.take_resources2evolve(building)
-        self.loop_evolve(building)  # time to built
-        self.up1level(building)
-        building.calculate_cost()
-        building.calculate_time2build()
-        self.metal.calculate_per_s()
+        if self.check_if_can_evolve(building):
+            self.is_evolving = True
+            self.take_resources2evolve(building)
+            self.loop_evolve(building)  # time to built
+            self.up1level(building)
+            building.calculate_cost()
+            building.calculate_time2build()
+            self.metal.calculate_per_s()
+            self.is_evolving = False
 
     def check_if_can_evolve(self, building):
-        if self.metal >= building.cost and not building.evolving:
-            return True
+        print 'check...'
+        if not self.is_evolving:
+            print '\n nao esta a evoluir nada neste momento', self.is_evolving
+            if self.metal >= building.cost and not building.evolving:
+                return True
+        else:
+            print '\n\n\nainda esta a evoluir'
 
     def take_resources2evolve(self, building):
         self.metal.total -= building.cost
@@ -54,11 +64,15 @@ class Logic(object):
         building.level += 1
 
     def loop_evolve(self, building):
+        self.is_evolving = True
         if building.evolving:
             building.left -= 1
             if building.left <= 0:
                 building.left = building.time
                 building.evolving = False
                 return
-            threading.Thread(target=time.sleep(1))
-            self.loop_evolve(building)
+            t = threading.Timer(interval=1, function=self.loop_evolve, kwargs={'building': building})
+            t.start()
+
+    def save(self):
+        self.run =  False

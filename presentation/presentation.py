@@ -1,5 +1,5 @@
 from Tkinter import *
-import threading
+import threading, time
 from logic.logic import Logic
 from resources import Resources
 from buildings import Buildings
@@ -29,9 +29,10 @@ class Presentation(object):
             Button(text='evolve factory', command=lambda: self.game.robot_factory)
         self.b_lv_robot_fac.grid(row=l + 1, column=self.buildings.head.c_evol)
 
-        #self.resources.updating()
-        self.p_updating_metal = threading.Thread(target=self.resources.updating)
-        self.p_updating_metal.start()
+        self.b_quit = Button(text='quit', command=self.quit)
+        self.b_quit.grid(row = 10, column=10)
+
+        self.resources.updating()
 
         self.root.mainloop()
 
@@ -42,3 +43,10 @@ class Presentation(object):
     def update(self, building):
         self.buildings.fill.update(building)
         self.resources.update_all()
+
+    def quit(self):
+        print 'quit ............................\n\n'
+        self.game.save()
+        self.game.metal.total = 40
+        self.game.run = False
+        self.root.destroy()
