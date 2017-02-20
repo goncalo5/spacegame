@@ -42,6 +42,8 @@ class Building(object):
         self.rate_time = constants.BUILDINGS[self.name]['rate_time']
         self.time = self.time_lv0 * self.rate_time**self.level
 
+    def change_time2build(self, factor):
+        self.time *= 1. / factor
 
 class Mine(Building):
     def __init__(self, name):
@@ -50,3 +52,14 @@ class Mine(Building):
 
     def calculate_rate_per_s(self):
         self.rate_per_s = 1.5
+
+
+class Factory(Building):
+    def __init__(self, name):
+        super(Factory, self).__init__(name)
+        self.factor0 = constants.BUILDINGS[self.name]['factor']
+        self.rate_factor = constants.BUILDINGS[self.name]['rate_factor']
+        self.factor = None
+
+    def calculate_factor(self):
+        self.factor = self.factor0 * self.rate_factor ** self.level

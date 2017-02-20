@@ -1,7 +1,7 @@
 import time
 import threading
 # import constants
-from buildings import Building, Mine
+from buildings import Building, Mine, Factory
 from resources import Resource
 
 
@@ -17,7 +17,7 @@ class Logic(object):
         # Buildings
         # create buildings's objects
         self.metal_mine = Mine('metal_mine')
-        self.robot_factory = Building('robot_factory')
+        self.robot_factory = Factory('robot_factory')
         self.buildings = [self.metal_mine, self.robot_factory]
         self.mines = [self.metal_mine]
 
@@ -59,7 +59,11 @@ class Logic(object):
         building.level += 1
         building.calculate_cost()
         building.calculate_time2build()
-        self.metal.calculate_per_s()
+        if building.name == "metal_mine":
+            self.metal.calculate_per_s()
+        elif building.name == "robot_factory":
+            self.robot_factory.calculate_factor()
+            self.change_all_times(self.robot_factory.factor)
 
     def loop_evolve(self, building):
         self.is_evolving = building.is_evolving = True
@@ -72,6 +76,12 @@ class Logic(object):
                 return
             t = threading.Timer(interval=1, function=self.loop_evolve, kwargs={'building': building})
             t.start()
+
+    def change_all_times(self, factor):
+        for b in self.buildings:
+            print b.name
+            b.change_time2build(factor)
+            print 'time', b.time
 
     def save(self):
         self.run =  False
