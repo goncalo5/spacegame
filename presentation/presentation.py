@@ -26,7 +26,7 @@ class Presentation(object):
             Button(text='evolve mine', command=lambda: self.evolve_building(self.game.metal_mine))
         self.b_lv_metal_mine.grid(row=l, column=self.buildings.head.c_evol)
         self.b_lv_robot_fac = \
-            Button(text='evolve factory', command=lambda: self.game.robot_factory)
+            Button(text='evolve factory', command=lambda: self.evolve_building(self.game.robot_factory))
         self.b_lv_robot_fac.grid(row=l + 1, column=self.buildings.head.c_evol)
 
         self.b_quit = Button(text='quit', command=self.quit)

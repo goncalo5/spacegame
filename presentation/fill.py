@@ -22,11 +22,17 @@ class Fill(object):
             building.l_t.grid(row=l, column=column_i + 2 + self.game.n_resources)
             # evolving
 
+        self.updating()
+
     def update(self, building):
-        building.l_lv['text'] = building.level
-        building.l_cost['text'] = building.cost
-        building.l_t['text'] = building.time
+        building.l_lv['text'] = int(building.level)
+        building.l_cost['text'] = int(building.cost)
+        building.l_t['text'] = int(building.left)
 
     def update_all(self):
         for building in self.game.buildings:
             self.update(building)
+
+    def updating(self):
+        self.update_all()
+        self.root.after(1000, self.updating)

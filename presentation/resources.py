@@ -30,6 +30,6 @@ class Resources(object):
 
     def updating(self):
         self.update_all()
-        print 'updating ... ', self.game.metal.total
+        #print 'updating ... ', self.game.metal.total
         # always use after method in Tkinter
         self.root.after(1000, self.updating)

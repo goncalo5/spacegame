@@ -28,33 +28,28 @@ class Logic(object):
         up_total.start()
 
     def updating_total(self):
-        print threading.active_count()
-        print 'updating_total:', self.metal.total, self.metal.per_s, self.run
+        #print threading.active_count()
+        #print 'updating_total:', self.metal.total, self.metal.per_s, self.run
         self.metal.total += self.metal.per_s
         if self.run:
-            print 'esta a entrar'
+            #print 'esta a entrar'
             t = threading.Timer(interval=1, function=self.updating_total)
             t.start()
 
     def evolve_building(self, building):
         if self.check_if_can_evolve(building):
-            self.is_evolving = True
             self.take_resources2evolve(building)
             self.loop_evolve(building)  # time to built
             self.up1level(building)
-            building.calculate_cost()
-            building.calculate_time2build()
-            self.metal.calculate_per_s()
-            self.is_evolving = False
 
     def check_if_can_evolve(self, building):
         print 'check...'
         if not self.is_evolving:
             print '\n nao esta a evoluir nada neste momento', self.is_evolving
-            if self.metal >= building.cost and not building.evolving:
+            if self.metal >= building.cost and not building.is_evolving:
                 return True
         else:
-            print '\n\n\nainda esta a evoluir'
+            print '\n\n\nainda esta a evoluir', self.is_evolving, building.is_evolving
 
     def take_resources2evolve(self, building):
         self.metal.total -= building.cost
@@ -62,14 +57,18 @@ class Logic(object):
 
     def up1level(self, building):
         building.level += 1
+        building.calculate_cost()
+        building.calculate_time2build()
+        self.metal.calculate_per_s()
 
     def loop_evolve(self, building):
-        self.is_evolving = True
+        self.is_evolving = building.is_evolving = True
+        print building.left
         if building.evolving:
             building.left -= 1
             if building.left <= 0:
                 building.left = building.time
-                building.evolving = False
+                self.is_evolving = building.is_evolving = False
                 return
             t = threading.Timer(interval=1, function=self.loop_evolve, kwargs={'building': building})
             t.start()

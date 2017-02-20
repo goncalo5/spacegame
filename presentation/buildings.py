@@ -7,7 +7,5 @@ class Buildings(object):
         self.root = root
         self.game = game
 
-        self.head = Header(self.root, line_i, column_i)
+        self.head = Header(self.root, game, line_i, column_i)
         self.fill = Fill(self.root, game, line_i + self.head.n_lines, column_i)
-
-

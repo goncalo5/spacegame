@@ -20,7 +20,7 @@ class Building(object):
         self.calculate_time2build()
 
         #
-        self.evolving = False
+        self.is_evolving = False
         self.left = self.time
 
     # Data Base
