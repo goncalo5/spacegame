@@ -61,4 +61,6 @@ class Factory(Building):
         self.factor = None
 
     def calculate_factor(self):
-        self.factor = 1. / self.factor0 * self.rate_factor ** self.level
+        print 'level:', self.level
+        self.factor = 1. / (self.factor0 * self.rate_factor ** (self.level - 1))
+        print 'factor:', self.factor
