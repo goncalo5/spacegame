@@ -90,6 +90,7 @@ DEFENSES = {'rocket_launcher':
                  'attack': 50, 'shield': 10}}
 
 MACHINES = dict(SPACESHIPS, **DEFENSES)
-# times
-TIME2UPDATE_DB = 10
-TIME2REFRESH = 3
+
+# Presentation
+MENU = ['overview', 'resources', 'Facilities', 'Merchant', 'Research',
+        'Hangar', 'Defense', 'Fleet', 'Universe', 'Alliance']
