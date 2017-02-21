@@ -72,20 +72,14 @@ class Storage(Building):
     def __init__(self, name, resource):
         super(Storage, self).__init__(name)
         self.name = name
-        print resource
         self.resource = resource
-        print self.resource.total
         self.capacity = self.capacity0 = constants.BUILDINGS[self.name]['capacity']
         self.rate_capacity = constants.BUILDINGS[self.name]['rate_capacity']
 
     def is_full(self):
-        print self.resource.total
-        print self.capacity
         return self.resource.total > self.capacity
 
     def update_storage_capacity(self):
-        print '\n\n\nupdate storage capacity'
-        print self.capacity0 , self.rate_capacity , self.level
         self.capacity = self.capacity0 * self.rate_capacity ** self.level
 
     def check_storage(self):

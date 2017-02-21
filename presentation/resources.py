@@ -11,14 +11,14 @@ class Resources(object):
         # Available Resources
         # header
         Label(self.root, text='resource').grid(row=0, column=0)
-        Label(self.root, text='per sec').grid(row=1, column=0)
-        Label(self.root, text='Total').grid(row=2, column=0)
+        Label(self.root, text='Total').grid(row=1, column=0)
+        Label(self.root, text='per sec').grid(row=2, column=0)
         for n, r in enumerate(self.game.resources):
             Label(self.root, text=r.name).grid(row=0, column=1 + n)
-            r.l_per_s = Label(self.root, text=r.per_s)
-            r.l_per_s.grid(row=1, column=1 + n)
             r.l_total = Label(self.root, text=self.game.metal.total)
-            r.l_total.grid(row=2, column=1)
+            r.l_total.grid(row=1, column=1)
+            r.l_per_s = Label(self.root, text=r.per_s)
+            r.l_per_s.grid(row=2, column=1 + n)
 
     def update(self, resource):
         resource.l_total['text'] = int(self.game.metal.total)

@@ -34,7 +34,6 @@ class Logic(object):
         #print threading.active_count()
         #print 'updating_total:', self.metal.total, self.metal.per_s, self.run
         self.metal.total += self.metal.per_s
-        print self.metal_wharehouse.name
         if self.run:
             self.metal_wharehouse.check_storage()
             t = threading.Timer(interval=1, function=self.updating_total)
@@ -75,9 +74,7 @@ class Logic(object):
 
     # for storages
     def update_storage_capacity(self, building):
-        print 'update_storage_capacity', building.name
         if building in self.storages:
-            print '\n\n\n'
             building.update_storage_capacity()
 
     # for factories
