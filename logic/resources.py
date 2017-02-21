@@ -8,16 +8,14 @@ class Resource(object):
         self.name = name
 
         # Null variables
-        self.total = None
-        self.per_s = None
+        self.total = self.per_s = None
+
+        # constants
+        self.per_s0 = self.per_s = constants.RESOURCES[self.name]['per_s']
+        self.rate_per_s = constants.RESOURCES[self.name]['rate_per_s']
 
         # initial methods
         self.see_total_in_db()
-        self.calculate_per_s()
-
-    # calculators
-    def calculate_per_s(self):
-        self.per_s = 1
 
     # Data Base
     # GET

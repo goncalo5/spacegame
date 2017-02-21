@@ -45,12 +45,12 @@ class Building(object):
 
 
 class Mine(Building):
-    def __init__(self, name):
+    def __init__(self, name, resource):
         super(Mine, self).__init__(name)
-        self.rate_per_s = None
+        self.resource = resource
 
-    def calculate_rate_per_s(self):
-        self.rate_per_s = 1.5
+    def update_per_s(self):
+        self.resource.per_s = self.resource.per_s0 * self.resource.rate_per_s ** self.level
 
 
 class Factory(Building):
@@ -61,6 +61,6 @@ class Factory(Building):
         self.factor = None
 
     def calculate_factor(self):
-        print 'level:', self.level
+        #print 'level:', self.level
         self.factor = 1. / (self.factor0 * self.rate_factor ** (self.level - 1))
-        print 'factor:', self.factor
+        #print 'factor:', self.factor
