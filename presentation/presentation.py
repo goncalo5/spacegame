@@ -22,12 +22,11 @@ class Presentation(object):
 
         # create buttons
         l = self.buildings.head.l + 2
-        self.b_lv_metal_mine = \
-            Button(text='evolve mine', command=lambda: self.evolve_building(self.game.metal_mine))
-        self.b_lv_metal_mine.grid(row=l, column=self.buildings.head.c_evol)
-        self.b_lv_robot_fac = \
-            Button(text='evolve factory', command=lambda: self.evolve_building(self.game.robot_factory))
-        self.b_lv_robot_fac.grid(row=l + 1, column=self.buildings.head.c_evol)
+        self.b_buildings = []
+        for i, building in enumerate(self.game.buildings):
+            self.b_buildings.append(\
+                Button(text=building.type, command=lambda b=building: self.evolve_building(b)))
+            self.b_buildings[-1].grid(row=l + i, column=self.buildings.head.c_evol)
 
         self.b_quit = Button(text='quit', command=self.quit)
         self.b_quit.grid(row = 10, column=10)
@@ -37,6 +36,7 @@ class Presentation(object):
         self.root.mainloop()
 
     def evolve_building(self, building):
+        print 'evolve_building', building.name
         self.game.evolve_building(building)
         self.update(building)
 

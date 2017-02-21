@@ -6,6 +6,7 @@ class Building(object):
     def __init__(self, name):
         # initiate variables
         self.name = name
+        self.type = constants.BUILDINGS[self.name]['type']
         # get constants
         self.cost_lv0 = constants.BUILDINGS[self.name]['cost']
         self.rate_cost = constants.BUILDINGS[self.name]['rate_cost']
@@ -62,5 +63,31 @@ class Factory(Building):
 
     def calculate_factor(self):
         #print 'level:', self.level
+        # level - 1, because it's a inverso
         self.factor = 1. / (self.factor0 * self.rate_factor ** (self.level - 1))
         #print 'factor:', self.factor
+
+
+class Storage(Building):
+    def __init__(self, name, resource):
+        super(Storage, self).__init__(name)
+        self.name = name
+        print resource
+        self.resource = resource
+        print self.resource.total
+        self.capacity = self.capacity0 = constants.BUILDINGS[self.name]['capacity']
+        self.rate_capacity = constants.BUILDINGS[self.name]['rate_capacity']
+
+    def is_full(self):
+        print self.resource.total
+        print self.capacity
+        return self.resource.total > self.capacity
+
+    def update_storage_capacity(self):
+        print '\n\n\nupdate storage capacity'
+        print self.capacity0 , self.rate_capacity , self.level
+        self.capacity = self.capacity0 * self.rate_capacity ** self.level
+
+    def check_storage(self):
+        if self.is_full():
+            self.resource.total = self.capacity

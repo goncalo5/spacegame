@@ -27,5 +27,5 @@ class Header(object):
             grid(row=self.l, column=self.c_t, rowspan=2)
         # evolving column
         self.c_evol = self.c_t + 1
-        Label(self.root, text='Evolutions').\
+        Label(self.root, text='Evolve').\
             grid(row=self.l, column=self.c_evol, rowspan=2)

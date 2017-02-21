@@ -1,7 +1,7 @@
 import time
 import threading
 # import constants
-from buildings import Building, Mine, Factory
+from buildings import Building, Mine, Factory, Storage
 from resources import Resource
 
 
@@ -17,10 +17,12 @@ class Logic(object):
         # Buildings
         # create buildings's objects
         self.metal_mine = Mine('metal_mine', self.metal)
+        self.metal_wharehouse = Storage('metal_wharehouse', self.metal)
         self.robot_factory = Factory('robot_factory')
-        self.buildings = [self.metal_mine, self.robot_factory]
         self.mines = [self.metal_mine]
+        self.storages = [self.metal_wharehouse]
         self.factories = [self.robot_factory]
+        self.buildings = self.mines + self.storages + self.factories
 
         self.run = True
         self.is_evolving = False  # just 1 building at the same time
@@ -28,17 +30,13 @@ class Logic(object):
         up_total = threading.Timer(interval=1, function=self.updating_total)
         up_total.start()
 
-    def update_per_s(self, building):
-        if building in self.mines:
-            for mine in self.mines:
-                mine.update_per_s()
-
     def updating_total(self):
         #print threading.active_count()
         #print 'updating_total:', self.metal.total, self.metal.per_s, self.run
         self.metal.total += self.metal.per_s
+        print self.metal_wharehouse.name
         if self.run:
-            #print 'esta a entrar'
+            self.metal_wharehouse.check_storage()
             t = threading.Timer(interval=1, function=self.updating_total)
             t.start()
 
@@ -65,9 +63,24 @@ class Logic(object):
     def up1level(self, building):
         building.level += 1
         building.calculate_cost()
-        self.update_times(building)
-        self.update_per_s(building)
+        self.update_per_s(building)  # for mines
+        self.update_storage_capacity(building)  # for storages
+        self.update_times(building)  # for factories
 
+    # for mines
+    def update_per_s(self, building):
+        if building in self.mines:
+            for mine in self.mines:
+                mine.update_per_s()
+
+    # for storages
+    def update_storage_capacity(self, building):
+        print 'update_storage_capacity', building.name
+        if building in self.storages:
+            print '\n\n\n'
+            building.update_storage_capacity()
+
+    # for factories
     def update_times(self, building):
         if building in self.factories:
             self.update_all_times()
@@ -98,7 +111,7 @@ class Logic(object):
     def loop_evolve(self, building):
         self.is_evolving = building.is_evolving = True
         #print 'loop evolve: left:', building.left
-        print 'loop_evolve, per s', self.metal.per_s
+        print 'loop_evolve', building.name
         if building.evolving:
             building.left -= 1
             if building.left <= 0:
