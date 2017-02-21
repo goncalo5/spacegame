@@ -4,16 +4,16 @@ import constants
 class Machine(object):
     def __init__(self, name):
         self.name = name
-        self.attack = constants.SPACESHIPS[self.name]['attack']
-        self.shield = constants.SPACESHIPS[self.name]['shield']
+        self.attack = constants.MACHINES[self.name]['attack']
+        self.shield = constants.MACHINES[self.name]['shield']
         self.structure = 0
-        self.cost = constants.SPACESHIPS[self.name]['cost']
+        self.cost = constants.MACHINES[self.name]['cost']
         self.time2build = 5  # constants.SPACESHIPS[self.name]['time2built']
         self.calculate_structure()
 
     def calculate_structure(self):
-        for resource_cost in constants.SPACESHIPS[self.name]['cost']:
-            self.structure += resource_cost
+        for resource_cost in constants.MACHINES[self.name]['cost']:
+            self.structure += constants.MACHINES[self.name]['cost'][resource_cost]
 
 
 class SpaceShip(Machine):

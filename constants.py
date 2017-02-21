@@ -57,16 +57,39 @@ SPACESHIPS = {'light_fighter': {'cost': {'metal': 3000, 'crystal': 1000},
                                   'speed': 0, 'cargo_capacity': 0, 'fuel_usage': 0, 'engine': None}}
 
 ENGINE = {'combustion': 100}
-DEFENSES = {'rocket_launcher',
-            'light_laser',
-            'heavy_laser',
-            'gauss_cannon',
-            'ion_cannon',
-            'plasma_turret',
-            'small_shield_dome',
-            'large_shield_dome',
-            'anti_ballistic_missiles',
-            'interplanetary_missiles'}
+
+DEFENSES = {'rocket_launcher':
+                {'cost': {'metal': 3000, 'crystal': 2000},
+                 'attack': 50, 'shield': 10},
+            'light_laser':
+                {'cost': {'metal': 3000, 'crystal': 2000},
+                 'attack': 50, 'shield': 10},
+            'heavy_laser':
+                {'cost': {'metal': 3000, 'crystal': 2000},
+                 'attack': 50, 'shield': 10},
+            'gauss_cannon':
+                {'cost': {'metal': 3000, 'crystal': 2000},
+                 'attack': 50, 'shield': 10},
+            'ion_cannon':
+                {'cost': {'metal': 3000, 'crystal': 2000},
+                 'attack': 50, 'shield': 10},
+            'plasma_turret':
+                {'cost': {'metal': 3000, 'crystal': 2000},
+                 'attack': 50, 'shield': 10},
+            'small_shield_dome':
+                {'cost': {'metal': 3000, 'crystal': 2000},
+                 'attack': 50, 'shield': 10},
+            'large_shield_dome':
+                {'cost': {'metal': 3000, 'crystal': 2000},
+                 'attack': 50, 'shield': 10},
+            'anti_ballistic_missiles':
+                {'cost': {'metal': 3000, 'crystal': 2000},
+                 'attack': 50, 'shield': 10},
+            'interplanetary_missiles':
+                {'cost': {'metal': 3000, 'crystal': 2000},
+                 'attack': 50, 'shield': 10}}
+
+MACHINES = dict(SPACESHIPS, **DEFENSES)
 # times
 TIME2UPDATE_DB = 10
 TIME2REFRESH = 3

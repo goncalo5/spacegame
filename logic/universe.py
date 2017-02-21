@@ -1,13 +1,27 @@
 import constants
+from player import Player
+from planet import Planet
 
 
 class Universe(object):
     def __init__(self):
         self.n_galaxies = 9
         self.galaxies = []
+
         for i in xrange(self.n_galaxies):
             self.galaxy = Galaxy({'galaxy': i})
             self.galaxies.append(self.galaxy)
+
+    def create_player(self, name):
+        planet = self.find_a_planet()
+        self.player = Player(name, planet)
+
+    def find_a_planet(self):
+        for g in self.galaxies:
+            for ps in g.planetary_systems:
+                for p in ps.planets:
+                    if p.empty:
+                        return p
 
 
 class Galaxy(object):
@@ -30,27 +44,3 @@ class PlanetarySystem(object):
             coord = self.coordinates
             coord['planet'] = i
             self.planets.append(Planet(coord))
-
-
-class Planet(object):
-    def __init__(self, coordinates):
-        self.coordinates = coordinates
-        self.star_distance = self.coordinates['planet'] + 1
-        self.total_fields = self.star_distance * \
-                            constants.UNIVERSE['planets']['rate_field'] + \
-                            constants.UNIVERSE['planets']['field']
-        self.fields_left = self.total_fields
-        self.fields_occupied = 0
-        self.defenses = {}
-        for i, defense in enumerate(constants.DEFESENSES):
-            new = Defense(defense)
-            self.defenses[new.name] = new
-            self.defense[new.name].n = 0
-
-        def occupy1field(self):
-            self.field_left -= 1
-            self.fields_ocupided += 1
-
-        def leave1field(self):
-            self.field_left += 1
-            self.fields_ocupided -= 1
