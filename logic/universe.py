@@ -8,13 +8,16 @@ class Universe(object):
         self.n_galaxies = 9
         self.galaxies = []
 
+        self.players = []
+
         for i in xrange(self.n_galaxies):
             self.galaxy = Galaxy({'galaxy': i})
             self.galaxies.append(self.galaxy)
 
     def create_player(self, name):
         planet = self.find_a_planet()
-        self.player = Player(name, planet)
+        print 'new planet:', planet
+        self.players.append(Player(name, planet))
 
     def find_a_planet(self):
         for g in self.galaxies:

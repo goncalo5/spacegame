@@ -1,4 +1,3 @@
-import time
 import threading
 # import constants
 from universe import  Universe, Galaxy, PlanetarySystem
@@ -14,7 +13,7 @@ class Logic(object):
         self.universe = Universe()
         # Resources
         # create resources's objects
-        self.metal = Resource('metal')
+        """self.metal = Resource('metal')
         self.resources = [self.metal]
         self.n_resources = len(self.resources)
 
@@ -108,7 +107,6 @@ class Logic(object):
             b.left = b.time
             #print b.name, b.time
 
-
     def loop_evolve(self, building):
         self.is_evolving = building.is_evolving = True
         #print 'loop evolve: left:', building.left
@@ -128,4 +126,4 @@ class Logic(object):
             t.start()
 
     def save(self):
-        self.run =  False
+        self.run = False """

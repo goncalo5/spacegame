@@ -12,7 +12,11 @@ class Presentation(object):
         self.root.title('SPACEgame')
 
         # initiate game
-        self.game = Logic()
+        self.logic = Logic()
+        print 'univ:', self.logic.universe
+        self.logic.universe.create_player('gon')
+        self.player = self.logic.universe.players[0]
+        self.game = self.player.planets[0]
 
         # Available Resources
         self.resources = Resources(self.root, self.game, 0, 0)
