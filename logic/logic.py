@@ -17,10 +17,10 @@ class Logic(object):
         # Buildings
         # create buildings's objects
         self.metal_mine = Mine('metal_mine', self.metal)
-        self.metal_wharehouse = Storage('metal_wharehouse', self.metal)
+        self.metal_storage = Storage('metal_storage', self.metal)
         self.robot_factory = Factory('robot_factory')
         self.mines = [self.metal_mine]
-        self.storages = [self.metal_wharehouse]
+        self.storages = [self.metal_storage]
         self.factories = [self.robot_factory]
         self.buildings = self.mines + self.storages + self.factories
 
@@ -35,7 +35,7 @@ class Logic(object):
         #print 'updating_total:', self.metal.total, self.metal.per_s, self.run
         self.metal.total += self.metal.per_s
         if self.run:
-            self.metal_wharehouse.check_storage()
+            self.metal_storage.check_storage()
             t = threading.Timer(interval=1, function=self.updating_total)
             t.start()
 

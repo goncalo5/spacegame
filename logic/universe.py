@@ -12,35 +12,35 @@ class Universe(object):
 
 class Galaxy(object):
     def __init__(self, coordinates):
-        self.galaxy.coordinates = coordinates
+        self.coordinates = coordinates
         self.n_planetary_system = 9
         self.planetary_systems = []
         for i in xrange(self.n_planetary_system):
-            coord = self.galaxy.coordinates
+            coord = self.coordinates
             coord['planetary_systems'] = i
             self.planetary_systems.append(PlanetarySystem(coord))
 
 
-class PlanetarySystem(objects):
+class PlanetarySystem(object):
     def __init__(self, coordinates):
-        self.planetary_systems.coordinates = coordinates
+        self.coordinates = coordinates
         self.n_planets = 5
         self.planets = []
         for i in xrange(self.n_planets):
-            coord = self.planetary_systems.coordinates
+            coord = self.coordinates
             coord['planet'] = i
             self.planets.append(Planet(coord))
 
 
 class Planet(object):
-    def __init__(self, star_distance):
-        self.planet.coordinates = coordinates
+    def __init__(self, coordinates):
+        self.coordinates = coordinates
         self.star_distance = self.coordinates['planet'] + 1
-        self.total_fields = self.star_distance *
-            constants.UNIVERSE['planets']['rate_field'] +
-            constants.UNIVERSE['planets']['field']
-        self.fields_left = self.n_fields
-        self.fields_ocupided = 0
+        self.total_fields = self.star_distance * \
+                            constants.UNIVERSE['planets']['rate_field'] + \
+                            constants.UNIVERSE['planets']['field']
+        self.fields_left = self.total_fields
+        self.fields_occupied = 0
         self.defenses = {}
         for i, defense in enumerate(constants.DEFESENSES):
             new = Defense(defense)
