@@ -92,5 +92,5 @@ DEFENSES = {'rocket_launcher':
 MACHINES = dict(SPACESHIPS, **DEFENSES)
 
 # Presentation
-MENU = ['overview', 'resources', 'Facilities', 'Merchant', 'Research',
-        'Hangar', 'Defense', 'Fleet', 'Universe', 'Alliance']
+MENU = ['overview', 'buildings', 'merchant', 'research',
+        'hangar', 'defense', 'fleet', 'universe', 'alliance']

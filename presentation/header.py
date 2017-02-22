@@ -15,7 +15,7 @@ class Header(object):
         Label(self.root, text='Level').grid(row=self.l, column=self.c + 1, rowspan=2)
 
         # initial costs column
-        self.c_costs = 2
+        self.c_costs = self.c + 2
         Label(self.root, text='evolving cost'). \
             grid(row=self.l, column=self.c_costs, columnspan=self.game.n_resources)
         for n, r in enumerate(self.game.resources):

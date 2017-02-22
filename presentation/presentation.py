@@ -20,9 +20,11 @@ class Presentation(object):
         self.game = self.player.planets[0]
 
         # Available Resources
-        self.resources = Resources(self.root, self.game, 0, 0)
+        self.resources = Resources(self.root, self.game, 0, 1)
 
         # create MENU
         self.menu = Menu(root=self.root,
             game=self.game, resources=self.resources,
             line_i=0, column_i=0)
+
+        self.root.mainloop()

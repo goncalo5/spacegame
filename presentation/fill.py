@@ -39,8 +39,6 @@ class Fill(object):
 
         self.resources.updating()
 
-        self.root.mainloop()
-
     def evolve_building(self, building):
         print 'evolve_building', building.name
         self.game.evolve_building(building)
