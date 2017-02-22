@@ -7,7 +7,9 @@ class Machine(object):
         self.attack = constants.MACHINES[self.name]['attack']
         self.shield = constants.MACHINES[self.name]['shield']
         self.structure = 0
-        self.cost = constants.MACHINES[self.name]['cost']
+        self.cost_metal = constants.MACHINES[self.name]['cost']['metal']
+        self.cost_crystal = constants.MACHINES[self.name]['cost']['crystal']
+        self.costs = [self.cost_metal, self.cost_crystal]
         self.time2build = 5  # constants.SPACESHIPS[self.name]['time2built']
         self.calculate_structure()
 
