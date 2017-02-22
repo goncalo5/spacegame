@@ -22,6 +22,8 @@ class Resources(object):
             r.l_per_s = Label(self.root, text=r.per_s)
             r.l_per_s.grid(row=row_i + 2, column=column_i + 1 + n)
 
+        self.updating()
+
     def update(self, resource):
         resource.l_total['text'] = int(self.game.metal.total)
         resource.l_per_s['text'] = resource.per_s
@@ -31,7 +33,9 @@ class Resources(object):
             self.update(r)
 
     def updating(self):
-        self.update_all()
-        #print 'updating ... ', self.game.metal.total
-        # always use after method in Tkinter
-        self.root.after(1000, self.updating)
+        if self.game.run:
+            print 'pres updating'
+            self.update_all()
+            #print 'updating ... ', self.game.metal.total
+            # always use after method in Tkinter
+            self.root.after(1000, self.updating)

@@ -36,19 +36,26 @@ class Planet(object):
         self.factories = [self.robot_factory]
         self.buildings = self.mines + self.storages + self.factories
 
-        self.run = True
+        self.run = False
         self.is_evolving = False  # just 1 building at the same time
         # start updating resources
-        up_total = threading.Timer(interval=1, function=self.updating_total)
-        up_total.start()
+        print 'logic updating', threading.active_count()
+        print self.run, self.empty
+        if not self.run and not self.empty:
+            print 'ruuuuuuun', self.run
+            self.run = True
+            self.updating_total()
+        #up_total = threading.Timer(interval=1, function=self.updating_total)
+        #up_total.start()
 
     def updating_total(self):
-        # print threading.active_count()
-        # print 'updating_total:', self.metal.total, self.metal.per_s, self.run
+        print threading.active_count()
+        print 'updating_total:', self.metal.total, self.metal.per_s, self.run
         self.metal.total += self.metal.per_s
         if self.run:
             self.metal_storage.check_storage()
             t = threading.Timer(interval=1, function=self.updating_total)
+            print 'logic updating', threading.active_count()
             t.start()
 
     def evolve_building(self, building):
