@@ -25,6 +25,6 @@ class Presentation(object):
         # create MENU
         self.menu = Menu(root=self.root,
             game=self.game, resources=self.resources,
-            line_i=0, column_i=0)
+            row_i=0, column_i=0)
 
         self.root.mainloop()

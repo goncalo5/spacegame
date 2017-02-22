@@ -3,14 +3,14 @@ from constants import *
 
 
 class Header(object):
-    def __init__(self, root, game, line_i, column_i):
+    def __init__(self, root, game, row_i, column_i):
         self.root = root
         # initiate game
         self.game = game
 
-        self.l = line_i  # upper Header line
+        self.l = row_i  # upper Header row
         self.c = column_i  # initial Header column
-        self.n_lines = 2
+        self.n_rows = 2
         Label(self.root, text='Building').grid(row=self.l, column=self.c, rowspan=2)
         Label(self.root, text='Level').grid(row=self.l, column=self.c + 1, rowspan=2)
 

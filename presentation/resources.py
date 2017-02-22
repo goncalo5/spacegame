@@ -3,7 +3,7 @@ import threading
 
 
 class Resources(object):
-    def __init__(self, root, game, line_i, column_i):
+    def __init__(self, root, game, row_i, column_i):
         print 'Resources'
         self.root = root
         # initiate game
@@ -12,15 +12,15 @@ class Resources(object):
         # Available Resources
         # header
         print column_i
-        Label(self.root, text='resource').grid(row=line_i, column=column_i)
-        Label(self.root, text='Total').grid(row=line_i + 1, column=column_i)
-        Label(self.root, text='per sec').grid(row=line_i + 2, column=column_i)
+        Label(self.root, text='resource').grid(row=row_i, column=column_i)
+        Label(self.root, text='Total').grid(row=row_i + 1, column=column_i)
+        Label(self.root, text='per sec').grid(row=row_i + 2, column=column_i)
         for n, r in enumerate(self.game.resources):
-            Label(self.root, text=r.name).grid(row=line_i, column=column_i + 1 + n)
+            Label(self.root, text=r.name).grid(row=row_i, column=column_i + 1 + n)
             r.l_total = Label(self.root, text=self.game.metal.total)
-            r.l_total.grid(row=line_i + 1, column=column_i + 1)
+            r.l_total.grid(row=row_i + 1, column=column_i + 1)
             r.l_per_s = Label(self.root, text=r.per_s)
-            r.l_per_s.grid(row=line_i + 2, column=column_i + 1 + n)
+            r.l_per_s.grid(row=row_i + 2, column=column_i + 1 + n)
 
     def update(self, resource):
         resource.l_total['text'] = int(self.game.metal.total)

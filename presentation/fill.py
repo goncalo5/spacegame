@@ -2,7 +2,7 @@ from Tkinter import *
 
 
 class Fill(object):
-    def __init__(self, root, game, resources, header, line_i, column_i):
+    def __init__(self, root, game, resources, header, row_i, column_i):
         self.root = root
         # initiate game
         self.game = game
@@ -10,7 +10,7 @@ class Fill(object):
         self.header = header
 
         for n, building in enumerate(self.game.buildings):
-            l = line_i + n
+            l = row_i + n
             Label(self.root, text=building.name). \
                 grid(row=l, column=column_i)
             # Level

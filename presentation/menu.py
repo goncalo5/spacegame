@@ -1,31 +1,32 @@
 from Tkinter import *
 import constants
+from overview import Overview
 from buildings import Buildings
 
 
 class Menu(object):
-    def __init__(self, root, game, resources, line_i, column_i):
+    def __init__(self, root, game, resources, row_i, column_i):
         self.root = root
         self.game = game
         self.resources = resources
 
         self.buttons = []
-        a = Label(self.root, text='aaa')
-        a.grid(row=0, column=0)
-        print constants.MENU
         for i, item in enumerate(constants.MENU):
             self.buttons.append(\
                 Button(text=item, command=lambda b=item: self.change_screen(b)))
-            self.buttons[-1].grid(row=line_i + i, column=column_i)
+            self.buttons[-1].grid(row=row_i + i, column=column_i)
 
-        self.functions = {'buildings': self.buildings}
+        self.functions = {'overview': self.overview, 'buildings': self.buildings}
 
 
     def change_screen(self, item):
         print 'item', item
         self.functions[item]()
 
+    def overview(self):
+        self.overview = Overview(root=self.root,
+            game=self.game, row_i=3, column_i=1)
+
     def buildings(self):
-        # Buildings
         self.buildings = Buildings(root=self.root,
-        game=self.game, resources=self.resources, line_i=3, column_i=1)
+            game=self.game, resources=self.resources, row_i=3, column_i=1)
