@@ -1,6 +1,7 @@
 from Tkinter import *
 import threading, time
 from logic.logic import Logic
+from menu import Menu
 from resources import Resources
 from buildings import Buildings
 
@@ -21,6 +22,7 @@ class Presentation(object):
         # Available Resources
         self.resources = Resources(self.root, self.game, 0, 0)
 
-        # Buildings
-        self.buildings = Buildings(root=self.root,
-            game=self.game, resources=self.resources, line_i=3, column_i=0)
+        # create MENU
+        self.menu = Menu(root=self.root,
+            game=self.game, resources=self.resources,
+            line_i=0, column_i=0)
