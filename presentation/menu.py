@@ -5,7 +5,6 @@ from buildings import Buildings
 
 class Menu(object):
     def __init__(self, root, game, resources, line_i, column_i):
-        print 'menu'
         self.root = root
         self.game = game
         self.resources = resources
@@ -20,9 +19,6 @@ class Menu(object):
             self.buttons[-1].grid(row=line_i + i, column=column_i)
 
         self.functions = {'buildings': self.buildings}
-        print type(self.buildings)
-        print '...menu'
-
 
 
     def change_screen(self, item):
