@@ -18,10 +18,12 @@ Universe()  |Galaxy()   |PlanetarySystem()	|Planet()
 		        |		        |		      |		       |Weapon()
 		        |		        |		      |		       |Shield()
 		        |		        |		      |		       |Engine()
+            |           |         |          |Fleet()
+		        |		        |		      |          |Flight()
 		        |		        |		      |ResearchLab()	|Research()
-		        |		        |		      |Fleet()
 		        |		        |		      |Defense
-		        |		        |		      |Battle()	|Fleet
+		        |		        |		      |Battle()	|Forces()
+            |           |                   |Fleet
 		        |		        |Research
 		        |           
             |Battle
