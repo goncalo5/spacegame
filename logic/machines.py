@@ -4,6 +4,7 @@ import constants
 class Machine(object):
     def __init__(self, name):
         self.name = name
+        self.n = 0  # number of machines
         self.attack = constants.MACHINES[self.name]['attack']
         self.shield = constants.MACHINES[self.name]['shield']
         self.structure = 0

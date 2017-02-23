@@ -12,7 +12,8 @@ BUILDINGS = {'metal_mine': {'cost': 10, 'rate_cost': 1.5, 'time': 3, 'rate_time'
 
 UNIVERSE = {'planet': {'fields': 100, 'rate_field': 1.5}}
 
-SPACESHIPS = {'light_fighter': {'cost': {'metal': 3000, 'crystal': 1000},
+SPACESHIPS = {'light_fighter': {'name': 'light_fighter',
+                                'cost': {'metal': 3000, 'crystal': 1000},
                                 'attack': 50, 'shield': 10,
                                 'speed': 12500, 'cargo_capacity': 50,
                                 'fuel_usage': 20, 'engine': 'combustion'},
@@ -92,6 +93,7 @@ DEFENSES = {'rocket_launcher':
 MACHINES = dict(SPACESHIPS, **DEFENSES)
 
 N_ROUNDS = 1
+DISTANCES = {'GALAXIES': 100, 'PLANETARYSYSTEMS': 10, 'PLANETS': 1}
 
 # Presentation
 MENU = ['overview', 'buildings', 'merchant', 'research',
