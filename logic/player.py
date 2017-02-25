@@ -1,5 +1,3 @@
-from planet import  Planet
-
 class Player(object):
     def __init__(self, name, planet):
         self.name = name
@@ -8,4 +6,3 @@ class Player(object):
         planet.empty = False
         planet.updating_total()
         self.planets = [planet]
-        print 'player', self.planets[0].empty

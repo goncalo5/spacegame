@@ -1,4 +1,3 @@
-# from constantes import *
 from presentation.presentation import Presentation
 
 

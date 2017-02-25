@@ -40,7 +40,6 @@ class Fill(object):
         self.resources.updating()
 
     def evolve_building(self, building):
-        print 'evolve_building', building.name
         self.game.evolve_building(building)
         self.update(building)
 
@@ -49,7 +48,6 @@ class Fill(object):
         self.resources.update_all()
 
     def quit(self):
-        print 'quit ............................\n\n'
         self.game.save()
         self.game.metal.total = 40
         self.game.run = False

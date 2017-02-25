@@ -62,10 +62,8 @@ class Factory(Building):
         self.factor = None
 
     def calculate_factor(self):
-        #print 'level:', self.level
         # level - 1, because it's a inverso
         self.factor = 1. / (self.factor0 * self.rate_factor ** (self.level - 1))
-        #print 'factor:', self.factor
 
 
 class Storage(Building):

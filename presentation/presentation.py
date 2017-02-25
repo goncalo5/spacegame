@@ -1,9 +1,7 @@
 from Tkinter import *
-import threading, time
 from logic.logic import Logic
 from menu import Menu
 from resources import Resources
-from buildings import Buildings
 
 
 class Presentation(object):

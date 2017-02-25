@@ -23,14 +23,12 @@ class Menu(object):
         self.b_quit.grid(row = row_i + len(constants.MENU) + 1, column=column_i)
 
     def quit(self):
-        print 'quit 2\n\n'
         self.game.save()
         self.game.run = False
         
         self.root.destroy()
 
     def change_screen(self, item):
-        print 'item', item
         self.functions[item]()
 
     def overview(self):

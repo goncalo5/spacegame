@@ -16,7 +16,6 @@ class Universe(object):
 
     def create_player(self, name):
         planet = self.find_a_planet()
-        print 'new planet:', planet
         self.players.append(Player(name, planet))
 
     def find_a_planet(self):
