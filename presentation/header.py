@@ -3,10 +3,10 @@ from constants import *
 
 
 class Header(object):
-    def __init__(self, root, game, row_i, column_i):
+    def __init__(self, root, planet, row_i, column_i):
         self.root = root
-        # initiate game
-        self.game = game
+        # initiate planet
+        self.planet = planet
 
         self.l = row_i  # upper Header row
         self.c = column_i  # initial Header column
@@ -17,12 +17,12 @@ class Header(object):
         # initial costs column
         self.c_costs = self.c + 2
         Label(self.root, text='evolving cost'). \
-            grid(row=self.l, column=self.c_costs, columnspan=self.game.n_resources)
-        for n, r in enumerate(self.game.resources):
+            grid(row=self.l, column=self.c_costs, columnspan=self.planet.n_resources)
+        for n, r in enumerate(self.planet.resources):
             # costs
             Label(self.root, text=r.name).grid(row=self.l + 1, column=self.c_costs + n)
         # Column of construction times
-        self.c_t = self.c_costs + self.game.n_resources
+        self.c_t = self.c_costs + self.planet.n_resources
         Label(self.root, text='Time'). \
             grid(row=self.l, column=self.c_t, rowspan=2)
         # evolving column

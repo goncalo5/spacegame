@@ -32,7 +32,7 @@ Presentation()  |Resources()
 			    |Menu() |Overview() |Player
 				|		|           |Planet
 			    |		|Buildings()    |Header()
-			    |		|			    |Fill()
+			    |		|			    |Fill()     |Planet
 			    |		|Merchant()
 			    |		|Researches()
 			    |		|Hangar()

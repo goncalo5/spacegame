@@ -5,12 +5,12 @@ from buildings import Buildings
 
 
 class Menu(object):
-    def __init__(self, root, menu, screen, game, resources, row_i, column_i):
+    def __init__(self, root, menu, screen, planet, resources, row_i, column_i):
         # attributes
         self.root = root
         self.f_menu = menu
         self.f_screen = screen
-        self.game = game
+        self.planet = planet
         self.resources = resources
         # null attributes
         self.overview = self.buildings = None
@@ -28,11 +28,12 @@ class Menu(object):
         self.b_quit.grid(row=row_i + len(constants.MENU) + 1, column=column_i)
 
     def quit(self):
-        self.game.save()
-        self.game.run = False
+        self.planet.save()
+        self.planet.run = False
         self.root.destroy()
 
-    def create_new_frame(self):
+    def clean_screen(self):
+        self.f_screen.destroy()
         self.f_screen = Frame(master=self.root, width=300, height=300)
         self.f_screen.pack()
 
@@ -40,13 +41,11 @@ class Menu(object):
         self.functions[item]()
 
     def change2overview(self):
-        self.f_screen.destroy()
-        self.create_new_frame()
+        self.clean_screen()
         self.overview = Overview(root=self.f_screen,
-                                  game=self.game, row_i=3, column_i=1)
+                                 planet=self.planet, row_i=3, column_i=1)
 
     def change2buildings(self):
-        self.f_screen.destroy()
-        self.create_new_frame()
-        self.buildings = Buildings(root=self.f_screen, game=self.game,
+        self.clean_screen()
+        self.buildings = Buildings(root=self.f_screen, planet=self.planet,
                                    resources=self.resources, row_i=3, column_i=1)

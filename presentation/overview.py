@@ -2,7 +2,7 @@ from Tkinter import *
 
 
 class Overview(object):
-    def __init__(self, root, game, row_i, column_i):
+    def __init__(self, root, planet, row_i, column_i):
         self.player = ['Player', 'points', 'position']
         self.planets = ['Planets', 'coordinates', 'fields', 'temperature']
         self.all = self.player + self.planets
