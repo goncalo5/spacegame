@@ -25,6 +25,13 @@ class Universe(object):
                     if p.empty:
                         return p
 
+    def coordinates2planet(self, coordinates):
+        for g in self.galaxies:
+            for ps in g.planetary_systems:
+                for p in ps.planets:
+                    if p.coordinates == coordinates:
+                        return p
+
 
 class Galaxy(object):
     def __init__(self, coordinates):

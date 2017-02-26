@@ -31,7 +31,7 @@ class Presentation(object):
 
         # create MENU
         self.menu = Menu(root=self.root, menu=self.f_menu, screen=self.f_screen,
-            planet=self.planet, resources=self.resources,
-            row_i=0, column_i=0)
+                         planet=self.planet, resources=self.resources,
+                         row_i=0, column_i=0)
 
         self.root.mainloop()

@@ -81,7 +81,7 @@ class Planet(object):
             for mine in self.mines:
                 mine.update_per_s()
 
-    # for storages
+    # for storage
     def update_storage_capacity(self, building):
         if building in self.storages:
             building.update_storage_capacity()

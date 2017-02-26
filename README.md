@@ -18,8 +18,7 @@ Universe()  |Galaxy()   |PlanetarySystem()  |Planet()
 		    |		    |		    |		    |Weapon()
 		    |		    |		    |		    |Shield()
 		    |		    |		    |		    |Engine()
-            |           |           |           |Fleet()
-		    |		    |		    |           |Flight()
+            |           |           |           |Fleet()    |Flight()
 		    |		    |		    |ResearchLab()  |Research()
 		    |		    |		    |Defense
 		    |		    |		    |Battle()   |Forces()
@@ -33,7 +32,7 @@ Presentation()  |Resources()
 				|		|           |Planet
 			    |		|Buildings()    |Header()
 			    |		|			    |Fill()     |Planet
-			    |		|Merchant()
+			    |		|Merchant()     |Resources
 			    |		|Researches()
 			    |		|Hangar()
 			    |		|Defenses()

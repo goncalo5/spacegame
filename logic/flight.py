@@ -11,7 +11,7 @@ class Flight(object):
         self.left = self.distance / self.fleet.speed
 
     def flight_loop(self):
-        pass
+        while self.left
 
     def calc_distance(self):
         self.distance = max(
