@@ -30,12 +30,9 @@ class Fill(object):
         l = self.header.l + 2
         self.b_buildings = []
         for i, building in enumerate(self.game.buildings):
-            self.b_buildings.append(\
-                Button(text=building.type, command=lambda b=building: self.evolve_building(b)))
+            self.b_buildings.append(
+                Button(self.root, text=building.type, command=lambda b=building: self.evolve_building(b)))
             self.b_buildings[-1].grid(row=l + i, column=self.header.c_evol)
-
-        self.b_quit = Button(text='quit', command=self.quit)
-        self.b_quit.grid(row = 10, column=10)
 
         self.resources.updating()
 

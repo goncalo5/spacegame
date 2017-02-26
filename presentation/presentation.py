@@ -9,6 +9,15 @@ class Presentation(object):
         # initiate screen
         self.root = Tk()
         self.root.title('SPACEgame')
+        self.root.geometry('600x400')
+        self.root.configure(background='black')
+        # create frames
+        self.f_menu = Frame(master=self.root, width=100, height=400, bg='black')
+        self.f_resources = Frame(master=self.root, width=300, height=100, bg='black')
+        self.f_screen = Frame(master=self.root, width=300, height=300, bg='black')
+        self.f_menu.pack(side=LEFT)
+        self.f_resources.pack()
+        self.f_screen.pack()
 
         # initiate game
         self.logic = logic
@@ -18,10 +27,10 @@ class Presentation(object):
         self.game = self.player.planets[0]
 
         # Available Resources
-        self.resources = Resources(self.root, self.game, 0, 1)
+        self.resources = Resources(self.f_resources, self.game, 0, 1)
 
         # create MENU
-        self.menu = Menu(root=self.root,
+        self.menu = Menu(root=self.root, menu=self.f_menu, screen=self.f_screen,
             game=self.game, resources=self.resources,
             row_i=0, column_i=0)
 
