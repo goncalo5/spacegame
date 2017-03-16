@@ -1,6 +1,9 @@
 # resources
-RESOURCES = {'metal': {'total': 1000, 'per_s': 5, 'rate_per_s': 2},
-             'crystal': {'total': 500, 'per_s': 1, 'rate_per_s': 1.5}}
+METAL = {'NAME': 'metal', 'total': 1000, 'per_s': 5, 'rate_per_s': 2}
+CRYSTAL = {'NAME': 'crystal', 'total': 500, 'per_s': 1, 'rate_per_s': 1.5}
+DEUTERIUM = {'NAME': 'deuterium', 'total': 500, 'per_s': 1, 'rate_per_s': 1.5}
+ENERGY = {'NAME': 'energy', 'total': 500, 'per_s': 0, 'rate_per_s': 1.5}
+RESOURCES = [METAL, CRYSTAL, DEUTERIUM, ENERGY]
 
 # buildings
 BUILDINGS = {'metal_mine': {'cost': 10, 'rate_cost': 1.5, 'time': 3, 'rate_time': 1.5,
