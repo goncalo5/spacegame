@@ -7,46 +7,104 @@ RESOURCES = [METAL, CRYSTAL, DEUTERIUM, ENERGY]
 
 # buildings
 # resources buildings:
-METAL_MINE = {'NAME': 'metal_mine', 'KIND': 'mine', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
-              'TIME': 3, 'RATE_TIME': 1.5, 'RESOURCE_GAIN': METAL['name'], 'RESOURCE_CONSUME': DEUTERIUM['name']}
+METAL_MINE = {
+    'NAME': 'metal_mine', 'KIND': 'resource_building', 'TIME': 3, 'RATE_TIME': 1.5,
+    'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+    'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+    'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}
+}
+CRYSTAL_MINE = {
+    'NAME': 'crystal_mine', 'KIND': 'resource_building', 'TIME': 3, 'RATE_TIME': 1.5,
+    'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+    'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+    'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}
+}
+DEUTERIUM_SYNTHESIZER = {
+    'NAME': 'deuterium_synthesizer', 'KIND': 'resource_building', 'TIME': 3, 'RATE_TIME': 1.5,
+    'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+    'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+    'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}
+}
+SOLAR_PLANT = {
+    'NAME': 'metal_mine', 'KIND': 'resource_building', 'TIME': 3, 'RATE_TIME': 1.5,
+    'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+    'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+    'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}
+}
+FUSION_REACTOR = {'NAME': 'metal_mine', 'KIND': 'resource_building', 'TIME': 3, 'RATE_TIME': 1.5,
+              'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+              'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+              'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}}
 
-CRYSTAL_MINE = {'NAME': 'crystal_mine', 'KIND': 'mine', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
-              'TIME': 3, 'RATE_TIME': 1.5, 'RESOURCE_GAIN': CRYSTAL['name'], 'RESOURCE_CONSUME': DEUTERIUM['name']}
+METAL_STORAGE = {'NAME': 'metal_storage', 'KIND': 'storage', 'TIME': 3, 'RATE_TIME': 1.5,
+              'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+              'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+              'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}}
 
-DEUTERIUM_SYNTHESIZER = {'NAME': 'deuterium_synthesizer', 'KIND': 'mine', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
-              'TIME': 3, 'RATE_TIME': 1.5, 'RESOURCE_GAIN': DEUTERIUM['name'], 'RESOURCE_CONSUME': DEUTERIUM['name']}
+CRYSTAL_STORAGE = {'NAME': 'crystal_storage', 'KIND': 'storage', 'TIME': 3, 'RATE_TIME': 1.5,
+              'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+              'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+              'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}}
 
-SOLAR_PLANT = {'NAME': 'metal_mine', 'KIND': 'mine', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
-              'TIME': 3, 'RATE_TIME': 1.5, 'RESOURCE_GAIN': ENERGY['name']}
+DEUTERIUM_TANK = {'NAME': 'deuterium_tank', 'KIND': 'storage', 'TIME': 3, 'RATE_TIME': 1.5,
+              'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+              'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+              'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}}
 
-FUSION_REACTOR, = {'NAME': 'metal_mine', 'KIND': 'mine', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
-              'TIME': 3, 'RATE_TIME': 1.5, 'RESOURCE_GAIN': ENERGY['name'], 'RESOURCE_CONSUME': DEUTERIUM['name']}
+ROBOTICS_FACTORY = {'NAME': 'robot_factory',  'KIND': 'factory', 'TIME': 3, 'RATE_TIME': 1.5,
+                    'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+                    'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+                    'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]},
+                    'factor': 2, 'rate_factor': 2}
 
-METAL_STORAGE = {'NAME': 'metal_storage', 'KIND': 'storage', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
-              'TIME': 3, 'RATE_TIME': 1.5, RESOURCE: METAL['name'], 'CAPACITY': 1500, 'RATE_CAPACITY': 1.5}
+NANITE_FACTORY = {
+    'NAME': 'crystal_mine', 'KIND': 'resource_building', 'TIME': 3, 'RATE_TIME': 1.5,
+    'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+    'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+    'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}
+}
 
-CRYSTAL_STORAGE = {'NAME': 'crystal_storage', 'KIND': 'storage', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
-              'TIME': 3, 'RATE_TIME': 1.5, RESOURCE: METAL['name'], 'CAPACITY': 1500, 'RATE_CAPACITY': 1.5}
+SHIPYARD = {
+    'NAME': 'crystal_mine', 'KIND': 'resource_building', 'TIME': 3, 'RATE_TIME': 1.5,
+    'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+    'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+    'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}
+}
 
-DEUTERIUM_TANK = {'NAME': 'deuterium_tank', 'KIND': 'storage', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
-              'TIME': 3, 'RATE_TIME': 1.5, RESOURCE: METAL['name'], 'CAPACITY': 1500, 'RATE_CAPACITY': 1.5}
+ALLIANCE_DEPOT = {
+    'NAME': 'crystal_mine', 'KIND': 'resource_building', 'TIME': 3, 'RATE_TIME': 1.5,
+    'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+    'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+    'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}
+}
 
-ROBOTICS_FACTORY robot_factory': {'cost': 10, 'rate_cost': 2, 'time': 3, 'rate_time': 1.5,
-                               'KIND': 'factory', 'factor': 2, 'rate_factor': 2}}
+MISSILE_SILO = {
+    'NAME': 'crystal_mine', 'KIND': 'resource_building', 'TIME': 3, 'RATE_TIME': 1.5,
+    'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+    'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+    'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}
+}
 
-NANITE_FACTORY
+RESEARCH_LAB = {
+    'NAME': 'crystal_mine', 'KIND': 'resource_building', 'TIME': 3, 'RATE_TIME': 1.5,
+    'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+    'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+    'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}
+}
 
-SHIPYARD
+TERRAFORMER = {
+    'NAME': 'crystal_mine', 'KIND': 'resource_building', 'TIME': 3, 'RATE_TIME': 1.5,
+    'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+    'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+    'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}
+}
 
-ALLIANCE_DEPOT
-
-MISSILE_SILO,
-
-RESEARCH_LAB
-
-TERRAFORMER
-
-SPACE_DOCK
+SPACE_DOCK = {
+    'NAME': 'crystal_mine', 'KIND': 'resource_building', 'TIME': 3, 'RATE_TIME': 1.5,
+    'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+    'RESOURCE_GAIN': {'PER_S': [1.5, 0, 0, 0], 'RATE_PER_S': [2, 0, 0, 0]},
+    'RESOURCE_CONSUME': {'TOTAL': [0, 0, 0, 50], 'RATE_TOTAL': [0, 0, 0, 1.5]}
+}
 
 BUILDINGS = [METAL_MINE, CRYSTAL_MINE, DEUTERIUM_SYNTHESIZER, SOLAR_PLANT, FUSION_REACTOR,
              METAL_STORAGE, CRYSTAL_STORAGE, DEUTERIUM_TANK,
