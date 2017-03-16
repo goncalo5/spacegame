@@ -6,12 +6,52 @@ ENERGY = {'NAME': 'energy', 'total': 500, 'per_s': 0, 'rate_per_s': 1.5}
 RESOURCES = [METAL, CRYSTAL, DEUTERIUM, ENERGY]
 
 # buildings
-BUILDINGS = {'metal_mine': {'cost': 10, 'rate_cost': 1.5, 'time': 3, 'rate_time': 1.5,
-                            'type': 'mine'},
-             'metal_storage': {'cost': 10, 'rate_cost': 2, 'time': 3, 'rate_time': 1.5,
-                               'type': 'storage', 'capacity': 1500, 'rate_capacity': 1.5},
-             'robot_factory': {'cost': 10, 'rate_cost': 2, 'time': 3, 'rate_time': 1.5,
-                               'type': 'factory', 'factor': 2, 'rate_factor': 2}}
+# resources buildings:
+METAL_MINE = {'NAME': 'metal_mine', 'KIND': 'mine', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+              'TIME': 3, 'RATE_TIME': 1.5, 'RESOURCE_GAIN': METAL['name'], 'RESOURCE_CONSUME': DEUTERIUM['name']}
+
+CRYSTAL_MINE = {'NAME': 'crystal_mine', 'KIND': 'mine', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+              'TIME': 3, 'RATE_TIME': 1.5, 'RESOURCE_GAIN': CRYSTAL['name'], 'RESOURCE_CONSUME': DEUTERIUM['name']}
+
+DEUTERIUM_SYNTHESIZER = {'NAME': 'deuterium_synthesizer', 'KIND': 'mine', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+              'TIME': 3, 'RATE_TIME': 1.5, 'RESOURCE_GAIN': DEUTERIUM['name'], 'RESOURCE_CONSUME': DEUTERIUM['name']}
+
+SOLAR_PLANT = {'NAME': 'metal_mine', 'KIND': 'mine', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+              'TIME': 3, 'RATE_TIME': 1.5, 'RESOURCE_GAIN': ENERGY['name']}
+
+FUSION_REACTOR, = {'NAME': 'metal_mine', 'KIND': 'mine', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+              'TIME': 3, 'RATE_TIME': 1.5, 'RESOURCE_GAIN': ENERGY['name'], 'RESOURCE_CONSUME': DEUTERIUM['name']}
+
+METAL_STORAGE = {'NAME': 'metal_storage', 'KIND': 'storage', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+              'TIME': 3, 'RATE_TIME': 1.5, RESOURCE: METAL['name'], 'CAPACITY': 1500, 'RATE_CAPACITY': 1.5}
+
+CRYSTAL_STORAGE = {'NAME': 'crystal_storage', 'KIND': 'storage', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+              'TIME': 3, 'RATE_TIME': 1.5, RESOURCE: METAL['name'], 'CAPACITY': 1500, 'RATE_CAPACITY': 1.5}
+
+DEUTERIUM_TANK = {'NAME': 'deuterium_tank', 'KIND': 'storage', 'COST': [10, 0, 0], 'RATE_COST': [1.5, 0, 0],
+              'TIME': 3, 'RATE_TIME': 1.5, RESOURCE: METAL['name'], 'CAPACITY': 1500, 'RATE_CAPACITY': 1.5}
+
+ROBOTICS_FACTORY robot_factory': {'cost': 10, 'rate_cost': 2, 'time': 3, 'rate_time': 1.5,
+                               'KIND': 'factory', 'factor': 2, 'rate_factor': 2}}
+
+NANITE_FACTORY
+
+SHIPYARD
+
+ALLIANCE_DEPOT
+
+MISSILE_SILO,
+
+RESEARCH_LAB
+
+TERRAFORMER
+
+SPACE_DOCK
+
+BUILDINGS = [METAL_MINE, CRYSTAL_MINE, DEUTERIUM_SYNTHESIZER, SOLAR_PLANT, FUSION_REACTOR,
+             METAL_STORAGE, CRYSTAL_STORAGE, DEUTERIUM_TANK,
+             ROBOTICS_FACTORY, NANITE_FACTORY, SHIPYARD, ALLIANCE_DEPOT, MISSILE_SILO,
+             RESEARCH_LAB, TERRAFORMER, SPACE_DOCK]
 
 UNIVERSE = {'planet': {'fields': 100, 'rate_field': 1.5}}
 
