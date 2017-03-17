@@ -26,7 +26,11 @@ class Resource(object):
         self.planet = planet
         self.index = index
         self.name = name
-        self.total = total
+        # static resource: resources that only change when a new building/spaceship is constructed/evolved
+        self.static = 0
+        # dynamic resource: resources that change over time (affected by per s)
+        self.dynamic = total
+        self.total = self.static + self.dynamic
 
         # Null variables
         self.per_s0 = self.per_s = self.rate_per_s = None
@@ -44,7 +48,17 @@ class Resource(object):
                     building.resource_gain['per_s1'][self.index] *\
                     building.resource_gain['rate_per_s'][self.index] **\
                     building.level - building.resource_gain['per_s1'][self.index]
-        #raise
+
+    def update_total(self):
+        self.static = 0
+        for building in self.planet.buildings:
+            if building.kind == 'resource_building':
+                self.static += \
+                    building.resource_gain['total0'][self.index] +\
+                    building.resource_gain['total1'][self.index] *\
+                    building.resource_gain['rate_total'][self.index] **\
+                    building.level - building.resource_gain['total1'][self.index]
+        self.total = self.static + self.dynamic
 
 
     # Data Base

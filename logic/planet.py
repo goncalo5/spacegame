@@ -40,7 +40,8 @@ class Planet(object):
 
     def updating_total(self):
         for resource in self.resources.list:
-            resource.total += resource.per_s
+            resource.dynamic += resource.per_s
+            resource.total = resource.static + resource.dynamic
         if self.run:
             #self.storage.check_storage()
             t = threading.Timer(interval=1, function=self.updating_total)

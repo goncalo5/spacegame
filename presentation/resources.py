@@ -15,7 +15,6 @@ class Resources(object):
         Label(self.root, text='per sec').grid(row=row_i + 2, column=column_i)
         # fill
         for n, resource in enumerate(self.planet.resources):
-            print resource.per_s, n
             Label(self.root, text=resource.name).grid(row=row_i, column=column_i + 1 + n)
             resource.l_total = Label(self.root, text=resource.total)
             resource.l_total.grid(row=row_i + 1, column=column_i + 1 + n)
