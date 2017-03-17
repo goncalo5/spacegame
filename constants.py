@@ -1,8 +1,8 @@
 # resources
 METAL = {'index': 0, 'name': 'metal', 'total': 1000}
 CRYSTAL = {'index': 1, 'name': 'crystal', 'total': 500}
-DEUTERIUM = {'index': 2, 'name': 'deuterium', 'total': 500}
-ENERGY = {'index': 3, 'name': 'energy', 'total': 500}
+DEUTERIUM = {'index': 2, 'name': 'deuterium', 'total': 0}
+ENERGY = {'index': 3, 'name': 'energy', 'total': 0}
 RESOURCES = [METAL, CRYSTAL, DEUTERIUM, ENERGY]
 
 # buildings
@@ -28,7 +28,7 @@ DEUTERIUM_SYNTHESIZER = {
 SOLAR_PLANT = {
     'name': 'Solar Plant', 'kind': 'resource_building', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'resource_gain': {'total0': [0, 0, 0, 50], 'total1': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5],
+    'resource_gain': {'total0': [0, 0, 0, 0], 'total1': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5],
                       'per_s0': [0, 0, 0, 0], 'per_s1': [0, 0, 0, 0], 'rate_per_s': [0, 0, 0, 0]}
 }
 FUSION_REACTOR = {

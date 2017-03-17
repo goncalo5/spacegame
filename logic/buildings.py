@@ -1,5 +1,6 @@
 import database
 import constants
+from functions import transform_name
 
 
 class Buildings(object):
@@ -21,7 +22,7 @@ class Buildings(object):
                  'other': Building}
         self.list.append(kinds[building['kind']](**building))
         new = self.list[-1]
-        self.__dict__[new.name] = new
+        self.__dict__[transform_name(new.name)] = new
         self.dictionary[new.name] = new
 
     def __iter__(self):

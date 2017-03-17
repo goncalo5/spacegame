@@ -1,3 +1,6 @@
+from functions import transform_name
+
+
 class Resources(object):
     def __init__(self, planet, resources_list):
         self.planet = planet
@@ -14,7 +17,7 @@ class Resources(object):
     def add_resource(self, resource):
         self.list.append(Resource(self.planet, **resource))
         new = self.list[-1]
-        self.__dict__[new.name] = new
+        self.__dict__[transform_name(new.name)] = new
         self.dictionary[new.name] = new
 
     def __iter__(self):
@@ -37,6 +40,7 @@ class Resource(object):
 
         # initial methods
         self.update_per_s()
+        self.update_total()
         self.see_total_in_db()
 
     def update_per_s(self):
@@ -53,12 +57,17 @@ class Resource(object):
         self.static = 0
         for building in self.planet.buildings:
             if building.kind == 'resource_building':
+                print building.resource_gain['total0'][self.index],\
+                    building.resource_gain['total1'][self.index],\
+                    building.resource_gain['rate_total'][self.index],\
+                    building.level - building.resource_gain['total1'][self.index]
                 self.static += \
                     building.resource_gain['total0'][self.index] +\
                     building.resource_gain['total1'][self.index] *\
                     building.resource_gain['rate_total'][self.index] **\
                     building.level - building.resource_gain['total1'][self.index]
         self.total = self.static + self.dynamic
+        raise
 
 
     # Data Base

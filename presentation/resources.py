@@ -35,4 +35,8 @@ class Resources(object):
         if self.planet.run:
             self.update_all()
             # always use after method in Tkinter
+            #print self.planet.resources.energy
+            #print self.planet.resources.energy.static
+            #print self.planet.resources.energy.dynamic
+            #print self.planet.resources.energy.total
             self.root.after(1000, self.updating)
