@@ -1,7 +1,7 @@
 import threading
 import constants
-from resources import Resource
-from buildings import Mine, Storage, Factory
+from resources import Resources
+from buildings import Buildings, ResourceBuilding, Storage, Factory
 from machines import Defense
 
 
@@ -17,24 +17,26 @@ class Planet(object):
         self.fields_occupied = 0
         self.defenses = {}
         for i, defense in enumerate(constants.DEFENSES):
-            new = Defense(defense)
+            new = Defense(**defense)
             self.defenses[new.name] = new
             self.defenses[new.name].n = 0
         # Resources
         # create resources's objects
-        self.metal = Resource('metal')
-        self.resources = [self.metal]
-        self.n_resources = len(self.resources)
+        self.resources = Resources(constants.RESOURCES)
+        #self.metal = Resource('metal')
+        #self.resources = [self.metal]
+        #self.n_resources = len(self.resources)
 
         # Buildings
         # create buildings's objects
-        self.metal_mine = Mine('metal_mine', self.metal)
-        self.metal_storage = Storage('metal_storage', self.metal)
-        self.robot_factory = Factory('robot_factory')
-        self.mines = [self.metal_mine]
-        self.storages = [self.metal_storage]
-        self.factories = [self.robot_factory]
-        self.buildings = self.mines + self.storages + self.factories
+        self.buildings = Buildings(constants.BUILDINGS)
+        #self.metal_mine = Mine('metal_mine', self.metal)
+        #s#elf.metal_storage = Storage('metal_storage', self.metal)
+        #self.robot_factory = Factory('robot_factory')
+        #self.mines = [self.metal_mine]
+        #self.storages = [self.metal_storage]
+        #self.factories = [self.robot_factory]
+        #self.buildings = self.mines + self.storages + self.factories
 
         self.run = False
         self.is_evolving = False  # just 1 building at the same time
@@ -46,11 +48,20 @@ class Planet(object):
         #up_total.start()
 
     def updating_total(self):
-        self.metal.total += self.metal.per_s
+        print 'updating total:', self.resources.list
+        for resource in self.resources.list:
+            print resource
+            resource.total += resource.per_s
         if self.run:
-            self.metal_storage.check_storage()
+            #self.storage.check_storage()
             t = threading.Timer(interval=1, function=self.updating_total)
             t.start()
+
+        #self.metal.total += self.metal.per_s
+        #if self.run:
+        #   self.metal_storage.check_storage()
+        #    t = threading.Timer(interval=1, function=self.updating_total)
+        #    t.start()
 
     def evolve_building(self, building):
         if self.check_if_can_evolve(building):

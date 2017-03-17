@@ -1,32 +1,52 @@
-import time
-import database
-import constants
+class Resources(object):
+    def __init__(self, planet, resources_list):
+        self.planet = planet
+        self.list = []
+        self.dictionary = {}
+        self.n = None
+        self.create_resources_objects(resources_list)
+
+    def create_resources_objects(self, resources_list):
+        for resource in resources_list:
+            self.add_resource(resource)
+        self.n = len(self.list)
+
+    def add_resource(self, resource):
+        self.list.append(Resource(self.planet, **resource))
+        new = self.list[-1]
+        self.__dict__[new.name] = new
+        self.dictionary[new.name] = new
+
+    def __iter__(self):
+        return iter(self.list)
 
 
 class Resource(object):
-    def __init__(self, name):
+    def __init__(self, planet, index, name, total):
+        self.planet = planet
+        self.index = index
         self.name = name
+        self.total = total
 
         # Null variables
-        self.total = self.per_s = None
-
-        # constants
-        self.per_s0 = self.per_s = constants.RESOURCES[self.name]['per_s']
-        self.rate_per_s = constants.RESOURCES[self.name]['rate_per_s']
+        self.per_s0 = self.per_s = self.rate_per_s = None
 
         # initial methods
         self.see_total_in_db()
 
+    def update_per_s(self):
+        for building in self.planet.buildings:
+            if building.kind == 'resource_building':
+
+
     # Data Base
     # GET
     def see_total_in_db(self):
-        self.total = database.RESOURCES[self.name]
+        pass
 
     # PUT
     def save_total_in_db(self):
-        database.BUILDINGS[self.name]['total'] = self.total
+        pass
 
     def updating_total_in_db(self):
-        self.save_total_in_db()
-        time.sleep(constants.TIME2UPDATE_DB)
-        self.updating_total_in_db()
+        pass
