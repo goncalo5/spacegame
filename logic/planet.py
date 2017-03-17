@@ -20,23 +20,14 @@ class Planet(object):
             new = Defense(**defense)
             self.defenses[new.name] = new
             self.defenses[new.name].n = 0
-        # Resources
-        # create resources's objects
-        self.resources = Resources(constants.RESOURCES)
-        #self.metal = Resource('metal')
-        #self.resources = [self.metal]
-        #self.n_resources = len(self.resources)
 
         # Buildings
         # create buildings's objects
         self.buildings = Buildings(constants.BUILDINGS)
-        #self.metal_mine = Mine('metal_mine', self.metal)
-        #s#elf.metal_storage = Storage('metal_storage', self.metal)
-        #self.robot_factory = Factory('robot_factory')
-        #self.mines = [self.metal_mine]
-        #self.storages = [self.metal_storage]
-        #self.factories = [self.robot_factory]
-        #self.buildings = self.mines + self.storages + self.factories
+        # Resources
+        # create resources's objects
+        self.resources = Resources(self, constants.RESOURCES)
+        self.n_resources = len(constants.RESOURCES)
 
         self.run = False
         self.is_evolving = False  # just 1 building at the same time
@@ -48,9 +39,7 @@ class Planet(object):
         #up_total.start()
 
     def updating_total(self):
-        print 'updating total:', self.resources.list
         for resource in self.resources.list:
-            print resource
             resource.total += resource.per_s
         if self.run:
             #self.storage.check_storage()
@@ -70,36 +59,37 @@ class Planet(object):
 
     def check_if_can_evolve(self, building):
         if not self.is_evolving:
-            if self.metal >= building.cost and not building.is_evolving:
-                return True
-        else:
-            pass
+            for i, resource in enumerate(self.resources):
+                if resource.total < building.cost[i]:
+                    return False
+            return True
 
     def take_resources2evolve(self, building):
-        self.metal.total -= building.cost
+        for i, resource in enumerate(self.resources):
+            resource.total -= building.cost[i]
         building.evolving = True
 
     def up1level(self, building):
         building.level += 1
-        building.calculate_cost()
+        building.calculate_costs()
         self.update_per_s(building)  # for mines
         self.update_storage_capacity(building)  # for storages
         self.update_times(building)  # for factories
 
     # for mines
     def update_per_s(self, building):
-        if building in self.mines:
-            for mine in self.mines:
-                mine.update_per_s()
+        if building.kind == 'resource_building':
+            for resource in self.resources:
+                resource.update_per_s()
 
     # for storage
     def update_storage_capacity(self, building):
-        if building in self.storages:
+        if building.kind == 'storage':
             building.update_storage_capacity()
 
     # for factories
     def update_times(self, building):
-        if building in self.factories:
+        if building.kind == 'factory':
             self.update_all_times()
         else:
             self.update_time(building)
@@ -108,9 +98,10 @@ class Planet(object):
         time = 1
         building.calculate_time2build()
         time *= building.time
-        for f in self.factories:
-            f.calculate_factor()
-            time *= f.factor
+        for building in self.buildings:
+            if building.kind == 'factory':
+                building.calculate_factor()
+                time *= building.factor
         building.time = time
 
     def update_all_times(self):

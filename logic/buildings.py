@@ -57,10 +57,8 @@ class Building(object):
 
     # calculators
     def calculate_costs(self):
-        #print 'calculate cost:', self.cost_lv0, self.rate_cost, self.level
         cost =[]
         for i, cost_lv0 in enumerate(self.cost_lv0):
-            #print i, self.cost_lv0, cost_lv0, self.rate_cost[i]
             cost.append(cost_lv0 * self.rate_cost[i]**self.level)
         self.cost = cost
 
@@ -69,12 +67,9 @@ class Building(object):
 
 
 class ResourceBuilding(Building):
-    def __init__(self, name, kind, time, rate_time, cost, rate_cost, resource_gain, resource_consume):
+    def __init__(self, name, kind, time, rate_time, cost, rate_cost, resource_gain):
         super(ResourceBuilding, self).__init__(name, kind, time, rate_time, cost, rate_cost)
-        self.resource_gain, self.resource_consume = resource_gain, resource_consume
-
-    def update_per_s(self):
-        self.resource.per_s = self.resource.per_s0 * self.resource.rate_per_s ** self.level
+        self.resource_gain = resource_gain
 
 
 class Factory(Building):

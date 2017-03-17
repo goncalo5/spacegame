@@ -10,32 +10,32 @@ RESOURCES = [METAL, CRYSTAL, DEUTERIUM, ENERGY]
 METAL_MINE = {
     'name': 'metal_mine', 'kind': 'resource_building', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'resource_gain': {'per_s': [1.5, 0, 0, 0], 'rate_per_s': [2, 0, 0, 0]},
-    'resource_consume': {'total': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5]}
+    'resource_gain': {'total': [0, 0, 0, -50], 'rate_total': [0, 0, 0, 1.5],
+                      'per_s0': [2, 0, 0, 0], 'per_s1': [10, 0, 0, 0], 'rate_per_s': [2, 0, 0, 0]}
 }
 CRYSTAL_MINE = {
     'name': 'crystal_mine', 'kind': 'resource_building', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'resource_gain': {'per_s': [1.5, 0, 0, 0], 'rate_per_s': [2, 0, 0, 0]},
-    'resource_consume': {'total': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5]}
+    'resource_gain': {'total': [0, 0, 0, -50], 'rate_total': [0, 0, 0, 1.5],
+                      'per_s0': [0, 1, 0, 0], 'per_s1': [0, 5, 0, 0], 'rate_per_s': [0, 2, 0, 0]}
 }
 DEUTERIUM_SYNTHESIZER = {
     'name': 'deuterium_synthesizer', 'kind': 'resource_building', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'resource_gain': {'per_s': [1.5, 0, 0, 0], 'rate_per_s': [2, 0, 0, 0]},
-    'resource_consume': {'total': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5]}
+    'resource_gain': {'total': [0, 0, 0, -50], 'rate_total': [0, 0, 0, 1.5],
+                      'per_s0': [0, 0, 0, 0], 'per_s1': [0, 0, 1.5, 0], 'rate_per_s': [0, 0, 2, 0]}
 }
 SOLAR_PLANT = {
     'name': 'metal_mine', 'kind': 'resource_building', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'resource_gain': {'per_s': [1.5, 0, 0, 0], 'rate_per_s': [2, 0, 0, 0]},
-    'resource_consume': {'total': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5]}
+    'resource_gain': {'total': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5],
+                      'per_s0': [0, 0, 0, 0], 'per_s1': [0, 0, 0, 0], 'rate_per_s': [0, 0, 0, 0]}
 }
 FUSION_REACTOR = {
     'name': 'metal_mine', 'kind': 'resource_building', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'resource_gain': {'per_s': [1.5, 0, 0, 0], 'rate_per_s': [2, 0, 0, 0]},
-    'resource_consume': {'total': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5]}
+    'resource_gain': {'total': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5],
+                      'per_s0': [0, 0, 0, 0], 'per_s1': [0, 0, -1.5, 0], 'rate_per_s': [0, 0, 2, 0]}
 }
 # Storage
 METAL_STORAGE = {
@@ -200,5 +200,6 @@ N_ROUNDS = 1
 DISTANCES = {'GALAXIES': 100, 'PLANETARY_SYSTEMS': 10, 'PLANETS': 1}
 
 # Presentation
+SCREEN = '800x650'
 MENU = ['overview', 'buildings', 'merchant', 'research',
         'hangar', 'defense', 'fleet', 'universe', 'alliance']

@@ -1,4 +1,5 @@
 from Tkinter import *
+from constants import SCREEN
 from logic.logic import Logic
 from menu import Menu
 from resources import Resources
@@ -9,7 +10,7 @@ class Presentation(object):
         # initiate screen
         self.root = Tk()
         self.root.title('SPACEgame')
-        self.root.geometry('600x400')
+        self.root.geometry(SCREEN)
         self.root.configure(background='black')
         # create frames
         self.f_menu = Frame(master=self.root, width=100, height=400, bg='black')
