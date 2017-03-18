@@ -10,19 +10,19 @@ RESOURCES = [METAL, CRYSTAL, DEUTERIUM, ENERGY]
 METAL_MINE = {
     'name': 'metal_mine', 'kind': 'resource_building', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'resource_gain': {'total0': [0, 0, 0, -50], 'total1': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5],
+    'resource_gain': {'total0': [0, 0, 0, 0], 'total1': [0, 0, 0, -5], 'rate_total': [0, 0, 0, 1.5],
                       'per_s0': [2, 0, 0, 0], 'per_s1': [10, 0, 0, 0], 'rate_per_s': [2, 0, 0, 0]}
 }
 CRYSTAL_MINE = {
     'name': 'crystal_mine', 'kind': 'resource_building', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'resource_gain': {'total0': [0, 0, 0, -50], 'total1': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5],
+    'resource_gain': {'total0': [0, 0, 0, 0], 'total1': [0, 0, 0, -5], 'rate_total': [0, 0, 0, 1.5],
                       'per_s0': [0, 1, 0, 0], 'per_s1': [0, 5, 0, 0], 'rate_per_s': [0, 2, 0, 0]}
 }
 DEUTERIUM_SYNTHESIZER = {
     'name': 'deuterium_synthesizer', 'kind': 'resource_building', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'resource_gain': {'total0': [0, 0, 0, -50], 'total1': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5],
+    'resource_gain': {'total0': [0, 0, 0, 0], 'total1': [0, 0, 0, -5], 'rate_total': [0, 0, 0, 1.5],
                       'per_s0': [0, 0, 0, 0], 'per_s1': [0, 0, 1.5, 0], 'rate_per_s': [0, 0, 2, 0]}
 }
 SOLAR_PLANT = {
@@ -34,7 +34,7 @@ SOLAR_PLANT = {
 FUSION_REACTOR = {
     'name': 'Fusion Reactor', 'kind': 'resource_building', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'resource_gain': {'total0': [0, 0, 0, 50], 'total1': [0, 0, 0, 50], 'rate_total': [0, 0, 0, 1.5],
+    'resource_gain': {'total0': [0, 0, 0, 0], 'total1': [0, 0, 0, 150], 'rate_total': [0, 0, 0, 1.5],
                       'per_s0': [0, 0, 0, 0], 'per_s1': [0, 0, -1.5, 0], 'rate_per_s': [0, 0, 2, 0]}
 }
 # Storage
@@ -91,12 +91,17 @@ SPACE_DOCK = {
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0]
 }
 RESOURCE_BUILDING = [METAL_MINE, CRYSTAL_MINE, DEUTERIUM_SYNTHESIZER, SOLAR_PLANT, FUSION_REACTOR]
-STORAGES =[METAL_STORAGE, CRYSTAL_STORAGE, DEUTERIUM_TANK]
+STORAGES = [METAL_STORAGE, CRYSTAL_STORAGE, DEUTERIUM_TANK]
 FACTORIES = [ROBOTICS_FACTORY, NANITE_FACTORY, SHIPYARD]
 OTHERS = [ALLIANCE_DEPOT, MISSILE_SILO, RESEARCH_LAB, TERRAFORMER, SPACE_DOCK]
 BUILDINGS = RESOURCE_BUILDING + STORAGES + FACTORIES + OTHERS
 
-UNIVERSE = {'planet': {'fields': 100, 'rate_field': 1.5}}
+UNIVERSE = {'n_galaxies': 9, 'planet': {'fields': 100, 'rate_field': 1.5}}
+DISTANCES = {'GALAXIES': 100, 'PLANETARY_SYSTEMS': 10, 'PLANETS': 1}
+
+# Trader
+TRADER = {'ratios': {'food': 1, 'wood': 1, 'stone': 2, 'iron': 10, 'gold': 100},
+          'profit': 0.1}
 
 # Spaceships
 COMBUSTION = {'name': 'Combustion', 'power': 1}
@@ -105,56 +110,56 @@ HYPERSPACE = {'name': 'Hyperspace', 'power': 1}
 ENGINES = [COMBUSTION, IMPULSION, HYPERSPACE]
 
 LIGHT_FIGHTER = {
-    'name': 'light_fighter', 'time': 3, 'rate_time': 1.5, 'cost': [3000, 1000 , 0, 0],
+    'name': 'light_fighter', 'time': 3, 'rate_time': 1.5, 'cost': [3000, 1000, 0, 0],
     'attack': 50, 'shield': 10, 'speed': 12500, 'cargo_capacity': 50,
     'fuel_usage': 20, 'engine': COMBUSTION}
 HEAVY_FIGHTER = {
-    'name': 'Heavy Fighter', 'cost': [6000, 4000 , 0, 0],
+    'name': 'Heavy Fighter', 'cost': [6000, 4000, 0, 0],
     'attack': 50, 'shield': 10, 'speed': 12500, 'cargo_capacity': 50, 'fuel_usage': 20, 'engine': COMBUSTION}
 CRUISER = {
-    'name': 'Cruiser', 'cost': [20000, 7000 , 0, 0],
+    'name': 'Cruiser', 'cost': [20000, 7000, 0, 0],
     'attack': 50, 'shield': 10, 'speed': 12500, 'cargo_capacity': 50, 'fuel_usage': 20, 'engine': COMBUSTION}
 BATTLESHIP = {
-    'name': 'Battleship', 'cost': [45000, 15000 , 0, 0],
+    'name': 'Battleship', 'cost': [45000, 15000, 0, 0],
     'attack': 50, 'shield': 10, 'speed': 12500, 'cargo_capacity': 50, 'fuel_usage': 20, 'engine': COMBUSTION}
 BATTLE_CRUISER = {
-    'name': 'Battle Cruiser', 'cost': [40000, 30000 , 0, 0],
+    'name': 'Battle Cruiser', 'cost': [40000, 30000, 0, 0],
     'attack': 50, 'shield': 10,
     'speed': 12500, 'cargo_capacity': 50, 'fuel_usage': 20, 'engine': COMBUSTION}
 BOMBER = {
-    'name': 'Bomber', 'cost': [50000, 25000 , 0, 0],
+    'name': 'Bomber', 'cost': [50000, 25000, 0, 0],
     'attack': 50, 'shield': 10,
     'speed': 12500, 'cargo_capacity': 50, 'fuel_usage': 20, 'engine': COMBUSTION}
 DESTROYER = {
-    'name': 'destroyer', 'cost': [60000, 50000 , 0, 0],
+    'name': 'destroyer', 'cost': [60000, 50000, 0, 0],
     'attack': 50, 'shield': 10,
     'speed': 12500, 'cargo_capacity': 50, 'fuel_usage': 20, 'engine': COMBUSTION}
 DEATH_STAR = {
-    'name': 'Death Star', 'cost': [5*10**6, 4*10**6 , 0, 0],
+    'name': 'Death Star', 'cost': [5*10**6, 4*10**6, 0, 0],
     'attack': 50, 'shield': 10,
     'speed': 12500, 'cargo_capacity': 50, 'fuel_usage': 20, 'engine': COMBUSTION}
 SMALL_CARGO = {
-    'name': 'small Cargo', 'cost': [2000, 2000 , 0, 0],
+    'name': 'small Cargo', 'cost': [2000, 2000, 0, 0],
     'attack': 50, 'shield': 10,
     'speed': 12500, 'cargo_capacity': 50, 'fuel_usage': 20, 'engine': COMBUSTION}
 LARGE_CARGO = {
-    'name': 'Large Cargo', 'cost': [6000, 6000 , 0, 0],
+    'name': 'Large Cargo', 'cost': [6000, 6000, 0, 0],
     'attack': 50, 'shield': 10,
     'speed': 12500, 'cargo_capacity': 50, 'fuel_usage': 20, 'engine': COMBUSTION}
 COLONY_SHIP = {
-    'name': 'Colony Ship', 'cost': [10000, 20000 , 0, 0],
+    'name': 'Colony Ship', 'cost': [10000, 20000, 0, 0],
     'attack': 50, 'shield': 10,
     'speed': 12500, 'cargo_capacity': 50, 'fuel_usage': 20, 'engine': COMBUSTION}
 RECYCLER = {
-    'name': 'Recycler', 'cost': [10000, 6000 , 0, 0],
+    'name': 'Recycler', 'cost': [10000, 6000, 0, 0],
     'attack': 50, 'shield': 10,
     'speed': 12500, 'cargo_capacity': 50, 'fuel_usage': 20, 'engine': COMBUSTION}
 ESPIONAGE_PROBE = {
-    'name': 'Espionage Probe', 'cost': [0, 1000 , 0, 0],
+    'name': 'Espionage Probe', 'cost': [0, 1000, 0, 0],
     'attack': 50, 'shield': 10,
     'speed': 12500, 'cargo_capacity': 50, 'fuel_usage': 20, 'engine': COMBUSTION}
 SOLAR_SATELLITE = {
-    'name': 'Solar Satellite', 'cost': [3000, 2000 , 0, 0],
+    'name': 'Solar Satellite', 'cost': [3000, 2000, 0, 0],
     'attack': 50, 'shield': 10,
     'speed': 0, 'cargo_capacity': 0, 'fuel_usage': 0, 'engine': None}
 
@@ -162,34 +167,34 @@ SPACESHIPS = [LIGHT_FIGHTER, HEAVY_FIGHTER, CRUISER, BATTLESHIP, BATTLE_CRUISER,
               SMALL_CARGO, LARGE_CARGO, COLONY_SHIP, RECYCLER, ESPIONAGE_PROBE, SOLAR_SATELLITE]
 
 ROCKET_LAUNCHER = {
-    'name': 'rocket_launcher', 'cost': [3000, 2000 , 0, 0],
+    'name': 'rocket_launcher', 'cost': [3000, 2000, 0, 0],
     'attack': 50, 'shield': 10}
 LIGHT_LASER = {
-    'name': 'light_laser', 'cost': [3000, 2000 , 0, 0],
+    'name': 'light_laser', 'cost': [3000, 2000, 0, 0],
     'attack': 50, 'shield': 10}
 HEAVY_LASER = {
-    'name': 'heavy_laser', 'cost': [3000, 2000 , 0, 0],
+    'name': 'heavy_laser', 'cost': [3000, 2000, 0, 0],
     'attack': 50, 'shield': 10}
 GAUSS_CANNON = {
-    'name': 'gauss_cannon', 'cost': [3000, 2000 , 0, 0],
+    'name': 'gauss_cannon', 'cost': [3000, 2000, 0, 0],
     'attack': 50, 'shield': 10}
 ION_CANNON = {
-    'name': 'ion_cannon', 'cost': [3000, 2000 , 0, 0],
+    'name': 'ion_cannon', 'cost': [3000, 2000, 0, 0],
     'attack': 50, 'shield': 10}
 PLASMA_TURRET = {
-    'name': 'plasma_turret', 'cost': [3000, 2000 , 0, 0],
+    'name': 'plasma_turret', 'cost': [3000, 2000, 0, 0],
     'attack': 50, 'shield': 10}
 SMALL_SHIELD_DOME = {
-    'name': 'small_shield_dome', 'cost': [3000, 2000 , 0, 0],
+    'name': 'small_shield_dome', 'cost': [3000, 2000, 0, 0],
     'attack': 50, 'shield': 10}
 LARGE_SHIELD_DOME = {
-    'name': 'large_shield_dome', 'cost': [3000, 2000 , 0, 0],
+    'name': 'large_shield_dome', 'cost': [3000, 2000, 0, 0],
     'attack': 50, 'shield': 10}
-ANTI_BALLISTIC_MISSILES =  {
-    'name': 'anti_ballistic_missiles', 'cost': [3000, 2000 , 0, 0],
+ANTI_BALLISTIC_MISSILES = {
+    'name': 'anti_ballistic_missiles', 'cost': [3000, 2000, 0, 0],
     'attack': 50, 'shield': 10}
 INTERPLANETARY_MISSILES = {
-    'name': 'interplanetary_missiles', 'cost': [3000, 2000 , 0, 0],
+    'name': 'interplanetary_missiles', 'cost': [3000, 2000, 0, 0],
     'attack': 50, 'shield': 10}
 DEFENSES = [ROCKET_LAUNCHER, LIGHT_LASER, HEAVY_LASER, GAUSS_CANNON, ION_CANNON, PLASMA_TURRET,
             SMALL_SHIELD_DOME, LARGE_SHIELD_DOME, ANTI_BALLISTIC_MISSILES, INTERPLANETARY_MISSILES]
@@ -197,7 +202,6 @@ DEFENSES = [ROCKET_LAUNCHER, LIGHT_LASER, HEAVY_LASER, GAUSS_CANNON, ION_CANNON,
 MACHINES = SPACESHIPS + DEFENSES
 
 N_ROUNDS = 1
-DISTANCES = {'GALAXIES': 100, 'PLANETARY_SYSTEMS': 10, 'PLANETS': 1}
 
 # Presentation
 SCREEN = '800x650'

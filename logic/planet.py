@@ -1,42 +1,35 @@
 import threading
 import constants
 from resources import Resources
-from buildings import Buildings, ResourceBuilding, Storage, Factory
+from buildings import Buildings
 from machines import Defense
 
 
 class Planet(object):
     def __init__(self, coordinates):
         self.coordinates = coordinates
-        self.empty = True
+        self.run = False
+        self.is_evolving = False  # just 1 building at the same time
         self.star_distance = self.coordinates['planet'] + 1
         self.total_fields = self.star_distance * \
                             constants.UNIVERSE['planet']['rate_field'] + \
                             constants.UNIVERSE['planet']['fields']
         self.fields_left = self.total_fields
         self.fields_occupied = 0
+        # None initial attributes
+        self.buildings = self.resources = self.n_resources = None
         self.defenses = {}
         for i, defense in enumerate(constants.DEFENSES):
             new = Defense(**defense)
             self.defenses[new.name] = new
             self.defenses[new.name].n = 0
 
-        # Buildings
-        # create buildings's objects
+    def create_buildings_objects(self):
         self.buildings = Buildings(constants.BUILDINGS)
-        # Resources
-        # create resources's objects
+
+    def create_resources_objects(self):
         self.resources = Resources(self, constants.RESOURCES)
         self.n_resources = len(constants.RESOURCES)
-
-        self.run = False
-        self.is_evolving = False  # just 1 building at the same time
-        # start updating resources
-        if not self.run and not self.empty:
-            self.run = True
-            self.updating_total()
-        #up_total = threading.Timer(interval=1, function=self.updating_total)
-        #up_total.start()
 
     def updating_total(self):
         for resource in self.resources.list:
@@ -46,12 +39,6 @@ class Planet(object):
             #self.storage.check_storage()
             t = threading.Timer(interval=1, function=self.updating_total)
             t.start()
-
-        #self.metal.total += self.metal.per_s
-        #if self.run:
-        #   self.metal_storage.check_storage()
-        #    t = threading.Timer(interval=1, function=self.updating_total)
-        #    t.start()
 
     def evolve_building(self, building):
         if self.check_if_can_evolve(building):
@@ -73,15 +60,22 @@ class Planet(object):
     def up1level(self, building):
         building.level += 1
         building.calculate_costs()
-        self.update_per_s(building)  # for mines
-        self.update_storage_capacity(building)  # for storages
+        # for resources buildings
+        if building.kind == 'resource_building':
+            self.update_resources_total()
+            self.update_resources_per_s()
+        # for storages
+        self.update_storage_capacity(building)
         self.update_times(building)  # for factories
 
     # for mines
-    def update_per_s(self, building):
-        if building.kind == 'resource_building':
-            for resource in self.resources:
-                resource.update_per_s()
+    def update_resources_total(self):
+        for resource in self.resources:
+            resource.update_total()
+
+    def update_resources_per_s(self):
+        for resource in self.resources:
+            resource.update_per_s()
 
     # for storage
     def update_storage_capacity(self, building):

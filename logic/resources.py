@@ -57,17 +57,13 @@ class Resource(object):
         self.static = 0
         for building in self.planet.buildings:
             if building.kind == 'resource_building':
-                print building.resource_gain['total0'][self.index],\
-                    building.resource_gain['total1'][self.index],\
-                    building.resource_gain['rate_total'][self.index],\
-                    building.level - building.resource_gain['total1'][self.index]
                 self.static += \
                     building.resource_gain['total0'][self.index] +\
                     building.resource_gain['total1'][self.index] *\
                     building.resource_gain['rate_total'][self.index] **\
-                    building.level - building.resource_gain['total1'][self.index]
+                    building.level - \
+                    building.resource_gain['total1'][self.index]
         self.total = self.static + self.dynamic
-        raise
 
 
     # Data Base

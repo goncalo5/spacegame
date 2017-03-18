@@ -5,10 +5,12 @@ from planet import Planet
 
 class Universe(object):
     def __init__(self):
-        self.n_galaxies = 9
+        self.n_galaxies = constants.UNIVERSE['n_galaxies']
         self.galaxies = []
 
         self.players = []
+
+        self.trader = Trader()
 
         for i in xrange(self.n_galaxies):
             self.galaxy = Galaxy({'galaxy': i})
@@ -22,7 +24,7 @@ class Universe(object):
         for g in self.galaxies:
             for ps in g.planetary_systems:
                 for p in ps.planets:
-                    if p.empty:
+                    if not p.run:
                         return p
 
     def coordinates2planet(self, coordinates):
@@ -53,3 +55,22 @@ class PlanetarySystem(object):
             coord = self.coordinates
             coord['planet'] = i
             self.planets.append(Planet(coord))
+
+
+# to control all market's offers and do his own offers
+class Trader(object):
+    def __init__(self):
+        self.ratios = constants.TRADER['ratios']
+        self.profit = constants.TRADER['profit']
+        self.offers = {}
+
+    # his own offers
+    # resource_send, resource_receive = 'wood', 'food'
+    def calculate_ratio(self, resource_send, resource_receive):
+        return (1 + self.profit) * self.ratios[resource_send] / self.ratios[resource_receive]
+
+    # resource = 1000
+    def calculate_receive(self, resource_send, ratio=None):
+        if ratio is None:
+            ratio = self.calculate_ratio(resource_send, resource_send)
+        return float(resource_send) / ratio
