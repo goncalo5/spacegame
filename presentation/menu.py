@@ -1,15 +1,19 @@
 from Tkinter import *
+import time
 import constants
 from overview import Overview
 from buildings import Buildings
 
 
 class Menu(object):
-    def __init__(self, root, menu, screen, planet, resources, row_i, column_i):
+    def __init__(self, root, menu, planet, resources, row_i, column_i):
         # attributes
         self.root = root
         self.f_menu = menu
-        self.f_screen = screen
+        #self.f_screen = screen
+        self.f_overview = Frame(master=self.root, width=300, height=300, bg='black')
+        self.f_buildings = Frame(master=self.root, width=300, height=300, bg='black')
+        self.f_screen = self.f_overview
         self.planet = planet
         self.resources = resources
         # null attributes
@@ -33,19 +37,24 @@ class Menu(object):
         self.root.destroy()
 
     def clean_screen(self):
-        self.f_screen.destroy()
-        self.f_screen = Frame(master=self.root, width=300, height=300)
-        self.f_screen.pack()
+        self.f_screen.pack_forget()#destroy()
+        #self.f_screen = Frame(master=self.root, width=300, height=300)
+        #self.f_screen.pack()
 
     def change_screen(self, item):
         self.functions[item]()
 
     def change2overview(self):
         self.clean_screen()
-        self.overview = Overview(root=self.f_screen,
+        self.f_screen = self.f_overview
+        self.f_overview.pack()
+        self.overview = Overview(root=self.f_overview,
                                  planet=self.planet, row_i=3, column_i=1)
 
     def change2buildings(self):
         self.clean_screen()
-        self.buildings = Buildings(root=self.f_screen, planet=self.planet,
+        self.f_screen = self.f_buildings
+        self.f_buildings.pack()
+        self.buildings = Buildings(root=self.f_buildings, planet=self.planet,
                                    resources=self.resources, row_i=3, column_i=1)
+

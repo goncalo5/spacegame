@@ -1,13 +1,21 @@
 from Tkinter import *
+import time
 
 
 class Buildings(object):
     def __init__(self, root, planet, resources, row_i, column_i):
+        t = []
+        t.append(time.time())
         self.root = root
         self.planet = planet
 
         self.header = BuildingsHeader(self.root, planet, row_i, column_i)
         self.fill = BuildingsFill(self.root, planet, resources, self.header, row_i + self.header.n_rows, column_i)
+        t.append(time.time())
+        for i in xrange(len(t) - 1):
+            pass
+            #print t[i + 1] - t[i],
+        #print t[-1] - t[0]
 
 
 class BuildingsHeader(object):
