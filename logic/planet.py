@@ -2,7 +2,7 @@ import threading
 import constants
 from resources import Resources
 from buildings import Buildings
-from machines import Defense
+from machines import Spaceship, Defense
 
 
 class Planet(object):
@@ -30,6 +30,14 @@ class Planet(object):
     def create_resources_objects(self):
         self.resources = Resources(self, constants.RESOURCES)
         self.n_resources = len(constants.RESOURCES)
+
+    def create_spaceships_objects(self):
+        # constants.spaceships = {'spear_fighter': {...}, ... name_unit: {characteristics}}
+        self.spaceships = {}  # {spear_fighter: 5, ... obj_unit: n_soldier}
+        for i, spaceship in enumerate(constants.SPACESHIPS):
+            print spaceship
+            new_spaceship = Spaceship(**spaceship)
+            self.spaceships[new_spaceship] = 0  # there are no spaceships at first
 
     def updating_total(self):
         for resource in self.resources.list:

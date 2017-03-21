@@ -67,6 +67,7 @@ class Trader(object):
     # his own offers
     # resource_send, resource_receive = 'wood', 'food'
     def calculate_ratio(self, resource_send, resource_receive):
+        print resource_receive, resource_send
         return (1 + self.profit) * self.ratios[resource_send] / self.ratios[resource_receive]
 
     # resource = 1000

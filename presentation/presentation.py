@@ -41,8 +41,8 @@ class Presentation(object):
         t.append(time.time())
 
         # create MENU
-        self.menu = Menu(root=self.root, menu=self.f_menu,#, screen=self.f_screen,
-                         planet=self.planet, resources=self.resources,
+        self.menu = Menu(universe=self.logic.universe, planet=self.planet,
+                         root=self.root, menu=self.f_menu, resources=self.resources,
                          row_i=0, column_i=0)
         t.append(time.time())
         for i in xrange(len(t) - 1):
