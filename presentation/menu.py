@@ -2,6 +2,7 @@ from Tkinter import *
 import time
 import constants
 from overview import Overview
+from resources import MenuResources
 from buildings import Buildings
 from market import Market
 from hangar import Hangar
@@ -33,6 +34,7 @@ class Menu(object):
             self.buttons[-1].grid(row=row_i + i, column=column_i)
 
         self.functions = {'overview': self.change2overview,
+                          'resources': self.change2resources,
                           'buildings': self.change2buildings,
                           'market': self.change2market,
                           'hangar': self.change2hangar}
@@ -56,6 +58,17 @@ class Menu(object):
         self.clean_screen()
         self.f_screen = self.f_overview
         self.f_overview.pack()
+
+    def change2resources(self):
+        self.clean_screen()
+        try:
+            self.f_resources.pack()
+        except:
+            self.f_resources = Frame(master=self.root, width=300, height=300, bg='black')
+            self.f_resources.pack()
+            self.resources = MenuResources(planet=self.planet, root=self.f_resources,
+                                           resources=self.resources, row_i=3, column_i=1)
+        self.f_screen = self.f_resources
 
     def change2buildings(self):
         self.clean_screen()

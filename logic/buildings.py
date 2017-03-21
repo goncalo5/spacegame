@@ -1,6 +1,6 @@
 import database
 import constants
-from functions import transform_name
+import functions
 
 
 class Buildings(object):
@@ -8,6 +8,10 @@ class Buildings(object):
         self.list = []
         self.dictionary = {}
         self.n = None
+        self.resource_buildings = []
+        self.storages = []
+        self.factories = []
+        self.others = []
         self.create_buildings_objects(buildings_list)
 
     def create_buildings_objects(self, buildings_list):
@@ -20,10 +24,16 @@ class Buildings(object):
                  'storage': Storage,
                  'factory': Factory,
                  'other': Building}
+        plural = {'resource_building': 'resource_buildings',
+                 'storage': 'storages',
+                 'factory': 'factories',
+                 'other': 'others'}
         self.list.append(kinds[building['kind']](**building))
         new = self.list[-1]
-        self.__dict__[transform_name(new.name)] = new
+        self.__dict__[functions.transform_name(new.name)] = new
         self.dictionary[new.name] = new
+        # kinds lists
+        self.__dict__[plural[building['kind']]].append(new)
 
     def __iter__(self):
         return iter(self.list)

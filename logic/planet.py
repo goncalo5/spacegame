@@ -35,7 +35,6 @@ class Planet(object):
         # constants.spaceships = {'spear_fighter': {...}, ... name_unit: {characteristics}}
         self.spaceships = {}  # {spear_fighter: 5, ... obj_unit: n_soldier}
         for i, spaceship in enumerate(constants.SPACESHIPS):
-            print spaceship
             new_spaceship = Spaceship(**spaceship)
             self.spaceships[new_spaceship] = 0  # there are no spaceships at first
 
@@ -54,8 +53,11 @@ class Planet(object):
             self.loop_evolve(building)  # time to built
 
     def check_if_can_evolve(self, building):
+        print 'check if can evolve'
         if not self.is_evolving:
+            print 'not evolving'
             for i, resource in enumerate(self.resources):
+                print resource.name, resource.total, building.cost[i]
                 if resource.total < building.cost[i]:
                     return False
             return True

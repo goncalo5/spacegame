@@ -34,9 +34,25 @@ class Resources(object):
     def updating(self):
         if self.planet.run:
             self.update_all()
-            # always use after method in Tkinter
-            #print self.planet.resources.energy
-            #print self.planet.resources.energy.static
-            #print self.planet.resources.energy.dynamic
-            #print self.planet.resources.energy.total
             self.root.after(1000, self.updating)
+
+
+class MenuResources(object):
+    def __init__(self, planet, root, resources, row_i=0, column_i=0):
+        self.planet, self.root, self.resources, self.i, self.j \
+            = planet, root, resources, row_i, column_i
+        self.create_header()
+        self.create_fill()
+
+    def create_header(self):
+        for i, resource in enumerate(self.planet.resources.list):
+            Label(master=self.root, text=resource.name).grid(row=self.i, column=self.j + i + 1)
+
+    def create_fill(self):
+        Label(master=self.root, text='Basic').grid(row=self.i + 1, column=self.j)
+        for i, resource in enumerate(self.planet.resources):
+            Label(master=self.root, text=resource.per_s0).grid(row=self.i + 1, column=self.j + i + 1)
+        for i, resource_building in enumerate(self.planet.buildings.resource_buildings):
+            Label(master=self.root, text=resource_building.name).grid(row=self.i + i + 2, column=self.j)
+            for j, resource in enumerate(self.planet.resources):
+                Label(master=self.root, text=resource.per_s).grid(row=self.i + i + 2, column=self.j + j + 1)

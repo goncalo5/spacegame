@@ -81,6 +81,7 @@ class BuildingsFill(object):
                 Button(self.root, text=building.kind, command=lambda b=building: self.evolve_building(b)))
             self.b_buildings[-1].grid(row=l + i, column=self.header.c_evol)
 
+        print self.resources
         self.resources.updating()
 
     def evolve_building(self, building):

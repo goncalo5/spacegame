@@ -206,5 +206,5 @@ N_ROUNDS = 1
 
 # Presentation
 SCREEN = '800x650'
-MENU = ['overview', 'buildings', 'market', 'research',
+MENU = ['overview', 'resources', 'buildings', 'market', 'research',
         'hangar', 'defense', 'fleet', 'universe', 'alliance']
