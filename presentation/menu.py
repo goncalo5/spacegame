@@ -6,16 +6,19 @@ from buildings import Buildings
 
 
 class Menu(object):
-    def __init__(self, root, menu, planet, resources, row_i, column_i):
+    def __init__(self, planet, root, menu, resources, row_i, column_i):
         # attributes
+        self.planet = planet
+
         self.root = root
         self.f_menu = menu
-        #self.f_screen = screen
-        self.f_overview = Frame(master=self.root, width=300, height=300, bg='black')
-        self.f_buildings = Frame(master=self.root, width=300, height=300, bg='black')
-        self.f_screen = self.f_overview
-        self.planet = planet
         self.resources = resources
+        
+        self.f_overview = Frame(master=self.root, width=300, height=300, bg='black')
+        self.f_overview.pack()
+        self.overview = Overview(root=self.f_overview,
+                                 planet=self.planet, row_i=3, column_i=1)
+        self.f_screen = self.f_overview
         # null attributes
         self.overview = self.buildings = None
 
@@ -37,9 +40,7 @@ class Menu(object):
         self.root.destroy()
 
     def clean_screen(self):
-        self.f_screen.pack_forget()#destroy()
-        #self.f_screen = Frame(master=self.root, width=300, height=300)
-        #self.f_screen.pack()
+        self.f_screen.pack_forget()
 
     def change_screen(self, item):
         self.functions[item]()
@@ -48,13 +49,15 @@ class Menu(object):
         self.clean_screen()
         self.f_screen = self.f_overview
         self.f_overview.pack()
-        self.overview = Overview(root=self.f_overview,
-                                 planet=self.planet, row_i=3, column_i=1)
 
     def change2buildings(self):
         self.clean_screen()
+        try:
+            self.f_buildings.pack()
+        except:
+            self.f_buildings = Frame(master=self.root, width=300, height=300, bg='black')
+            self.f_buildings.pack()
+            self.buildings = Buildings(root=self.f_buildings, planet=self.planet,
+                                       resources=self.resources, row_i=3, column_i=1)
         self.f_screen = self.f_buildings
-        self.f_buildings.pack()
-        self.buildings = Buildings(root=self.f_buildings, planet=self.planet,
-                                   resources=self.resources, row_i=3, column_i=1)
 
