@@ -1,6 +1,7 @@
 import database
 import constants
 import functions
+import resources
 
 
 class Buildings(object):
@@ -78,9 +79,20 @@ class Building(object):
 
 
 class ResourceBuilding(Building):
-    def __init__(self, name, kind, time, rate_time, cost, rate_cost, resource_gain):
+    def __init__(self, name, kind, time, rate_time, cost, rate_cost, earned_resources):
         super(ResourceBuilding, self).__init__(name, kind, time, rate_time, cost, rate_cost)
-        self.resource_gain = resource_gain
+        self.earned_resources = earned_resources
+        self.n_resources = len(self.cost)
+        self.per_s = [None] * self.n_resources  # [None, None, None, None]
+        self.update_per_s()
+
+    def update_per_s(self):
+        for i in xrange(self.n_resources):
+            self.per_s[i] = \
+                self.earned_resources['per_s0'][i] + \
+                self.earned_resources['per_s1'][i] * \
+                self.earned_resources['rate_per_s'][i] ** \
+                self.level - self.earned_resources['per_s1'][i]
 
 
 class Factory(Building):

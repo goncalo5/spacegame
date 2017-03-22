@@ -12,17 +12,13 @@ class Presentation(object):
         t.append(time.time())
         # initiate screen
         self.root = Tk()  # 83 % of all time
-        t.append(time.time())
         self.root.title('SPACEgame')
-        t.append(time.time())
         self.root.geometry(SCREEN)
-        t.append(time.time())
         self.root.configure(background='black')
-        t.append(time.time())
         # create frames
         self.f_menu = Frame(master=self.root, width=100, height=400, bg='black')
         self.f_resources = Frame(master=self.root, width=300, height=100, bg='black')
-        self.f_screen = Frame(master=self.root, width=300, height=300, bg='black')
+        #self.f_screen = Frame(master=self.root, width=300, height=300, bg='black')
         self.f_menu.pack(side=LEFT)
         self.f_resources.pack()
         #self.f_screen.pack()
@@ -42,7 +38,7 @@ class Presentation(object):
 
         # create MENU
         self.menu = Menu(universe=self.logic.universe, planet=self.planet,
-                         root=self.root, menu=self.f_menu, resources=self.resources,
+                         presentation=self,
                          row_i=0, column_i=0)
         t.append(time.time())
         for i in xrange(len(t) - 1):

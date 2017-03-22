@@ -3,14 +3,14 @@ import time
 
 
 class Buildings(object):
-    def __init__(self, root, planet, resources, row_i, column_i):
+    def __init__(self, planet, presentation, row_i, column_i):
         t = []
         t.append(time.time())
-        self.root = root
         self.planet = planet
+        self.presentation = presentation
 
-        self.header = BuildingsHeader(self.root, planet, row_i, column_i)
-        self.fill = BuildingsFill(self.root, planet, resources, self.header, row_i + self.header.n_rows, column_i)
+        self.header = BuildingsHeader(self.presentation.menu.f_buildings, planet, row_i, column_i)
+        self.fill = BuildingsFill(planet, presentation, self.header, row_i + self.header.n_rows, column_i)
         t.append(time.time())
         for i in xrange(len(t) - 1):
             pass
@@ -48,11 +48,11 @@ class BuildingsHeader(object):
 
 
 class BuildingsFill(object):
-    def __init__(self, root, planet, resources, header, row_i, column_i):
-        self.root = root
+    def __init__(self, planet, presentation, header, row_i, column_i):
         # initiate planet
         self.planet = planet
-        self.resources = resources
+        self.presentation = presentation
+        self.root = self.presentation.menu.f_buildings
         self.header = header
 
         for n, building in enumerate(self.planet.buildings):
@@ -81,8 +81,7 @@ class BuildingsFill(object):
                 Button(self.root, text=building.kind, command=lambda b=building: self.evolve_building(b)))
             self.b_buildings[-1].grid(row=l + i, column=self.header.c_evol)
 
-        print self.resources
-        self.resources.updating()
+        self.presentation.resources.updating()
 
     def evolve_building(self, building):
         self.planet.evolve_building(building)

@@ -55,4 +55,4 @@ class MenuResources(object):
         for i, resource_building in enumerate(self.planet.buildings.resource_buildings):
             Label(master=self.root, text=resource_building.name).grid(row=self.i + i + 2, column=self.j)
             for j, resource in enumerate(self.planet.resources):
-                Label(master=self.root, text=resource.per_s).grid(row=self.i + i + 2, column=self.j + j + 1)
+                Label(master=self.root, text=resource_building.per_s[j]).grid(row=self.i + i + 2, column=self.j + j + 1)
