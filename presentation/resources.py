@@ -49,9 +49,6 @@ class MenuResources(object):
             Label(master=self.root, text=resource.name).grid(row=self.i, column=self.j + i + 1)
 
     def create_fill(self):
-        Label(master=self.root, text='Basic').grid(row=self.i + 1, column=self.j)
-        for i, resource in enumerate(self.planet.resources):
-            Label(master=self.root, text=resource.per_s0).grid(row=self.i + 1, column=self.j + i + 1)
         for i, resource_building in enumerate(self.planet.buildings.resource_buildings):
             Label(master=self.root, text=resource_building.name).grid(row=self.i + i + 2, column=self.j)
             for j, resource in enumerate(self.planet.resources):

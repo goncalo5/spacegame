@@ -52,25 +52,21 @@ class Resource(object):
             self.per_s0 += per_s0
 
     def update_per_s(self):
-        self.per_s = self.per_s0
+        self.per_s = 0
         for building in self.planet.buildings.resource_buildings:
-            per_s = \
-                    building.earned_resources['per_s1'][self.index] *\
-                    building.earned_resources['rate_per_s'][self.index] **\
-                    building.level - building.earned_resources['per_s1'][self.index]
+            per_s = building.per_s[self.index]
             # create total per_s for each resource
             self.per_s += per_s
 
     def update_total(self):
         self.static = 0
-        for building in self.planet.buildings:
-            if building.kind == 'resource_building':
-                self.static += \
-                    building.earned_resources['total0'][self.index] +\
-                    building.earned_resources['total1'][self.index] *\
-                    building.earned_resources['rate_total'][self.index] **\
-                    building.level - \
-                    building.earned_resources['total1'][self.index]
+        for building in self.planet.buildings.resource_buildings:
+            self.static += \
+                building.earned_resources['total0'][self.index] +\
+                building.earned_resources['total1'][self.index] *\
+                building.earned_resources['rate_total'][self.index] **\
+                building.level - \
+                building.earned_resources['total1'][self.index]
         self.total = self.static + self.dynamic
 
 

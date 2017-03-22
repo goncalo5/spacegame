@@ -53,11 +53,8 @@ class Planet(object):
             self.loop_evolve(building)  # time to built
 
     def check_if_can_evolve(self, building):
-        print 'check if can evolve'
         if not self.is_evolving:
-            print 'not evolving'
             for i, resource in enumerate(self.resources):
-                print resource.name, resource.total, building.cost[i]
                 if resource.total < building.cost[i]:
                     return False
             return True
@@ -72,6 +69,7 @@ class Planet(object):
         building.calculate_costs()
         # for resources buildings
         if building.kind == 'resource_building':
+            building.update_per_s()
             self.update_resources_total()
             self.update_resources_per_s()
         # for storages

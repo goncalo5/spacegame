@@ -87,10 +87,6 @@ class BuildingsFill(object):
         self.planet.evolve_building(building)
         self.update(building)
 
-    #def update(self, building):
-    #    self.fill.update(building)
-    #    self.resources.update_all()
-
     def quit(self):
         self.planet.save()
         self.planet.metal.total = 40
