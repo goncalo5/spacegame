@@ -3,7 +3,9 @@ import time
 
 
 class Buildings(object):
-    def __init__(self, planet, presentation, row_i, column_i):
+    def __init__(self, universe, planet, presentation, root, row_i=0, column_i=0):
+        self.universe, self.planet, self.presentation, self.root, self.i, self.j \
+            = universe, planet, presentation, root, row_i, column_i
         t = []
         t.append(time.time())
         self.planet = planet
@@ -84,14 +86,9 @@ class BuildingsFill(object):
         self.presentation.resources.updating()
 
     def evolve_building(self, building):
+        print building.name, building.left
         self.planet.evolve_building(building)
         self.update(building)
-
-    def quit(self):
-        self.planet.save()
-        self.planet.metal.total = 40
-        self.planet.run = False
-        self.root.destroy()
 
     def update(self, building):
         building.l_lv['text'] = int(building.level)

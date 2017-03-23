@@ -38,9 +38,9 @@ class Resources(object):
 
 
 class MenuResources(object):
-    def __init__(self, planet, root, resources, row_i=0, column_i=0):
-        self.planet, self.root, self.resources, self.i, self.j \
-            = planet, root, resources, row_i, column_i
+    def __init__(self, universe, planet, presentation, root, row_i=0, column_i=0):
+        self.universe, self.planet, self.presentation, self.root, self.i, self.j \
+            = universe, planet, presentation, root, row_i, column_i
         self.create_header()
         self.create_fill()
 

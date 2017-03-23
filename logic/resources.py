@@ -1,4 +1,4 @@
-from functions import transform_name
+import functions
 
 
 class Resources(object):
@@ -17,8 +17,21 @@ class Resources(object):
     def add_resource(self, resource):
         self.list.append(Resource(self.planet, **resource))
         new = self.list[-1]
-        self.__dict__[transform_name(new.name)] = new
+        self.__dict__[functions.transform_name(new.name)] = new
         self.dictionary[new.name] = new
+
+    def updating_total(self):
+        for resource in self.list:
+            resource.dynamic += resource.per_s
+            resource.total = resource.static + resource.dynamic
+
+    def update_total(self):
+        for resource in self.list:
+            resource.update_total()
+
+    def update_per_s(self):
+        for resource in self.list:
+            resource.update_per_s()
 
     def __iter__(self):
         return iter(self.list)

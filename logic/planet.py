@@ -24,6 +24,7 @@ class Planet(object):
             self.defenses[new.name] = new
             self.defenses[new.name].n = 0
 
+    # creating objects
     def create_buildings_objects(self):
         self.buildings = Buildings(constants.BUILDINGS)
 
@@ -39,9 +40,7 @@ class Planet(object):
             self.spaceships[new_spaceship] = 0  # there are no spaceships at first
 
     def updating_total(self):
-        for resource in self.resources.list:
-            resource.dynamic += resource.per_s
-            resource.total = resource.static + resource.dynamic
+        self.resources.updating_total()
         if self.run:
             #self.storage.check_storage()
             t = threading.Timer(interval=1, function=self.updating_total)
@@ -65,25 +64,15 @@ class Planet(object):
         building.evolving = True
 
     def up1level(self, building):
-        building.level += 1
-        building.calculate_costs()
+        building.up1level()
         # for resources buildings
         if building.kind == 'resource_building':
             building.update_per_s()
-            self.update_resources_total()
-            self.update_resources_per_s()
+            self.resources.update_total()
+            self.resources.update_per_s()
         # for storages
         self.update_storage_capacity(building)
         self.update_times(building)  # for factories
-
-    # for mines
-    def update_resources_total(self):
-        for resource in self.resources:
-            resource.update_total()
-
-    def update_resources_per_s(self):
-        for resource in self.resources:
-            resource.update_per_s()
 
     # for storage
     def update_storage_capacity(self, building):
@@ -108,9 +97,9 @@ class Planet(object):
         building.time = time
 
     def update_all_times(self):
-        for b in self.buildings:
-            self.update_time(b)
-            b.left = b.time
+        for building in self.buildings:
+            self.update_time(building)
+            building.left = building.time
 
     def loop_evolve(self, building):
         self.is_evolving = building.is_evolving = True

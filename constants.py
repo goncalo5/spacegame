@@ -57,17 +57,26 @@ DEUTERIUM_TANK = {
 ROBOTICS_FACTORY = {
     'name': 'robot_factory',  'kind': 'factory', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'factor': 2, 'rate_factor': 2
+    'factor': {'buildings': 2, 'hangar': 1, 'defenses': 1, 'research': 1},
+    'rate_factor':  {'buildings': 1.5, 'hangar': 1, 'defenses': 1, 'research': 1}
 }
 NANITE_FACTORY = {
     'name': 'Nanite Factory', 'kind': 'factory', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'factor': 2, 'rate_factor': 2
+    'factor': {'buildings': 2, 'hangar': 2, 'defenses': 2, 'research': 1},
+    'rate_factor':  {'buildings': 2, 'hangar': 2, 'defenses': 2, 'research': 1}
 }
 SHIPYARD = {
     'name': 'Shipyard', 'kind': 'factory', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
-    'factor': 2, 'rate_factor': 2
+    'factor': {'buildings': 2, 'hangar': 2, 'defenses': 2, 'research': 1},
+    'rate_factor':  {'buildings': 1, 'hangar': 1.5, 'defenses': 1.5, 'research': 1}
+}
+RESEARCH_LAB = {
+    'name': 'Research Lab', 'kind': 'factory', 'time': 3, 'rate_time': 1.5,
+    'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0],
+    'factor': {'buildings': 1, 'hangar': 1, 'defenses': 1, 'research': 2},
+    'rate_factor':  {'buildings': 1, 'hangar': 1, 'defenses': 1, 'research': 1.5}
 }
 # Others Buildings
 ALLIANCE_DEPOT = {
@@ -76,10 +85,6 @@ ALLIANCE_DEPOT = {
 }
 MISSILE_SILO = {
     'name': 'Missile Silo', 'kind': 'other', 'time': 3, 'rate_time': 1.5,
-    'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0]
-}
-RESEARCH_LAB = {
-    'name': 'Research Lab', 'kind': 'other', 'time': 3, 'rate_time': 1.5,
     'cost': [10, 0, 0, 0], 'rate_cost': [1.5, 0, 0, 0]
 }
 TERRAFORMER = {
@@ -92,8 +97,8 @@ SPACE_DOCK = {
 }
 RESOURCE_BUILDING = [METAL_MINE, CRYSTAL_MINE, DEUTERIUM_SYNTHESIZER, SOLAR_PLANT, FUSION_REACTOR]
 STORAGES = [METAL_STORAGE, CRYSTAL_STORAGE, DEUTERIUM_TANK]
-FACTORIES = [ROBOTICS_FACTORY, NANITE_FACTORY, SHIPYARD]
-OTHERS = [ALLIANCE_DEPOT, MISSILE_SILO, RESEARCH_LAB, TERRAFORMER, SPACE_DOCK]
+FACTORIES = [ROBOTICS_FACTORY, NANITE_FACTORY, SHIPYARD, RESEARCH_LAB]
+OTHERS = [ALLIANCE_DEPOT, MISSILE_SILO, TERRAFORMER, SPACE_DOCK]
 BUILDINGS = RESOURCE_BUILDING + STORAGES + FACTORIES + OTHERS
 
 UNIVERSE = {'n_galaxies': 9, 'planet': {'fields': 100, 'rate_field': 1.5}}
@@ -206,5 +211,5 @@ N_ROUNDS = 1
 
 # Presentation
 SCREEN = '800x650'
-MENU = ['overview', 'resources', 'buildings', 'market', 'research',
+MENU = ['Overview', 'resources', 'buildings', 'market', 'research',
         'hangar', 'defense', 'fleet', 'universe', 'alliance']

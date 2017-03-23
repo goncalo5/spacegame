@@ -59,13 +59,9 @@ class Building(object):
         self.is_evolving = False
         self.left = self.time
 
-    # Data Base
-    # GET
-    def see_level_in_db(self):
-        self.level = database.BUILDINGS[self.name]['level']
-
-    def see_metal_in_db(self):
-        self.metal = database.RESOURCES['metal']
+    def up1level(self):
+        self.level += 1
+        self.calculate_costs()
 
     # calculators
     def calculate_costs(self):
@@ -103,7 +99,7 @@ class Factory(Building):
         self.factor = None
 
     def calculate_factor(self):
-        # level - 1, because it's a inverso
+        # level - 1, because it's a inverse
         self.factor = 1. / (self.factor0 * self.rate_factor ** (self.level - 1))
 
 

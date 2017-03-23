@@ -2,14 +2,9 @@ from Tkinter import *
 
 
 class Hangar(object):
-    def __init__(self, planet, root, resources, row_i, column_i):
-        # logic attributes
-        self.planet = planet
-        # presentation attributes
-        self.root = root
-        self.resources = resources
-        self.i = row_i
-        self.j = column_i
+    def __init__(self, universe, planet, presentation, root, row_i=0, column_i=0):
+        self.universe, self.planet, self.presentation, self.root, self.i, self.j \
+            = universe, planet, presentation, root, row_i, column_i
 
         self.unit_being_trained = False
         text = "Hangar (level %i)" % self.planet.buildings.list[11].level
