@@ -52,6 +52,22 @@
             on_press:
                 root.building.upgrade(root.construction_queue)
 
+# <ButtonAddUnits@Button>:
+#     size_hint_y: None
+#     height: 100
+#     on_press:
+#         print("main")
+#         app.display_costs(root.building)
+#     RelativeLayout:
+#         pos: self.parent.pos
+#         size: self.parent.size
+#         Label:
+#             text: "%s" % root.building_name
+#         Label:
+#             text: "level: %s" % root.building_level
+#             size_hint: None, None
+#             pos_hint: {"right": 1}
+
 <MainScreen@Screen>:
     BoxLayout:
         orientation: "vertical"
@@ -59,6 +75,33 @@
         Button:
             text: "Buildings"
             on_press: root.manager.current = "buildings_screen"
+        Button:
+            text: "Defenses"
+            on_press: root.manager.current = "defenses_screen"
+
+<DefensesScreen@Screen>:
+    BoxLayout:
+        orientation: "vertical"
+        ResourcesBar
+        Button:
+            text: "Rocketlauncher"
+            on_press:
+                app.display_costs(app.rocketlauncher)
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: app.construction_name
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_h: 0.1
+                Label:
+                    text: app.metal_cost
+                Label:
+                    text: app.crystal_cost
+                Label:
+                    text: app.deuterium_cost
+                Label:
+                    text: app.time_cost
 
 <BuildingsScreen@Screen>:
     BoxLayout:
@@ -152,7 +195,7 @@
         BoxLayout:
             orientation: "vertical"
             Label:
-                text: app.building_name
+                text: app.construction_name
             BoxLayout:
                 orientation: "horizontal"
                 size_hint_h: 0.1
@@ -168,6 +211,8 @@
 <Game>:
     id: game
     main_screen: main_screen
+    buildings_screen: buildings_screen
+    defenses_screen: defenses_screen
     MainScreen:
         id: main_screen
         name: "main_screen"
@@ -175,4 +220,8 @@
     BuildingsScreen:
         id: buildings_screen
         name: "buildings_screen"
+        manager: game
+    DefensesScreen:
+        id: defenses_screen
+        name: "defenses_screen"
         manager: game

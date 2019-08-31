@@ -6,20 +6,20 @@ from kivy.event import EventDispatcher
 # uix:
 from kivy.uix.screenmanager import ScreenManager
 # mine:
-from settings import RESOURCES, BUILDINGS
+from settings import RESOURCES, BUILDINGS, DEFENSES
 
 
 class Building(EventDispatcher):
     name = kp.StringProperty()
     level = kp.NumericProperty()
-    cost = kp.DictProperty()
+    costs = kp.DictProperty()
     time = kp.NumericProperty()
     def __init__(self, settings):
         super().__init__()
         self.name = settings.get("name")
         self.level = settings.get("level", 0)
-        self.cost0 = settings.get("cost0")
-        self.cost_rate = settings.get("cost_rate")
+        self.costs0 = settings.get("costs0")
+        self.costs_rate = settings.get("costs_rate")
         self.time0 = settings.get("time0")
         self.time_rate = settings.get("time_rate")
 
@@ -29,9 +29,9 @@ class Building(EventDispatcher):
         print("upgrade", construction_queue)
         self.construction_queue = construction_queue
         self.app = App.get_running_app()
-        if not self.app.check_if_can_pay(self.cost):
+        if not self.app.check_if_can_pay(self.costs):
             return
-        self.app.pay_the_resources(self.cost)
+        self.app.pay_the_resources(self.costs)
         self.construction_queue.size_hint_y = 0.1
         self.app.construction_building_name = self.name
         self.app.construction_time_left_s = self.time
@@ -53,11 +53,11 @@ class Building(EventDispatcher):
         print("on_level")
         self.app = App.get_running_app()
         # update resources:
-        self.cost["metal"] = self.cost0["metal"] * self.cost_rate ** self.level
-        self.cost["crystal"] =\
-            self.cost0["crystal"] * self.cost_rate ** self.level
-        self.cost["deuterium"] =\
-            self.cost0["deuterium"] * self.cost_rate ** self.level
+        self.costs["metal"] = self.costs0["metal"] * self.costs_rate ** self.level
+        self.costs["crystal"] =\
+            self.costs0["crystal"] * self.costs_rate ** self.level
+        self.costs["deuterium"] =\
+            self.costs0["deuterium"] * self.costs_rate ** self.level
         self.update_time()
         Clock.schedule_once(self.update_feature, 0)
 
@@ -231,6 +231,19 @@ class Terraformer(Building):
         self.app = App.get_running_app()
 
 
+class Defense(EventDispatcher):
+    costs = kp.DictProperty()
+    def __init__(self, settings):
+        super().__init__()
+        print(settings)
+        self.name = settings.get("name")
+        self.costs = settings.get("costs")
+        self.hull = settings.get("hull")
+        self.shield = settings.get("shield")
+        self.weapen = settings.get("weapen")
+        self.time = settings.get("time")
+
+
 class Game(ScreenManager):
     pass
 
@@ -277,11 +290,14 @@ class GameApp(App, ScreenManager):
     construction_building_name = kp.StringProperty()
     construction_time_left_s = kp.NumericProperty()
     construction_time_left = kp.StringProperty()
-    building_name = kp.StringProperty()
+    construction_name = kp.StringProperty()
     metal_cost = kp.StringProperty()
     crystal_cost = kp.StringProperty()
     deuterium_cost = kp.StringProperty()
     time_cost = kp.StringProperty()
+    # defenses:
+    rocketlauncher =\
+        kp.ObjectProperty(Defense(DEFENSES.get("rocketlauncher")))
 
     def build_config(self, *args):
         self.resources = {
@@ -300,10 +316,11 @@ class GameApp(App, ScreenManager):
         return self.game
 
     def display_costs(self, building):
-        self.building_name = building.name
-        self.metal_cost =  "metal: %s" % int(building.cost["metal"])
-        self.crystal_cost =  "crystal: %s" % int(building.cost["crystal"])
-        self.deuterium_cost =  "deuterium: %s" % int(building.cost["deuterium"])
+        print("display_costs", building)
+        self.construction_name = building.name
+        self.metal_cost =  "metal: %s" % int(building.costs.get("metal"))
+        self.crystal_cost =  "crystal: %s" % int(building.costs.get("crystal"))
+        self.deuterium_cost =  "deuterium: %s" % int(building.costs.get("deuterium"))
         self.time_cost =  "time: %s" % int(building.time)
 
     def update(self, dt):
