@@ -100,5 +100,17 @@ BUILDINGS = {
         "time0": 3,
         "time_rate": 2,
         "building_time_factor0": 0.5
-    }
+    },
+    "research_lab":{
+        "name": "Research Lab",
+        "cost0": {
+            "metal": 50,
+            "crystal": 50,
+            "deuterium": 0
+        },
+        "cost_rate": 2,
+        "time0": 3,
+        "time_rate": 2,
+        "reasearch_time_factor0": 0.5
+    },
 }

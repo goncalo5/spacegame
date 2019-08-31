@@ -168,6 +168,20 @@ class RoboticsFactory(Building):
             building.update_time()
 
 
+class ResearchLab(Storage):
+    def __init__(self, settings):
+        super().__init__(settings)
+        self.reasearch_time_factor0 = settings.get("reasearch_time_factor0")
+        self.update_factor()
+
+    def update_factor(self):
+        self.reasearch_time_factor =\
+            self.reasearch_time_factor0 ** self.level
+
+    def update_feature(self, *args):
+        self.app = App.get_running_app()
+
+
 class Game(ScreenManager):
     pass
 
@@ -202,6 +216,8 @@ class GameApp(App, ScreenManager):
         kp.ObjectProperty(DeuteriumStorage(BUILDINGS.get("deuterium_storage")))
     robotics_factory =\
         kp.ObjectProperty(RoboticsFactory(BUILDINGS.get("robotics_factory")))
+    research_lab =\
+        kp.ObjectProperty(ResearchLab(BUILDINGS.get("research_lab")))
     # construction:
     construction_building_name = kp.StringProperty()
     construction_time_left_s = kp.NumericProperty()
