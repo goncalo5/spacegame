@@ -67,15 +67,81 @@ class Building(EventDispatcher):
         pass
 
 
-class MetalMine(Building):
+class Mine(Building):
     def __init__(self, settings):
         super().__init__(settings)
+
+
+class MetalMine(Mine):
+    def __init__(self, settings):
         self.metal_rate = settings.get("metal_rate")
+        super().__init__(settings)
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
         self.app.metal_per_s =\
             self.app.metal_per_s0 * self.metal_rate ** self.level
+
+
+class CrystalMine(Building):
+    def __init__(self, settings):
+        super().__init__(settings)
+        self.crystal_rate = settings.get("crystal_rate")
+
+    def update_feature(self, *args):
+        self.app = App.get_running_app()
+        self.app.crystal_per_s =\
+            self.app.crystal_per_s0 * self.crystal_rate ** self.level
+
+
+class DeuteriumMine(Building):
+    def __init__(self, settings):
+        super().__init__(settings)
+        self.deuterium_rate = settings.get("deuterium_rate")
+
+    def update_feature(self, *args):
+        self.app = App.get_running_app()
+        self.app.deuterium_per_s =\
+            self.app.deuterium_per_s0 * self.deuterium_rate ** self.level
+
+
+class Storage(Building):
+    pass
+
+
+class MetalStorage(Storage):
+    def __init__(self, settings):
+        print("settings", settings)
+        super().__init__(settings)
+        self.metal_rate = settings.get("metal_rate")
+        print("self.metal_rate", self.metal_rate)
+
+    def update_feature(self, *args):
+        self.app = App.get_running_app()
+        self.app.metal_cap =\
+            self.app.metal_cap0 * self.metal_rate ** self.level
+
+
+class CrystalStorage(Storage):
+    def __init__(self, settings):
+        super().__init__(settings)
+        self.crystal_rate = settings.get("crystal_rate")
+
+    def update_feature(self, *args):
+        self.app = App.get_running_app()
+        self.app.crystal_cap =\
+            self.app.crystal_cap0 * self.crystal_rate ** self.level
+
+
+class DeuteriumStorage(Storage):
+    def __init__(self, settings):
+        super().__init__(settings)
+        self.deuterium_rate = settings.get("deuterium_rate")
+
+    def update_feature(self, *args):
+        self.app = App.get_running_app()
+        self.app.deuterium_cap =\
+            self.app.deuterium_cap0 * self.deuterium_rate ** self.level
 
 class Game(ScreenManager):
     pass
@@ -93,14 +159,27 @@ class GameApp(App, ScreenManager):
     metal_per_s = kp.NumericProperty(RESOURCES.get("metal").get("per_s0"))
     crystal_per_s = kp.NumericProperty(RESOURCES.get("crystal").get("per_s0"))
     deuterium_per_s = kp.NumericProperty(RESOURCES.get("deuterium").get("per_s0"))
+    metal_cap0 = kp.NumericProperty(RESOURCES.get("metal").get("cap0"))
+    crystal_cap0 = kp.NumericProperty(RESOURCES.get("metal").get("cap0"))
+    deuterium_cap0 = kp.NumericProperty(RESOURCES.get("metal").get("cap0"))
+    metal_cap = kp.NumericProperty(RESOURCES.get("metal").get("cap0"))
+    crystal_cap = kp.NumericProperty(RESOURCES.get("metal").get("cap0"))
+    deuterium_cap = kp.NumericProperty(RESOURCES.get("metal").get("cap0"))
     # buildings:
     metal_mine = kp.ObjectProperty(MetalMine(BUILDINGS.get("metal_mine")))
-    crystal_mine = kp.ObjectProperty(Building(BUILDINGS.get("crystal_mine")))
-    deuterium_mine = kp.ObjectProperty(Building(BUILDINGS.get("deuterium_mine")))
+    crystal_mine = kp.ObjectProperty(CrystalMine(BUILDINGS.get("crystal_mine")))
+    deuterium_mine = kp.ObjectProperty(DeuteriumMine(BUILDINGS.get("deuterium_mine")))
+    metal_storage =\
+        kp.ObjectProperty(MetalStorage(BUILDINGS.get("metal_storage")))
+    crystal_storage =\
+        kp.ObjectProperty(CrystalStorage(BUILDINGS.get("crystal_storage")))
+    deuterium_storage =\
+        kp.ObjectProperty(DeuteriumStorage(BUILDINGS.get("deuterium_storage")))
     # construction:
     construction_building_name = kp.StringProperty()
     construction_time_left_s = kp.NumericProperty()
     construction_time_left = kp.StringProperty()
+    building_name = kp.StringProperty()
     metal_cost = kp.StringProperty()
     crystal_cost = kp.StringProperty()
     deuterium_cost = kp.StringProperty()
@@ -116,8 +195,9 @@ class GameApp(App, ScreenManager):
         Clock.schedule_interval(self.update, 0.1)
         self.game = Game()
         return self.game
-    
+
     def display_costs(self, building):
+        self.building_name = building.name
         self.metal_cost =  "metal: %s" % int(building.cost["metal"])
         self.crystal_cost =  "crystal: %s" % int(building.cost["crystal"])
         self.deuterium_cost =  "deuterium: %s" % int(building.cost["deuterium"])
@@ -125,9 +205,18 @@ class GameApp(App, ScreenManager):
 
     def update(self, dt):
         # update resources:
-        self.metal += self.metal_per_s * dt
-        self.crystal += self.crystal_per_s * dt
-        self.deuterium += self.deuterium_per_s * dt
+        if self.metal + self.metal_per_s * dt <= self.metal_cap:
+            self.metal += self.metal_per_s * dt
+        else:
+            self.metal = self.metal_cap
+        if self.crystal + self.crystal_per_s * dt <= self.crystal_cap:
+            self.crystal += self.crystal_per_s * dt
+        else:
+            self.crystal = self.crystal_cap
+        if self.deuterium + self.deuterium_per_s * dt <= self.deuterium_cap:
+            self.deuterium += self.deuterium_per_s * dt
+        else:
+            self.deuterium = self.deuterium_cap
     
     def check_if_can_pay(self, resources):
         # check if can pay:
