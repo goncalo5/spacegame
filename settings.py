@@ -1,15 +1,15 @@
 RESOURCES = {
     "metal": {
         "init": 100,
-        "per_s": 1
+        "per_s0": 1
     },
     "crystal": {
         "init": 100,
-        "per_s": 1
+        "per_s0": 1
     },
     "deuterium": {
         "init": 100,
-        "per_s": 1
+        "per_s0": 1
     }
 }
 
@@ -22,8 +22,9 @@ BUILDINGS = {
             "deuterium": 5
         },
         "cost_rate": 1.5,
-        "time0": 5,
-        "rate_time": 1.5
+        "time0": 2,
+        "time_rate": 1.5,
+        "metal_rate": 2
     },
     "crystal_mine": {
         "name": "Crystal Mine",
@@ -34,7 +35,7 @@ BUILDINGS = {
         },
         "cost_rate": 1.5,
         "time0": 5,
-        "rate_time": 1.5
+        "time_rate": 1.5
     },
     "deuterium_mine": {
         "name": "Deuterium Mine",
@@ -45,6 +46,6 @@ BUILDINGS = {
         },
         "cost_rate": 1.5,
         "time0": 5,
-        "rate_time": 1.5
+        "time_rate": 1.5
     }
 }

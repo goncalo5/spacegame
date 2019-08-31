@@ -12,6 +12,8 @@ from settings import RESOURCES, BUILDINGS
 class Building(EventDispatcher):
     name = kp.StringProperty()
     level = kp.NumericProperty()
+    cost = kp.DictProperty()
+    time = kp.NumericProperty()
     def __init__(self, settings):
         super().__init__()
         self.name = settings.get("name")
@@ -19,23 +21,24 @@ class Building(EventDispatcher):
         self.cost0 = settings.get("cost0")
         self.cost_rate = settings.get("cost_rate")
         self.time0 = settings.get("time0")
-        self.rate_time = settings.get("rate_time")
+        self.time_rate = settings.get("time_rate")
 
+        self.on_level()
 
     def upgrade(self, construction_queue):
         print("upgrade", construction_queue)
         self.construction_queue = construction_queue
         self.app = App.get_running_app()
-        if not self.app.check_if_can_pay(self.cost0):
+        if not self.app.check_if_can_pay(self.cost):
             return
-        self.app.pay_the_resources(self.cost0)
+        self.app.pay_the_resources(self.cost)
         self.construction_queue.size_hint_y = 0.1
         self.app.construction_building_name = self.name
-        self.app.construction_time_left_s = self.time0
+        self.app.construction_time_left_s = self.time
         Clock.schedule_interval(self.update_time_left, 0.1)
 
     def update_time_left(self, dt):
-        print("update_time_left", dt)
+        # print("update_time_left", dt)
         self.app.construction_time_left_s -= dt
         if self.app.construction_time_left_s <= 0:
             self.level += 1
@@ -44,6 +47,33 @@ class Building(EventDispatcher):
             self.app.construction_building_name = ""
             self.app.construction_time_left = ""
             return False
+
+    def on_level(self, *args):
+        print("on_level")
+        # update resources:
+        self.cost["metal"] = self.cost0["metal"] * self.cost_rate ** self.level
+        self.cost["crystal"] =\
+            self.cost0["crystal"] * self.cost_rate ** self.level
+        self.cost["deuterium"] =\
+            self.cost0["deuterium"] * self.cost_rate ** self.level
+        # update time:
+        self.time = self.time0 * self.time_rate ** self.level
+        # self.update_feature()
+        Clock.schedule_once(self.update_feature, 0)
+
+    def update_feature(self, *args):
+        pass
+
+
+class MetalMine(Building):
+    def __init__(self, settings):
+        super().__init__(settings)
+        self.metal_rate = settings.get("metal_rate")
+
+    def update_feature(self, *args):
+        self.app = App.get_running_app()
+        self.app.metal_per_s =\
+            self.app.metal_per_s0 * self.metal_rate ** self.level
 
 class Game(ScreenManager):
     pass
@@ -55,11 +85,14 @@ class GameApp(App):
     metal = kp.NumericProperty(RESOURCES.get("metal").get("init"))
     crystal = kp.NumericProperty(RESOURCES.get("crystal").get("init"))
     deuterium = kp.NumericProperty(RESOURCES.get("deuterium").get("init"))
-    metal_per_s = kp.NumericProperty(RESOURCES.get("metal").get("per_s"))
-    crystal_per_s = kp.NumericProperty(RESOURCES.get("crystal").get("per_s"))
-    deuterium_per_s = kp.NumericProperty(RESOURCES.get("deuterium").get("per_s"))
+    metal_per_s0 = kp.NumericProperty(RESOURCES.get("metal").get("per_s0"))
+    crystal_per_s0 = kp.NumericProperty(RESOURCES.get("crystal").get("per_s0"))
+    deuterium_per_s0 = kp.NumericProperty(RESOURCES.get("deuterium").get("per_s0"))
+    metal_per_s = kp.NumericProperty(RESOURCES.get("metal").get("per_s0"))
+    crystal_per_s = kp.NumericProperty(RESOURCES.get("crystal").get("per_s0"))
+    deuterium_per_s = kp.NumericProperty(RESOURCES.get("deuterium").get("per_s0"))
     # buildings:
-    metal_mine = kp.ObjectProperty(Building(BUILDINGS.get("metal_mine")))
+    metal_mine = kp.ObjectProperty(MetalMine(BUILDINGS.get("metal_mine")))
     crystal_mine = kp.ObjectProperty(Building(BUILDINGS.get("crystal_mine")))
     deuterium_mine = kp.ObjectProperty(Building(BUILDINGS.get("deuterium_mine")))
     # construction:

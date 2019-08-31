@@ -68,17 +68,17 @@
             BoxLayout:
                 orientation: "horizontal"
                 Label:
-                    text: "metal: %s" % app.metal_mine.cost0["metal"]
+                    text: "metal: %s" % int(app.metal_mine.cost["metal"])
                 Label:
-                    text: "crystal: %s" % app.crystal_mine.cost0["crystal"]
+                    text: "crystal: %s" % int(app.metal_mine.cost["crystal"])
                 Label:
-                    text: "deuterium: %s" % app.deuterium_mine.cost0["deuterium"]
+                    text: "deuterium: %s" % int(app.metal_mine.cost["deuterium"])
             Label:
-                text: "%s" % app.metal_mine.time0
+                text: "time: %s" % int(app.metal_mine.time)
             BoxLayout:
                 orientation: "horizontal"
                 Label:
-                    text: "%s" % app.metal_mine.level
+                    text: "level: %s" % app.metal_mine.level
                 Button:
                     text: "+1"
                     on_press:
