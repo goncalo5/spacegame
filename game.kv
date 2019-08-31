@@ -1,0 +1,61 @@
+
+
+<ResourcesBar@BoxLayout>:
+    orientation: "horizontal"
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Metal"
+        Label:
+            text: str(int(app.metal))
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Crystal"
+        Label:
+            text: str(int(app.crystal))
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Deuterium"
+        Label:
+            text: str(int(app.deuterium))
+
+<MainScreen@Screen>:
+    BoxLayout:
+        orientation: "vertical"
+        ResourcesBar
+        Button:
+            text: "Buildings"
+            on_press: root.manager.current = "buildings_screen"
+
+<BuildingsScreen@Screen>:
+    BoxLayout:
+        orientation: "vertical"
+        ResourcesBar
+        Label:
+            text: "Buildings"
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: "Metal Mine"
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    text: "metal: %s" % app.metal_mine.cost0["metal"]
+                Label:
+                    text: "crystal: %s" % app.crystal_mine.cost0["crystal"]
+                Label:
+                    text: "deuterium: %s" % app.deuterium_mine.cost0["deuterium"]
+
+<Game>:
+    id: game
+    main_screen: main_screen
+    MainScreen:
+        id: main_screen
+        name: "main_screen"
+        manager: game
+    BuildingsScreen:
+        id: buildings_screen
+        name: "buildings_screen"
+        manager: game
