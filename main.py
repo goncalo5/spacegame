@@ -23,7 +23,7 @@ class Building(EventDispatcher):
         self.time0 = settings.get("time0")
         self.time_rate = settings.get("time_rate")
 
-        self.on_level()
+        Clock.schedule_once(self.on_level, 0)
 
     def upgrade(self, construction_queue):
         print("upgrade", construction_queue)
@@ -46,10 +46,12 @@ class Building(EventDispatcher):
             self.construction_queue.height = 0
             self.app.construction_building_name = ""
             self.app.construction_time_left = ""
+            self.app.display_costs(self)
             return False
 
     def on_level(self, *args):
         print("on_level")
+        self.app = App.get_running_app()
         # update resources:
         self.cost["metal"] = self.cost0["metal"] * self.cost_rate ** self.level
         self.cost["crystal"] =\
@@ -79,7 +81,7 @@ class Game(ScreenManager):
     pass
 
 
-class GameApp(App):
+class GameApp(App, ScreenManager):
     window = kp.ObjectProperty(Window)
     # resources:
     metal = kp.NumericProperty(RESOURCES.get("metal").get("init"))
@@ -99,6 +101,10 @@ class GameApp(App):
     construction_building_name = kp.StringProperty()
     construction_time_left_s = kp.NumericProperty()
     construction_time_left = kp.StringProperty()
+    metal_cost = kp.StringProperty()
+    crystal_cost = kp.StringProperty()
+    deuterium_cost = kp.StringProperty()
+    time_cost = kp.StringProperty()
 
     def build_config(self, *args):
         self.resources = {
@@ -110,6 +116,12 @@ class GameApp(App):
         Clock.schedule_interval(self.update, 0.1)
         self.game = Game()
         return self.game
+    
+    def display_costs(self, building):
+        self.metal_cost =  "metal: %s" % int(building.cost["metal"])
+        self.crystal_cost =  "crystal: %s" % int(building.cost["crystal"])
+        self.deuterium_cost =  "deuterium: %s" % int(building.cost["deuterium"])
+        self.time_cost =  "time: %s" % int(building.time)
 
     def update(self, dt):
         # update resources:

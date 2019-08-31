@@ -27,6 +27,29 @@
         Label:
             text: str(int(app.deuterium))
 
+<ButtonUpgrade@Button>:
+    building: None
+    building_name: None
+    building_level: None
+    on_press:
+        print("main")
+        app.display_costs(root.building)
+    RelativeLayout:
+        pos: self.parent.pos
+        size: self.parent.size
+        Label:
+            text: "%s" % root.building_name
+        Label:
+            text: "level: %s" % root.building_level
+            size_hint: None, None
+            pos_hint: {"right": 1}
+        Button:
+            text: "+1"
+            size_hint: None, None
+            pos_hint: {"top": 1}
+            on_press:
+                root.building.upgrade(root.construction_queue)
+
 <MainScreen@Screen>:
     BoxLayout:
         orientation: "vertical"
@@ -60,33 +83,78 @@
 
         BoxLayout:
             orientation: "vertical"
-            size_hint_y: 0.8
+            # size_hint_y: 0.8
             canvas.before:
                 Color:
                     rgba: .1,0,0,1
                 Rectangle:
                     pos: self.pos
                     size: self.size
-            Label:
-                text: "Metal Mine"
+            ButtonUpgrade:
+                building: app.metal_mine
+                building_name: app.metal_mine.name
+                building_level: app.metal_mine.level
+                construction_queue: construction_queue
+            ButtonUpgrade:
+                building: app.crystal_mine
+                building_name: app.crystal_mine.name
+                building_level: app.crystal_mine.level
+                construction_queue: construction_queue
+            ButtonUpgrade:
+                building: app.deuterium_mine
+                building_name: app.deuterium_mine.name
+                building_level: app.deuterium_mine.level
+                construction_queue: construction_queue
+            # Button:
+            #     on_press:
+            #         print("main")
+            #         app.display_costs(app.metal_mine)
+            #     RelativeLayout:
+            #         pos: self.parent.pos
+            #         size: self.parent.size
+            #         Label:
+            #             text: app.metal_mine.name
+            #         Label:
+            #             text: "level: %s" % app.metal_mine.level
+            #             size_hint: None, None
+            #             pos_hint: {"right": 1}
+            #         Button:
+            #             text: "+1"
+            #             size_hint: None, None
+            #             pos_hint: {"top": 1}
+            #             on_press:
+            #                 app.metal_mine.upgrade(construction_queue)
+            # Button:
+            #     on_press:
+            #         print("main")
+            #         app.display_costs(app.crystal_mine)
+            #     RelativeLayout:
+            #         pos: self.parent.pos
+            #         size: self.parent.size
+            #         Label:
+            #             text: app.crystal_mine.name
+            #         Label:
+            #             text: "level: %s" % app.crystal_mine.level
+            #             size_hint: None, None
+            #             pos_hint: {"right": 1}
+            #         Button:
+            #             text: "+1"
+            #             size_hint: None, None
+            #             pos_hint: {"top": 1}
+            #             on_press:
+            #                 app.crystal_mine.upgrade(construction_queue)
             BoxLayout:
                 orientation: "horizontal"
+                size_hint_h: 0.1
                 Label:
-                    text: "metal: %s" % int(app.metal_mine.cost["metal"])
+                    text: app.metal_cost
                 Label:
-                    text: "crystal: %s" % int(app.metal_mine.cost["crystal"])
+                    text: app.crystal_cost
                 Label:
-                    text: "deuterium: %s" % int(app.metal_mine.cost["deuterium"])
-            Label:
-                text: "time: %s" % int(app.metal_mine.time)
-            BoxLayout:
-                orientation: "horizontal"
+                    text: app.deuterium_cost
                 Label:
-                    text: "level: %s" % app.metal_mine.level
-                Button:
-                    text: "+1"
-                    on_press:
-                        app.metal_mine.upgrade(construction_queue)
+                    text: app.time_cost
+
 <Game>:
     id: game
     main_screen: main_screen
