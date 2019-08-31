@@ -69,7 +69,11 @@ class Building(EventDispatcher):
         robotics_factory_factor =\
             self.app.robotics_factory.building_time_factor **\
                 self.app.robotics_factory.level
-        self.time = self.time0 * self.time_rate ** self.level * robotics_factory_factor
+        nanite_factory_factor =\
+            self.app.nanite_factory.building_time_factor **\
+                self.app.nanite_factory.level
+        self.time = self.time0 * self.time_rate ** self.level *\
+            robotics_factory_factor * nanite_factory_factor
         print("time", self.time, robotics_factory_factor)
 
 
@@ -154,16 +158,40 @@ class DeuteriumStorage(Storage):
             self.app.deuterium_cap0 * self.deuterium_rate ** self.level
 
 
-class RoboticsFactory(Building):
+class Factory(Building):
+    pass
+
+
+class RoboticsFactory(Factory):
     def __init__(self, settings):
         super().__init__(settings)
         self.building_time_factor0 = settings.get("building_time_factor0")
-        self.building_time_factor = settings.get("building_time_factor0")
+        self.update_factor()
         Clock.schedule_once(self.update_feature, 0)
+
+    def update_factor(self):
+        self.building_time_factor =\
+            self.building_time_factor0 ** self.level
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
         self.building_time_factor = self.building_time_factor0 ** self.level
+        for building in self.app.buildings:
+            building.update_time()
+
+
+class NaniteFactory(Factory):
+    def __init__(self, settings):
+        super().__init__(settings)
+        self.building_time_factor0 = settings.get("building_time_factor0")
+        self.update_factor()
+        Clock.schedule_once(self.update_feature, 0)
+
+    def update_factor(self):
+        self.building_time_factor = self.building_time_factor0 ** self.level
+
+    def update_feature(self, *args):
+        self.app = App.get_running_app()
         for building in self.app.buildings:
             building.update_time()
 
@@ -216,6 +244,8 @@ class GameApp(App, ScreenManager):
         kp.ObjectProperty(DeuteriumStorage(BUILDINGS.get("deuterium_storage")))
     robotics_factory =\
         kp.ObjectProperty(RoboticsFactory(BUILDINGS.get("robotics_factory")))
+    nanite_factory =\
+        kp.ObjectProperty(NaniteFactory(BUILDINGS.get("nanite_factory")))
     research_lab =\
         kp.ObjectProperty(ResearchLab(BUILDINGS.get("research_lab")))
     # construction:
