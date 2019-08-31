@@ -159,19 +159,31 @@ class DeuteriumStorage(Storage):
 
 
 class Factory(Building):
-    pass
-
-
-class RoboticsFactory(Factory):
     def __init__(self, settings):
         super().__init__(settings)
-        self.building_time_factor0 = settings.get("building_time_factor0")
         self.update_factor()
         Clock.schedule_once(self.update_feature, 0)
 
     def update_factor(self):
-        self.building_time_factor =\
-            self.building_time_factor0 ** self.level
+        self.building_time_factor = self.building_time_factor0 ** self.level
+
+
+class RoboticsFactory(Factory):
+    def __init__(self, settings):
+        self.building_time_factor0 = settings.get("building_time_factor0")
+        super().__init__(settings)
+
+    def update_feature(self, *args):
+        self.app = App.get_running_app()
+        self.building_time_factor = self.building_time_factor0 ** self.level
+        for building in self.app.buildings:
+            building.update_time()
+
+
+class Shipyard(Factory):
+    def __init__(self, settings):
+        self.building_time_factor0 = settings.get("building_time_factor0")
+        super().__init__(settings)
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
@@ -182,13 +194,8 @@ class RoboticsFactory(Factory):
 
 class NaniteFactory(Factory):
     def __init__(self, settings):
-        super().__init__(settings)
         self.building_time_factor0 = settings.get("building_time_factor0")
-        self.update_factor()
-        Clock.schedule_once(self.update_feature, 0)
-
-    def update_factor(self):
-        self.building_time_factor = self.building_time_factor0 ** self.level
+        super().__init__(settings)
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
@@ -258,6 +265,8 @@ class GameApp(App, ScreenManager):
         kp.ObjectProperty(DeuteriumStorage(BUILDINGS.get("deuterium_storage")))
     robotics_factory =\
         kp.ObjectProperty(RoboticsFactory(BUILDINGS.get("robotics_factory")))
+    shipyard =\
+        kp.ObjectProperty(Shipyard(BUILDINGS.get("shipyard")))
     nanite_factory =\
         kp.ObjectProperty(NaniteFactory(BUILDINGS.get("nanite_factory")))
     research_lab =\

@@ -101,6 +101,18 @@ BUILDINGS = {
         "time_rate": 2,
         "building_time_factor0": 0.5
     },
+    "shipyard":{
+        "name": "Shipyard",
+        "cost0": {
+            "metal": 50,
+            "crystal": 50,
+            "deuterium": 0
+        },
+        "cost_rate": 2,
+        "time0": 3,
+        "time_rate": 2,
+        "building_time_factor0": 0.5
+    },
     "nanite_factory":{
         "name": "Nanite Factory",
         "cost0": {
