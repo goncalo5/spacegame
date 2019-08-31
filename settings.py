@@ -125,4 +125,16 @@ BUILDINGS = {
         "time_rate": 2,
         "reasearch_time_factor0": 0.5
     },
+    "terraformer":{
+        "name": "Terraformer",
+        "cost0": {
+            "metal": 50,
+            "crystal": 50,
+            "deuterium": 0
+        },
+        "cost_rate": 2,
+        "time0": 3,
+        "time_rate": 2,
+        "fields_added_per_level": 5
+    },
 }

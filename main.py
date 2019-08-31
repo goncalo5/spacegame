@@ -196,7 +196,7 @@ class NaniteFactory(Factory):
             building.update_time()
 
 
-class ResearchLab(Storage):
+class ResearchLab(Building):
     def __init__(self, settings):
         super().__init__(settings)
         self.reasearch_time_factor0 = settings.get("reasearch_time_factor0")
@@ -205,6 +205,20 @@ class ResearchLab(Storage):
     def update_factor(self):
         self.reasearch_time_factor =\
             self.reasearch_time_factor0 ** self.level
+
+    def update_feature(self, *args):
+        self.app = App.get_running_app()
+
+
+class Terraformer(Building):
+    def __init__(self, settings):
+        super().__init__(settings)
+        self.fields_added_per_level = settings.get("fields_added_per_level")
+        self.update_factor()
+
+    def update_factor(self):
+        self.fields_added =\
+            self.fields_added_per_level * self.level
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
@@ -248,6 +262,8 @@ class GameApp(App, ScreenManager):
         kp.ObjectProperty(NaniteFactory(BUILDINGS.get("nanite_factory")))
     research_lab =\
         kp.ObjectProperty(ResearchLab(BUILDINGS.get("research_lab")))
+    terraformer =\
+        kp.ObjectProperty(Terraformer(BUILDINGS.get("terraformer")))
     # construction:
     construction_building_name = kp.StringProperty()
     construction_time_left_s = kp.NumericProperty()
