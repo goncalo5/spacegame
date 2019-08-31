@@ -52,22 +52,6 @@
             on_press:
                 root.building.upgrade(root.construction_queue)
 
-# <ButtonAddUnits@Button>:
-#     size_hint_y: None
-#     height: 100
-#     on_press:
-#         print("main")
-#         app.display_costs(root.building)
-#     RelativeLayout:
-#         pos: self.parent.pos
-#         size: self.parent.size
-#         Label:
-#             text: "%s" % root.building_name
-#         Label:
-#             text: "level: %s" % root.building_level
-#             size_hint: None, None
-#             pos_hint: {"right": 1}
-
 <MainScreen@Screen>:
     BoxLayout:
         orientation: "vertical"
@@ -119,6 +103,7 @@
                     size: self.size
         BoxLayout:
             id: construction_queue
+            cancel_construction: app.cancel_construction
             orientation: "horizontal"
             size_hint_y: None
             height: 0
@@ -126,6 +111,11 @@
                 text: "%s" % app.construction_building_name
             Label:
                 text: "%s" % app.construction_time_left
+            Button:
+                text: "cancel"
+                on_press:
+                    print("cancel")
+                    app.cancel_construction()
         RecycleView:
             BoxLayout:
                 orientation: "vertical"

@@ -22,7 +22,9 @@ class Building(EventDispatcher):
         Clock.schedule_once(self.on_level, 0)
 
     def upgrade(self, construction_queue):
-        print("upgrade", construction_queue)
+        print("construction_queue.cancel_construction",
+            construction_queue.cancel_construction)
+        self.construction_queue = construction_queue
         self.construction_queue = construction_queue
         self.app = App.get_running_app()
         if not self.app.check_if_can_pay(self.costs):
@@ -34,16 +36,25 @@ class Building(EventDispatcher):
         Clock.schedule_interval(self.update_time_left, 0.1)
 
     def update_time_left(self, dt):
-        # print("update_time_left", dt)
+        if self.app.construction_is_cancel:
+            self.app.return_the_resources(self.costs)
+            self.hide_construction_queue()
+            self.app.construction_is_cancel = False
+            return False
+
         self.app.construction_time_left_s -= dt
         if self.app.construction_time_left_s <= 0:
             self.level += 1
-            self.construction_queue.size_hint_y = None
-            self.construction_queue.height = 0
-            self.app.construction_building_name = ""
-            self.app.construction_time_left = ""
+            self.hide_construction_queue()
             self.app.display_costs(self)
             return False
+    
+    def hide_construction_queue(self):
+        self.construction_queue.size_hint_y = None
+        self.construction_queue.height = 0
+        self.app.construction_building_name = ""
+        self.app.construction_time_left = ""
+
 
     def on_level(self, *args):
         print("on_level")

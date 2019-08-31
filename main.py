@@ -77,6 +77,7 @@ class GameApp(App, ScreenManager):
     crystal_cost = kp.StringProperty()
     deuterium_cost = kp.StringProperty()
     time_cost = kp.StringProperty()
+    construction_is_cancel = kp.BooleanProperty(False)
     # defenses:
     rocketlauncher =\
         kp.ObjectProperty(Defense(DEFENSES.get("rocketlauncher")))
@@ -132,11 +133,17 @@ class GameApp(App, ScreenManager):
         self.metal -= resources["metal"]
         self.crystal -= resources["crystal"]
         self.deuterium -= resources["deuterium"]
+
+    def return_the_resources(self, resources):
+        self.metal += resources["metal"]
+        self.crystal += resources["crystal"]
+        self.deuterium += resources["deuterium"]
     
     def on_construction_time_left_s(self, *args):
         self.construction_time_left = "%s" % int(self.construction_time_left_s)
 
-
+    def cancel_construction(self):
+        self.construction_is_cancel = True
 
 
 if __name__ == "__main__":
