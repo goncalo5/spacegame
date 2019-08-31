@@ -58,10 +58,20 @@ class Building(EventDispatcher):
             self.cost0["crystal"] * self.cost_rate ** self.level
         self.cost["deuterium"] =\
             self.cost0["deuterium"] * self.cost_rate ** self.level
-        # update time:
-        self.time = self.time0 * self.time_rate ** self.level
-        # self.update_feature()
+        self.update_time()
         Clock.schedule_once(self.update_feature, 0)
+
+    def update_time(self):
+        # update time:
+        print("time", self.time)
+        print(self.app.robotics_factory.building_time_factor)
+        print(self.app.robotics_factory.level)
+        robotics_factory_factor =\
+            self.app.robotics_factory.building_time_factor **\
+                self.app.robotics_factory.level
+        self.time = self.time0 * self.time_rate ** self.level * robotics_factory_factor
+        print("time", self.time, robotics_factory_factor)
+
 
     def update_feature(self, *args):
         pass
@@ -143,6 +153,21 @@ class DeuteriumStorage(Storage):
         self.app.deuterium_cap =\
             self.app.deuterium_cap0 * self.deuterium_rate ** self.level
 
+
+class RoboticsFactory(Building):
+    def __init__(self, settings):
+        super().__init__(settings)
+        self.building_time_factor0 = settings.get("building_time_factor0")
+        self.building_time_factor = settings.get("building_time_factor0")
+        Clock.schedule_once(self.update_feature, 0)
+
+    def update_feature(self, *args):
+        self.app = App.get_running_app()
+        self.building_time_factor = self.building_time_factor0 ** self.level
+        for building in self.app.buildings:
+            building.update_time()
+
+
 class Game(ScreenManager):
     pass
 
@@ -175,6 +200,8 @@ class GameApp(App, ScreenManager):
         kp.ObjectProperty(CrystalStorage(BUILDINGS.get("crystal_storage")))
     deuterium_storage =\
         kp.ObjectProperty(DeuteriumStorage(BUILDINGS.get("deuterium_storage")))
+    robotics_factory =\
+        kp.ObjectProperty(RoboticsFactory(BUILDINGS.get("robotics_factory")))
     # construction:
     construction_building_name = kp.StringProperty()
     construction_time_left_s = kp.NumericProperty()
@@ -190,6 +217,11 @@ class GameApp(App, ScreenManager):
             "metal": self.metal, "crystal": self.crystal,
             "deuterium": self.deuterium
         }
+        self.buildings = [
+            self.metal_mine, self.crystal_mine, self.deuterium_mine,
+            self.metal_storage, self.crystal_storage, self.deuterium_storage,
+            self.robotics_factory
+        ]
 
     def build(self):
         Clock.schedule_interval(self.update, 0.1)

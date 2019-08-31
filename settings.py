@@ -1,18 +1,18 @@
 RESOURCES = {
     "metal": {
-        "init": 100,
+        "init": 500,
         "per_s0": 1,
-        "cap0": 120
+        "cap0": 600
     },
     "crystal": {
-        "init": 100,
+        "init": 500,
         "per_s0": 1,
-        "cap0": 120
+        "cap0": 600
     },
     "deuterium": {
-        "init": 100,
+        "init": 500,
         "per_s0": 1,
-        "cap0": 120
+        "cap0": 600
     }
 }
 
@@ -25,7 +25,7 @@ BUILDINGS = {
             "deuterium": 5
         },
         "cost_rate": 1.5,
-        "time0": 2,
+        "time0": 3,
         "time_rate": 1.5,
         "metal_rate": 2
     },
@@ -89,4 +89,16 @@ BUILDINGS = {
         "time_rate": 2,
         "deuterium_rate": 2
     },
+    "robotics_factory":{
+        "name": "Robotics Factory",
+        "cost0": {
+            "metal": 50,
+            "crystal": 50,
+            "deuterium": 0
+        },
+        "cost_rate": 2,
+        "time0": 3,
+        "time_rate": 2,
+        "building_time_factor0": 0.5
+    }
 }
