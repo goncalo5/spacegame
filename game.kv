@@ -2,6 +2,8 @@
 
 <ResourcesBar@BoxLayout>:
     orientation: "horizontal"
+    size_hint_y: None
+    height: app.window.height * 0.1
     BoxLayout:
         orientation: "vertical"
         Label:
@@ -35,8 +37,32 @@
         ResourcesBar
         Label:
             text: "Buildings"
+            size_hint_y: 0.05
+            canvas.before:
+                Color:
+                    rgba: .1,.1,.1,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        BoxLayout:
+            id: construction_queue
+            orientation: "horizontal"
+            size_hint_y: None
+            height: 0
+            Label:
+                text: "%s" % app.construction_building_name
+            Label:
+                text: "%s" % app.construction_time_left
+
         BoxLayout:
             orientation: "vertical"
+            size_hint_y: 0.8
+            canvas.before:
+                Color:
+                    rgba: .1,0,0,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             Label:
                 text: "Metal Mine"
             BoxLayout:
@@ -47,7 +73,16 @@
                     text: "crystal: %s" % app.crystal_mine.cost0["crystal"]
                 Label:
                     text: "deuterium: %s" % app.deuterium_mine.cost0["deuterium"]
-
+            Label:
+                text: "%s" % app.metal_mine.time0
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    text: "%s" % app.metal_mine.level
+                Button:
+                    text: "+1"
+                    on_press:
+                        app.metal_mine.upgrade(construction_queue)
 <Game>:
     id: game
     main_screen: main_screen
