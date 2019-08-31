@@ -66,7 +66,8 @@
         ResourcesBar
         Label:
             text: "Buildings"
-            size_hint_y: 0.05
+            size_hint_y: None
+            height: app.window.height * 0.05
             canvas.before:
                 Color:
                     rgba: .1,.1,.1,1
@@ -82,86 +83,87 @@
                 text: "%s" % app.construction_building_name
             Label:
                 text: "%s" % app.construction_time_left
-
-        BoxLayout:
-            orientation: "vertical"
-            # size_hint_y: 0.8
-            canvas.before:
-                Color:
-                    rgba: .1,0,0,1
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-            ButtonUpgrade:
-                building: app.metal_mine
-                building_name: app.metal_mine.name
-                building_level: app.metal_mine.level
-                construction_queue: construction_queue
-            ButtonUpgrade:
-                building: app.crystal_mine
-                building_name: app.crystal_mine.name
-                building_level: app.crystal_mine.level
-                construction_queue: construction_queue
-            ButtonUpgrade:
-                building: app.deuterium_mine
-                building_name: app.deuterium_mine.name
-                building_level: app.deuterium_mine.level
-                construction_queue: construction_queue
-            ButtonUpgrade:
-                building: app.metal_storage
-                building_name: app.metal_storage.name
-                building_level: app.metal_storage.level
-                construction_queue: construction_queue
-            ButtonUpgrade:
-                building: app.crystal_storage
-                building_name: app.crystal_storage.name
-                building_level: app.crystal_storage.level
-                construction_queue: construction_queue
-            ButtonUpgrade:
-                building: app.deuterium_storage
-                building_name: app.deuterium_storage.name
-                building_level: app.deuterium_storage.level
-                construction_queue: construction_queue
-            ButtonUpgrade:
-                building: app.robotics_factory
-                building_name: app.robotics_factory.name
-                building_level: app.robotics_factory.level
-                construction_queue: construction_queue
-            ButtonUpgrade:
-                building: app.shipyard
-                building_name: app.shipyard.name
-                building_level: app.shipyard.level
-                construction_queue: construction_queue
-            ButtonUpgrade:
-                building: app.nanite_factory
-                building_name: app.nanite_factory.name
-                building_level: app.nanite_factory.level
-                construction_queue: construction_queue
-            ButtonUpgrade:
-                building: app.research_lab
-                building_name: app.research_lab.name
-                building_level: app.research_lab.level
-                construction_queue: construction_queue
-            ButtonUpgrade:
-                building: app.terraformer
-                building_name: app.terraformer.name
-                building_level: app.terraformer.level
-                construction_queue: construction_queue
+        RecycleView:
             BoxLayout:
                 orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                canvas.before:
+                    Color:
+                        rgba: .1,0,0,1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                ButtonUpgrade:
+                    building: app.metal_mine
+                    building_name: app.metal_mine.name
+                    building_level: app.metal_mine.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    building: app.crystal_mine
+                    building_name: app.crystal_mine.name
+                    building_level: app.crystal_mine.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    building: app.deuterium_mine
+                    building_name: app.deuterium_mine.name
+                    building_level: app.deuterium_mine.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    building: app.metal_storage
+                    building_name: app.metal_storage.name
+                    building_level: app.metal_storage.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    building: app.crystal_storage
+                    building_name: app.crystal_storage.name
+                    building_level: app.crystal_storage.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    building: app.deuterium_storage
+                    building_name: app.deuterium_storage.name
+                    building_level: app.deuterium_storage.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    building: app.robotics_factory
+                    building_name: app.robotics_factory.name
+                    building_level: app.robotics_factory.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    building: app.shipyard
+                    building_name: app.shipyard.name
+                    building_level: app.shipyard.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    building: app.nanite_factory
+                    building_name: app.nanite_factory.name
+                    building_level: app.nanite_factory.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    building: app.research_lab
+                    building_name: app.research_lab.name
+                    building_level: app.research_lab.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    building: app.terraformer
+                    building_name: app.terraformer.name
+                    building_level: app.terraformer.level
+                    construction_queue: construction_queue
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: app.building_name
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_h: 0.1
                 Label:
-                    text: app.building_name
-                BoxLayout:
-                    orientation: "horizontal"
-                    size_hint_h: 0.1
-                    Label:
-                        text: app.metal_cost
-                    Label:
-                        text: app.crystal_cost
-                    Label:
-                        text: app.deuterium_cost
-                    Label:
-                        text: app.time_cost
+                    text: app.metal_cost
+                Label:
+                    text: app.crystal_cost
+                Label:
+                    text: app.deuterium_cost
+                Label:
+                    text: app.time_cost
 
 <Game>:
     id: game
