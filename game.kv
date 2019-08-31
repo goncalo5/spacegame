@@ -71,10 +71,27 @@
             text: "Rocketlauncher"
             on_press:
                 app.display_costs(app.rocketlauncher)
+            RelativeLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                Label:
+                    text: "%s" % app.rocketlauncher.n
+                    size_hint: None, None
+                    pos_hint: {"right": 1}
         BoxLayout:
             orientation: "vertical"
-            Label:
-                text: app.construction_name
+            BoxLayout:
+                orientation: "horizontal"
+                padding: 10
+                Label:
+                    text: app.construction_name
+                TextInput:
+                    id: input_construct
+                Button:
+                    text: "construct"
+                    on_press:
+                        app.construct_defense(input_construct.text)
+
             BoxLayout:
                 orientation: "horizontal"
                 size_hint_h: 0.1

@@ -15,6 +15,7 @@ from buildings import MetalMine, CrystalMine, DeuteriumMine,\
 
 class Defense(EventDispatcher):
     costs = kp.DictProperty()
+    n = kp.NumericProperty()
     def __init__(self, settings):
         super().__init__()
         print(settings)
@@ -24,6 +25,9 @@ class Defense(EventDispatcher):
         self.shield = settings.get("shield")
         self.weapen = settings.get("weapen")
         self.time = settings.get("time")
+    
+    def on_n(self, *args):
+        print("on_n")
 
 
 class Game(ScreenManager):
@@ -78,6 +82,7 @@ class GameApp(App, ScreenManager):
     deuterium_cost = kp.StringProperty()
     time_cost = kp.StringProperty()
     construction_is_cancel = kp.BooleanProperty(False)
+    current_selected = kp.ObjectProperty()
     # defenses:
     rocketlauncher =\
         kp.ObjectProperty(Defense(DEFENSES.get("rocketlauncher")))
@@ -100,6 +105,7 @@ class GameApp(App, ScreenManager):
 
     def display_costs(self, building):
         print("display_costs", building)
+        self.current_selected = building
         self.construction_name = building.name
         self.metal_cost =  "metal: %s" % int(building.costs.get("metal"))
         self.crystal_cost =  "crystal: %s" % int(building.costs.get("crystal"))
@@ -144,6 +150,12 @@ class GameApp(App, ScreenManager):
 
     def cancel_construction(self):
         self.construction_is_cancel = True
+    
+    def construct_defense(self, quantity):
+        try:
+            self.current_selected.n += int(quantity)
+        except AttributeError:
+            return
 
 
 if __name__ == "__main__":
