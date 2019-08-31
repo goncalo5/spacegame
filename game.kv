@@ -4,6 +4,10 @@
     orientation: "horizontal"
     size_hint_y: None
     height: app.window.height * 0.1
+    Button:
+        text: "Main"
+        on_press:
+            app.game.current = "main_screen"
     BoxLayout:
         orientation: "vertical"
         Label:

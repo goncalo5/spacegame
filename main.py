@@ -108,7 +108,8 @@ class GameApp(App):
 
     def build(self):
         Clock.schedule_interval(self.update, 0.1)
-        return Game()
+        self.game = Game()
+        return self.game
 
     def update(self, dt):
         # update resources:
