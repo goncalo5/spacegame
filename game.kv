@@ -67,6 +67,17 @@
     BoxLayout:
         orientation: "vertical"
         ResourcesBar
+        BoxLayout:
+            id: construction_queue
+            orientation: "vertical"
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    text: "Construction queue"
+                Label:
+                    text: "time: %s" % int(app.defenses_queue_time)
+                Label:
+                    text: "time: %s" % int(app.last_defense_time)
         Button:
             text: "Rocketlauncher"
             on_press:

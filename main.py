@@ -25,7 +25,10 @@ class Defense(EventDispatcher):
         self.shield = settings.get("shield")
         self.weapen = settings.get("weapen")
         self.time = settings.get("time")
-    
+
+    def __str__(self):
+        return "Defense(name=%s)" % self.name
+
     def on_n(self, *args):
         print("on_n")
 
@@ -83,6 +86,9 @@ class GameApp(App, ScreenManager):
     time_cost = kp.StringProperty()
     construction_is_cancel = kp.BooleanProperty(False)
     current_selected = kp.ObjectProperty()
+    defenses_queue = kp.ListProperty()
+    defenses_queue_time = kp.NumericProperty()
+    last_defense_time = kp.NumericProperty()
     # defenses:
     rocketlauncher =\
         kp.ObjectProperty(Defense(DEFENSES.get("rocketlauncher")))
@@ -100,6 +106,7 @@ class GameApp(App, ScreenManager):
 
     def build(self):
         Clock.schedule_interval(self.update, 0.1)
+        Clock.schedule_interval(self.update_defense_time_left, 0.1)
         self.game = Game()
         return self.game
 
@@ -127,18 +134,18 @@ class GameApp(App, ScreenManager):
         else:
             self.deuterium = self.deuterium_cap
     
-    def check_if_can_pay(self, resources):
+    def check_if_can_pay(self, resources, quantity=1):
         # check if can pay:
-        if self.metal < resources["metal"] or\
-            self.crystal < resources["crystal"] or\
-            self.deuterium < resources["deuterium"]:
+        if self.metal < (resources["metal"] * quantity) or\
+            self.crystal < (resources["crystal"] * quantity) or\
+            self.deuterium < (resources["deuterium"] * quantity):
             return False
         return True
 
-    def pay_the_resources(self, resources):
-        self.metal -= resources["metal"]
-        self.crystal -= resources["crystal"]
-        self.deuterium -= resources["deuterium"]
+    def pay_the_resources(self, resources, quantity=1):
+        self.metal -= resources["metal"] * quantity
+        self.crystal -= resources["crystal"] * quantity
+        self.deuterium -= resources["deuterium"] * quantity
 
     def return_the_resources(self, resources):
         self.metal += resources["metal"]
@@ -153,9 +160,61 @@ class GameApp(App, ScreenManager):
     
     def construct_defense(self, quantity):
         try:
-            self.current_selected.n += int(quantity)
+            quantity = int(quantity)
+        except ValueError:
+            print("ValueError please input an integer")
+            return
+        try:
+            # check if can pay:
+            print(self.current_selected.costs)
+            costs = self.current_selected.costs
+            if self.check_if_can_pay(costs, quantity):
+                print("can pay")
+                self.pay_the_resources(costs, quantity)
+            else:
+                print("cant pay")
+                return
         except AttributeError:
             return
+
+        self.defenses_queue.append([self.current_selected, int(quantity)])
+        print(self.defenses_queue)
+    
+    def on_defenses_queue(self, *args):
+        print("on_defense_queue", args)
+        if len(self.defenses_queue) == 0:
+            return
+        # calc the time:
+        if self.last_defense_time <= 0:
+            self.last_defense_time = self.defenses_queue[0][0].time
+            Clock.schedule_interval(self.update_first_defense_time_left, 0.1)
+        self.defenses_queue_time = 0
+        for defense, quantity in self.defenses_queue:
+            self.defenses_queue_time += defense.time * quantity
+        print("time", self.defenses_queue_time)
+        # Clock.schedule_interval(self.update_defense_time_left, 0.1)
+        self.defenses_queue_time -=\
+            (self.defenses_queue[0][0].time - self.last_defense_time)
+    
+    def update_first_defense_time_left(self, dt):
+        self.last_defense_time -= dt
+        if self.last_defense_time <= 0:
+            self.defenses_queue[0][0].n += 1
+            self.defenses_queue[0][1] -= 1
+            if self.defenses_queue[0][1] == 0:
+                self.defenses_queue.pop(0)
+            elif self.defenses_queue[0][1] > 0:
+                self.last_defense_time = self.defenses_queue[0][0].time
+                Clock.schedule_interval(self.update_first_defense_time_left, 0.1)
+
+            return False
+
+    
+    def update_defense_time_left(self, dt):
+        if self.defenses_queue_time <= 0:
+            return
+        self.defenses_queue_time -= dt
+
 
 
 if __name__ == "__main__":
