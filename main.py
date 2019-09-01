@@ -7,7 +7,7 @@ from kivy.event import EventDispatcher
 # kivy.uix:
 from kivy.uix.screenmanager import ScreenManager
 # mine:
-from settings import RESOURCES, BUILDINGS, DEFENSES
+from settings import RESOURCES, DEFENSES
 from buildings import MetalMine, CrystalMine, DeuteriumMine,\
     MetalStorage, CrystalStorage, DeuteriumStorage,\
     RoboticsFactory, Shipyard, NaniteFactory, ResearchLab, Terraformer
@@ -46,49 +46,27 @@ class GameApp(App, ScreenManager):
     crystal = kp.ObjectProperty(Resource("crystal"))
     deuterium = kp.ObjectProperty(Resource("deuterium"))
     # buildings:
-    metal_mine = kp.ObjectProperty(MetalMine(BUILDINGS.get("metal_mine")))
-    crystal_mine = kp.ObjectProperty(CrystalMine(BUILDINGS.get("crystal_mine")))
-    deuterium_mine = kp.ObjectProperty(DeuteriumMine(BUILDINGS.get("deuterium_mine")))
-    metal_storage =\
-        kp.ObjectProperty(MetalStorage(BUILDINGS.get("metal_storage")))
-    crystal_storage =\
-        kp.ObjectProperty(CrystalStorage(BUILDINGS.get("crystal_storage")))
-    deuterium_storage =\
-        kp.ObjectProperty(DeuteriumStorage(BUILDINGS.get("deuterium_storage")))
-    robotics_factory =\
-        kp.ObjectProperty(RoboticsFactory(BUILDINGS.get("robotics_factory")))
-    shipyard =\
-        kp.ObjectProperty(Shipyard(BUILDINGS.get("shipyard")))
-    nanite_factory =\
-        kp.ObjectProperty(NaniteFactory(BUILDINGS.get("nanite_factory")))
-    research_lab =\
-        kp.ObjectProperty(ResearchLab(BUILDINGS.get("research_lab")))
-    terraformer =\
-        kp.ObjectProperty(Terraformer(BUILDINGS.get("terraformer")))
+    metal_mine = kp.ObjectProperty(MetalMine())
+    crystal_mine = kp.ObjectProperty(CrystalMine())
+    deuterium_mine = kp.ObjectProperty(DeuteriumMine())
+    metal_storage = kp.ObjectProperty(MetalStorage())
+    crystal_storage = kp.ObjectProperty(CrystalStorage())
+    deuterium_storage = kp.ObjectProperty(DeuteriumStorage())
+    robotics_factory = kp.ObjectProperty(RoboticsFactory())
+    shipyard = kp.ObjectProperty(Shipyard())
+    nanite_factory = kp.ObjectProperty(NaniteFactory())
+    research_lab = kp.ObjectProperty(ResearchLab())
+    terraformer = kp.ObjectProperty(Terraformer())
     # construction:
     construction = kp.ObjectProperty(Construction())
-    # construction_building_name = kp.StringProperty()
-    # construction_time_left_s = kp.NumericProperty()
-    # construction_time_left = kp.StringProperty()
-    # construction_name = kp.StringProperty()
-    # metal_cost = kp.StringProperty()
-    # crystal_cost = kp.StringProperty()
-    # deuterium_cost = kp.StringProperty()
-    # time_cost = kp.StringProperty()
-    # construction_is_cancel = kp.BooleanProperty(False)
-    # current_selected = kp.ObjectProperty()
-    # defenses_queue = kp.ListProperty()
-    # defenses_queue_time = kp.NumericProperty()
-    # last_defense_time = kp.NumericProperty()
     # defenses:
     rocketlauncher =\
         kp.ObjectProperty(Defense(DEFENSES.get("rocketlauncher")))
 
     def build_config(self, *args):
-        self.resources = {
-            "metal": self.metal.current, "crystal": self.crystal,
-            "deuterium": self.deuterium
-        }
+        self.resources = [
+            self.metal.current, self.crystal, self.deuterium
+        ]
         self.buildings = [
             self.metal_mine, self.crystal_mine, self.deuterium_mine,
             self.metal_storage, self.crystal_storage, self.deuterium_storage,
@@ -144,7 +122,6 @@ class GameApp(App, ScreenManager):
         except ValueError:
             print("ValueError please input an integer")
             return
-        print(55)
         try:
             # check if can pay:
             print(self.construction.current_selected.costs)

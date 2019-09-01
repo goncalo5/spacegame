@@ -3,6 +3,8 @@ from kivy.app import App
 from kivy.event import EventDispatcher
 from kivy import properties as kp
 from kivy.clock import Clock
+# mine:
+from settings import BUILDINGS
 
 
 class Building(EventDispatcher):
@@ -10,14 +12,14 @@ class Building(EventDispatcher):
     level = kp.NumericProperty()
     costs = kp.DictProperty()
     time = kp.NumericProperty()
-    def __init__(self, settings):
+    def __init__(self):
         super().__init__()
-        self.name = settings.get("name")
-        self.level = settings.get("level", 0)
-        self.costs0 = settings.get("costs0")
-        self.costs_rate = settings.get("costs_rate")
-        self.time0 = settings.get("time0")
-        self.time_rate = settings.get("time_rate")
+        self.settings = BUILDINGS.get(self.name)
+        self.level = self.settings.get("level", 0)
+        self.costs0 = self.settings.get("costs0")
+        self.costs_rate = self.settings.get("costs_rate")
+        self.time0 = self.settings.get("time0")
+        self.time_rate = self.settings.get("time_rate")
 
         Clock.schedule_once(self.on_level, 0)
 
@@ -88,14 +90,15 @@ class Building(EventDispatcher):
 
 
 class Mine(Building):
-    def __init__(self, settings):
-        super().__init__(settings)
+    def __init__(self):
+        super().__init__()
 
 
 class MetalMine(Mine):
-    def __init__(self, settings):
-        self.metal_rate = settings.get("metal_rate")
-        super().__init__(settings)
+    def __init__(self):
+        self.name = "metal_mine"
+        super().__init__()
+        self.metal_rate = self.settings.get("metal_rate")
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
@@ -104,9 +107,10 @@ class MetalMine(Mine):
 
 
 class CrystalMine(Building):
-    def __init__(self, settings):
-        super().__init__(settings)
-        self.crystal_rate = settings.get("crystal_rate")
+    def __init__(self):
+        self.name = "crystal_mine"
+        super().__init__()
+        self.crystal_rate = self.settings.get("crystal_rate")
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
@@ -115,9 +119,10 @@ class CrystalMine(Building):
 
 
 class DeuteriumMine(Building):
-    def __init__(self, settings):
-        super().__init__(settings)
-        self.deuterium_rate = settings.get("deuterium_rate")
+    def __init__(self):
+        self.name = "deuterium_mine"
+        super().__init__()
+        self.deuterium_rate = self.settings.get("deuterium_rate")
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
@@ -130,11 +135,10 @@ class Storage(Building):
 
 
 class MetalStorage(Storage):
-    def __init__(self, settings):
-        print("settings", settings)
-        super().__init__(settings)
-        self.metal_rate = settings.get("metal_rate")
-        print("self.metal_rate", self.metal_rate)
+    def __init__(self):
+        self.name = "metal_storage"
+        super().__init__()
+        self.metal_rate = self.settings.get("metal_rate")
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
@@ -143,9 +147,10 @@ class MetalStorage(Storage):
 
 
 class CrystalStorage(Storage):
-    def __init__(self, settings):
-        super().__init__(settings)
-        self.crystal_rate = settings.get("crystal_rate")
+    def __init__(self):
+        self.name = "crystal_storage"
+        super().__init__()
+        self.crystal_rate = self.settings.get("crystal_rate")
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
@@ -154,9 +159,10 @@ class CrystalStorage(Storage):
 
 
 class DeuteriumStorage(Storage):
-    def __init__(self, settings):
-        super().__init__(settings)
-        self.deuterium_rate = settings.get("deuterium_rate")
+    def __init__(self):
+        self.name = "deuterium_storage"
+        super().__init__()
+        self.deuterium_rate = self.settings.get("deuterium_rate")
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
@@ -165,8 +171,9 @@ class DeuteriumStorage(Storage):
 
 
 class Factory(Building):
-    def __init__(self, settings):
-        super().__init__(settings)
+    def __init__(self):
+        super().__init__()
+        self.building_time_factor0 = self.settings.get("building_time_factor0")
         self.update_factor()
         Clock.schedule_once(self.update_feature, 0)
 
@@ -175,9 +182,9 @@ class Factory(Building):
 
 
 class RoboticsFactory(Factory):
-    def __init__(self, settings):
-        self.building_time_factor0 = settings.get("building_time_factor0")
-        super().__init__(settings)
+    def __init__(self):
+        self.name = "robotics_factory"
+        super().__init__()
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
@@ -187,9 +194,9 @@ class RoboticsFactory(Factory):
 
 
 class Shipyard(Factory):
-    def __init__(self, settings):
-        self.building_time_factor0 = settings.get("building_time_factor0")
-        super().__init__(settings)
+    def __init__(self):
+        self.name = "shipyard"
+        super().__init__()
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
@@ -199,9 +206,9 @@ class Shipyard(Factory):
 
 
 class NaniteFactory(Factory):
-    def __init__(self, settings):
-        self.building_time_factor0 = settings.get("building_time_factor0")
-        super().__init__(settings)
+    def __init__(self):
+        self.name = "nanite_factory"
+        super().__init__()
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
@@ -210,9 +217,10 @@ class NaniteFactory(Factory):
 
 
 class ResearchLab(Building):
-    def __init__(self, settings):
-        super().__init__(settings)
-        self.reasearch_time_factor0 = settings.get("reasearch_time_factor0")
+    def __init__(self):
+        self.name = "research_lab"
+        super().__init__()
+        self.reasearch_time_factor0 = self.settings.get("reasearch_time_factor0")
         self.update_factor()
 
     def update_factor(self):
@@ -224,9 +232,10 @@ class ResearchLab(Building):
 
 
 class Terraformer(Building):
-    def __init__(self, settings):
-        super().__init__(settings)
-        self.fields_added_per_level = settings.get("fields_added_per_level")
+    def __init__(self):
+        self.name = "terraformer"
+        super().__init__()
+        self.fields_added_per_level = self.settings.get("fields_added_per_level")
         self.update_factor()
 
     def update_factor(self):
