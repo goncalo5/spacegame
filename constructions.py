@@ -8,7 +8,6 @@ class Construction(EventDispatcher):
     name = kp.StringProperty()
     time_left_s = kp.NumericProperty()
     time_left = kp.StringProperty()
-    name = kp.StringProperty()
     metal_cost = kp.StringProperty()
     crystal_cost = kp.StringProperty()
     deuterium_cost = kp.StringProperty()
@@ -65,3 +64,10 @@ class Construction(EventDispatcher):
 
     def cancel(self):
         self.is_cancel = True
+
+    def clean_display(self):
+        self.name = ""
+        self.metal_cost = ""
+        self.crystal_cost = ""
+        self.deuterium_cost = ""
+        self.time_cost = ""

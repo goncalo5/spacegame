@@ -104,9 +104,6 @@ class GameApp(App, ScreenManager):
         self.metal.current += resources["metal"]
         self.crystal.current += resources["crystal"]
         self.deuterium.current += resources["deuterium"]
-
-    def cancel_construction(self):
-        self.construction.is_cancel = True
     
     def construct_defense(self, quantity):
         print("construct_defense")
