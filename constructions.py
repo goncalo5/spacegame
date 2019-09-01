@@ -18,6 +18,7 @@ class Construction(EventDispatcher):
     defenses_queue = kp.ListProperty()
     defenses_queue_time = kp.NumericProperty()
     last_defense_time = kp.NumericProperty()
+    have_queue = kp.BooleanProperty(0)
     def __init__(self):
         super().__init__()
     

@@ -29,7 +29,7 @@ class Building(EventDispatcher):
         if not self.app.check_if_can_pay(self.costs):
             return
         self.app.pay_the_resources(self.costs)
-        self.construction_queue.size_hint_y = 0.1
+        self.show_construction_queue()
         self.app.construction.name = self.name
         self.app.construction.time_left_s = self.time
         Clock.schedule_interval(self.update_time_left, 0.1)
@@ -48,11 +48,16 @@ class Building(EventDispatcher):
             self.app.construction.display_costs(self)
             return False
     
+    def show_construction_queue(self):
+        print("show_construction_queue")
+        self.construction_queue.size_hint_y = 0.1
+        self.app.construction.have_queue = 1
+
     def hide_construction_queue(self):
+        print("hide_construction_queue")
         self.construction_queue.size_hint_y = None
         self.construction_queue.height = 0
-        self.app.construction.name = ""
-        self.app.construction.time_left = ""
+        self.app.construction.have_queue = 0
 
 
     def on_level(self, *args):

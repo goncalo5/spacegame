@@ -136,10 +136,14 @@
             height: 0
             Label:
                 text: "%s" % app.construction.name
+                opacity: app.construction.have_queue
             Label:
                 text: "%s" % app.construction.time_left
+                opacity: app.construction.have_queue
             Button:
                 text: "cancel"
+                opacity: app.construction.have_queue
+                disabled: not app.construction.have_queue
                 on_press:
                     print("cancel")
                     app.construction.cancel()
