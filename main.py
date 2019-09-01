@@ -106,7 +106,7 @@ class GameApp(App, ScreenManager):
         self.deuterium.current += resources["deuterium"]
 
     def cancel_construction(self):
-        self.construction_is_cancel = True
+        self.construction.is_cancel = True
     
     def construct_defense(self, quantity):
         print("construct_defense")

@@ -61,3 +61,6 @@ class Construction(EventDispatcher):
                 Clock.schedule_interval(self.update_first_defense_time_left, 0.1)
 
             return False
+
+    def cancel(self):
+        self.is_cancel = True

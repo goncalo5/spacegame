@@ -24,8 +24,6 @@ class Building(EventDispatcher):
         Clock.schedule_once(self.on_level, 0)
 
     def upgrade(self, construction_queue):
-        print("construction_queue.cancel_construction",
-            construction_queue.cancel_construction)
         self.construction_queue = construction_queue
         self.app = App.get_running_app()
         if not self.app.check_if_can_pay(self.costs):

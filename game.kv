@@ -131,7 +131,6 @@
                     size: self.size
         BoxLayout:
             id: construction_queue
-            cancel_construction: app.cancel_construction
             orientation: "horizontal"
             size_hint_y: None
             height: 0
@@ -143,7 +142,7 @@
                 text: "cancel"
                 on_press:
                     print("cancel")
-                    app.cancel_construction()
+                    app.construction.cancel()
         RecycleView:
             BoxLayout:
                 orientation: "vertical"
