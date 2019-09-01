@@ -100,8 +100,8 @@ class MetalMine(Mine):
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
-        self.app.metal_per_s =\
-            self.app.metal_per_s0 * self.metal_rate ** self.level
+        self.app.metal.per_s =\
+            self.app.metal.per_s0 * self.metal_rate ** self.level
 
 
 class CrystalMine(Building):
@@ -111,8 +111,8 @@ class CrystalMine(Building):
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
-        self.app.crystal_per_s =\
-            self.app.crystal_per_s0 * self.crystal_rate ** self.level
+        self.app.crystal.per_s =\
+            self.app.crystal.per_s0 * self.crystal_rate ** self.level
 
 
 class DeuteriumMine(Building):
@@ -122,8 +122,8 @@ class DeuteriumMine(Building):
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
-        self.app.deuterium_per_s =\
-            self.app.deuterium_per_s0 * self.deuterium_rate ** self.level
+        self.app.deuterium.per_s =\
+            self.app.deuterium.per_s0 * self.deuterium_rate ** self.level
 
 
 class Storage(Building):
@@ -139,8 +139,8 @@ class MetalStorage(Storage):
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
-        self.app.metal_cap =\
-            self.app.metal_cap0 * self.metal_rate ** self.level
+        self.app.metal.cap =\
+            self.app.metal.cap0 * self.metal_rate ** self.level
 
 
 class CrystalStorage(Storage):
@@ -150,8 +150,8 @@ class CrystalStorage(Storage):
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
-        self.app.crystal_cap =\
-            self.app.crystal_cap0 * self.crystal_rate ** self.level
+        self.app.crystal.cap =\
+            self.app.crystal.cap0 * self.crystal_rate ** self.level
 
 
 class DeuteriumStorage(Storage):
@@ -161,8 +161,8 @@ class DeuteriumStorage(Storage):
 
     def update_feature(self, *args):
         self.app = App.get_running_app()
-        self.app.deuterium_cap =\
-            self.app.deuterium_cap0 * self.deuterium_rate ** self.level
+        self.app.deuterium.cap =\
+            self.app.deuterium.cap0 * self.deuterium_rate ** self.level
 
 
 class Factory(Building):

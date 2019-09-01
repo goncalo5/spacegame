@@ -13,19 +13,19 @@
         Label:
             text: "Metal"
         Label:
-            text: str(int(app.metal))
+            text: str(int(app.metal.current))
     BoxLayout:
         orientation: "vertical"
         Label:
             text: "Crystal"
         Label:
-            text: str(int(app.crystal))
+            text: str(int(app.crystal.current))
     BoxLayout:
         orientation: "vertical"
         Label:
             text: "Deuterium"
         Label:
-            text: str(int(app.deuterium))
+            text: str(int(app.deuterium.current))
 
 <ButtonUpgrade@Button>:
     size_hint_y: None

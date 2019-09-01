@@ -11,6 +11,7 @@ from settings import RESOURCES, BUILDINGS, DEFENSES
 from buildings import MetalMine, CrystalMine, DeuteriumMine,\
     MetalStorage, CrystalStorage, DeuteriumStorage,\
     RoboticsFactory, Shipyard, NaniteFactory, ResearchLab, Terraformer
+from resources import Resource
 
 
 class Defense(EventDispatcher):
@@ -40,21 +41,9 @@ class Game(ScreenManager):
 class GameApp(App, ScreenManager):
     window = kp.ObjectProperty(Window)
     # resources:
-    metal = kp.NumericProperty(RESOURCES.get("metal").get("init"))
-    crystal = kp.NumericProperty(RESOURCES.get("crystal").get("init"))
-    deuterium = kp.NumericProperty(RESOURCES.get("deuterium").get("init"))
-    metal_per_s0 = kp.NumericProperty(RESOURCES.get("metal").get("per_s0"))
-    crystal_per_s0 = kp.NumericProperty(RESOURCES.get("crystal").get("per_s0"))
-    deuterium_per_s0 = kp.NumericProperty(RESOURCES.get("deuterium").get("per_s0"))
-    metal_per_s = kp.NumericProperty(RESOURCES.get("metal").get("per_s0"))
-    crystal_per_s = kp.NumericProperty(RESOURCES.get("crystal").get("per_s0"))
-    deuterium_per_s = kp.NumericProperty(RESOURCES.get("deuterium").get("per_s0"))
-    metal_cap0 = kp.NumericProperty(RESOURCES.get("metal").get("cap0"))
-    crystal_cap0 = kp.NumericProperty(RESOURCES.get("metal").get("cap0"))
-    deuterium_cap0 = kp.NumericProperty(RESOURCES.get("metal").get("cap0"))
-    metal_cap = kp.NumericProperty(RESOURCES.get("metal").get("cap0"))
-    crystal_cap = kp.NumericProperty(RESOURCES.get("metal").get("cap0"))
-    deuterium_cap = kp.NumericProperty(RESOURCES.get("metal").get("cap0"))
+    metal = kp.ObjectProperty(Resource("metal"))
+    crystal = kp.ObjectProperty(Resource("crystal"))
+    deuterium = kp.ObjectProperty(Resource("deuterium"))
     # buildings:
     metal_mine = kp.ObjectProperty(MetalMine(BUILDINGS.get("metal_mine")))
     crystal_mine = kp.ObjectProperty(CrystalMine(BUILDINGS.get("crystal_mine")))
@@ -95,7 +84,7 @@ class GameApp(App, ScreenManager):
 
     def build_config(self, *args):
         self.resources = {
-            "metal": self.metal, "crystal": self.crystal,
+            "metal": self.metal.current, "crystal": self.crystal,
             "deuterium": self.deuterium
         }
         self.buildings = [
@@ -121,36 +110,36 @@ class GameApp(App, ScreenManager):
 
     def update(self, dt):
         # update resources:
-        if self.metal + self.metal_per_s * dt <= self.metal_cap:
-            self.metal += self.metal_per_s * dt
+        if self.metal.current + self.metal.per_s * dt <= self.metal.cap:
+            self.metal.current += self.metal.per_s * dt
         else:
-            self.metal = self.metal_cap
-        if self.crystal + self.crystal_per_s * dt <= self.crystal_cap:
-            self.crystal += self.crystal_per_s * dt
+            self.metal = self.metal.cap
+        if self.crystal.current + self.crystal.per_s * dt <= self.crystal.cap:
+            self.crystal.current += self.crystal.per_s * dt
         else:
-            self.crystal = self.crystal_cap
-        if self.deuterium + self.deuterium_per_s * dt <= self.deuterium_cap:
-            self.deuterium += self.deuterium_per_s * dt
+            self.crystal.current = self.crystal.cap
+        if self.deuterium.current + self.deuterium.per_s * dt <= self.deuterium.cap:
+            self.deuterium.current += self.deuterium.per_s * dt
         else:
-            self.deuterium = self.deuterium_cap
+            self.deuterium.current = self.deuterium.cap
     
     def check_if_can_pay(self, resources, quantity=1):
         # check if can pay:
-        if self.metal < (resources["metal"] * quantity) or\
-            self.crystal < (resources["crystal"] * quantity) or\
-            self.deuterium < (resources["deuterium"] * quantity):
+        if self.metal.current < (resources["metal"] * quantity) or\
+            self.crystal.current < (resources["crystal"] * quantity) or\
+            self.deuterium.current < (resources["deuterium"] * quantity):
             return False
         return True
 
     def pay_the_resources(self, resources, quantity=1):
-        self.metal -= resources["metal"] * quantity
-        self.crystal -= resources["crystal"] * quantity
-        self.deuterium -= resources["deuterium"] * quantity
+        self.metal.current -= resources["metal"] * quantity
+        self.crystal.current -= resources["crystal"] * quantity
+        self.deuterium.current -= resources["deuterium"] * quantity
 
     def return_the_resources(self, resources):
-        self.metal += resources["metal"]
-        self.crystal += resources["crystal"]
-        self.deuterium += resources["deuterium"]
+        self.metal.current += resources["metal"]
+        self.crystal.current += resources["crystal"]
+        self.deuterium.current += resources["deuterium"]
     
     def on_construction_time_left_s(self, *args):
         self.construction_time_left = "%s" % int(self.construction_time_left_s)
