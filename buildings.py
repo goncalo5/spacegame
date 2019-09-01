@@ -25,35 +25,34 @@ class Building(EventDispatcher):
         print("construction_queue.cancel_construction",
             construction_queue.cancel_construction)
         self.construction_queue = construction_queue
-        self.construction_queue = construction_queue
         self.app = App.get_running_app()
         if not self.app.check_if_can_pay(self.costs):
             return
         self.app.pay_the_resources(self.costs)
         self.construction_queue.size_hint_y = 0.1
-        self.app.construction_building_name = self.name
-        self.app.construction_time_left_s = self.time
+        self.app.construction.name = self.name
+        self.app.construction.time_left_s = self.time
         Clock.schedule_interval(self.update_time_left, 0.1)
 
     def update_time_left(self, dt):
-        if self.app.construction_is_cancel:
+        if self.app.construction.is_cancel:
             self.app.return_the_resources(self.costs)
             self.hide_construction_queue()
-            self.app.construction_is_cancel = False
+            self.app.construction.is_cancel = False
             return False
 
-        self.app.construction_time_left_s -= dt
-        if self.app.construction_time_left_s <= 0:
+        self.app.construction.time_left_s -= dt
+        if self.app.construction.time_left_s <= 0:
             self.level += 1
             self.hide_construction_queue()
-            self.app.display_costs(self)
+            self.app.construction.display_costs(self)
             return False
     
     def hide_construction_queue(self):
         self.construction_queue.size_hint_y = None
         self.construction_queue.height = 0
-        self.app.construction_building_name = ""
-        self.app.construction_time_left = ""
+        self.app.construction.name = ""
+        self.app.construction.time_left = ""
 
 
     def on_level(self, *args):

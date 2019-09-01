@@ -12,6 +12,7 @@ from buildings import MetalMine, CrystalMine, DeuteriumMine,\
     MetalStorage, CrystalStorage, DeuteriumStorage,\
     RoboticsFactory, Shipyard, NaniteFactory, ResearchLab, Terraformer
 from resources import Resource
+from constructions import Construction
 
 
 class Defense(EventDispatcher):
@@ -65,19 +66,20 @@ class GameApp(App, ScreenManager):
     terraformer =\
         kp.ObjectProperty(Terraformer(BUILDINGS.get("terraformer")))
     # construction:
-    construction_building_name = kp.StringProperty()
-    construction_time_left_s = kp.NumericProperty()
-    construction_time_left = kp.StringProperty()
-    construction_name = kp.StringProperty()
-    metal_cost = kp.StringProperty()
-    crystal_cost = kp.StringProperty()
-    deuterium_cost = kp.StringProperty()
-    time_cost = kp.StringProperty()
-    construction_is_cancel = kp.BooleanProperty(False)
-    current_selected = kp.ObjectProperty()
-    defenses_queue = kp.ListProperty()
-    defenses_queue_time = kp.NumericProperty()
-    last_defense_time = kp.NumericProperty()
+    construction = kp.ObjectProperty(Construction())
+    # construction_building_name = kp.StringProperty()
+    # construction_time_left_s = kp.NumericProperty()
+    # construction_time_left = kp.StringProperty()
+    # construction_name = kp.StringProperty()
+    # metal_cost = kp.StringProperty()
+    # crystal_cost = kp.StringProperty()
+    # deuterium_cost = kp.StringProperty()
+    # time_cost = kp.StringProperty()
+    # construction_is_cancel = kp.BooleanProperty(False)
+    # current_selected = kp.ObjectProperty()
+    # defenses_queue = kp.ListProperty()
+    # defenses_queue_time = kp.NumericProperty()
+    # last_defense_time = kp.NumericProperty()
     # defenses:
     rocketlauncher =\
         kp.ObjectProperty(Defense(DEFENSES.get("rocketlauncher")))
@@ -98,15 +100,6 @@ class GameApp(App, ScreenManager):
         Clock.schedule_interval(self.update_defense_time_left, 0.1)
         self.game = Game()
         return self.game
-
-    def display_costs(self, building):
-        print("display_costs", building)
-        self.current_selected = building
-        self.construction_name = building.name
-        self.metal_cost =  "metal: %s" % int(building.costs.get("metal"))
-        self.crystal_cost =  "crystal: %s" % int(building.costs.get("crystal"))
-        self.deuterium_cost =  "deuterium: %s" % int(building.costs.get("deuterium"))
-        self.time_cost =  "time: %s" % int(building.time)
 
     def update(self, dt):
         # update resources:
@@ -140,23 +133,22 @@ class GameApp(App, ScreenManager):
         self.metal.current += resources["metal"]
         self.crystal.current += resources["crystal"]
         self.deuterium.current += resources["deuterium"]
-    
-    def on_construction_time_left_s(self, *args):
-        self.construction_time_left = "%s" % int(self.construction_time_left_s)
 
     def cancel_construction(self):
         self.construction_is_cancel = True
     
     def construct_defense(self, quantity):
+        print("construct_defense")
         try:
             quantity = int(quantity)
         except ValueError:
             print("ValueError please input an integer")
             return
+        print(55)
         try:
             # check if can pay:
-            print(self.current_selected.costs)
-            costs = self.current_selected.costs
+            print(self.construction.current_selected.costs)
+            costs = self.construction.current_selected.costs
             if self.check_if_can_pay(costs, quantity):
                 print("can pay")
                 self.pay_the_resources(costs, quantity)
@@ -166,43 +158,14 @@ class GameApp(App, ScreenManager):
         except AttributeError:
             return
 
-        self.defenses_queue.append([self.current_selected, int(quantity)])
-        print(self.defenses_queue)
-    
-    def on_defenses_queue(self, *args):
-        print("on_defense_queue", args)
-        if len(self.defenses_queue) == 0:
-            return
-        # calc the time:
-        if self.last_defense_time <= 0:
-            self.last_defense_time = self.defenses_queue[0][0].time
-            Clock.schedule_interval(self.update_first_defense_time_left, 0.1)
-        self.defenses_queue_time = 0
-        for defense, quantity in self.defenses_queue:
-            self.defenses_queue_time += defense.time * quantity
-        print("time", self.defenses_queue_time)
-        # Clock.schedule_interval(self.update_defense_time_left, 0.1)
-        self.defenses_queue_time -=\
-            (self.defenses_queue[0][0].time - self.last_defense_time)
-    
-    def update_first_defense_time_left(self, dt):
-        self.last_defense_time -= dt
-        if self.last_defense_time <= 0:
-            self.defenses_queue[0][0].n += 1
-            self.defenses_queue[0][1] -= 1
-            if self.defenses_queue[0][1] == 0:
-                self.defenses_queue.pop(0)
-            elif self.defenses_queue[0][1] > 0:
-                self.last_defense_time = self.defenses_queue[0][0].time
-                Clock.schedule_interval(self.update_first_defense_time_left, 0.1)
-
-            return False
+        self.construction.defenses_queue.append([self.construction.current_selected, int(quantity)])
+        print(self.construction.defenses_queue)
 
     
     def update_defense_time_left(self, dt):
-        if self.defenses_queue_time <= 0:
+        if self.construction.defenses_queue_time <= 0:
             return
-        self.defenses_queue_time -= dt
+        self.construction.defenses_queue_time -= dt
 
 
 

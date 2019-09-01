@@ -35,7 +35,7 @@
     building_level: None
     on_press:
         print("main")
-        app.display_costs(root.building)
+        app.construction.display_costs(root.building)
     RelativeLayout:
         pos: self.parent.pos
         size: self.parent.size
@@ -75,13 +75,13 @@
                 Label:
                     text: "Construction queue"
                 Label:
-                    text: "time: %s" % int(app.defenses_queue_time)
+                    text: "time: %s" % int(app.construction.defenses_queue_time)
                 Label:
-                    text: "time: %s" % int(app.last_defense_time)
+                    text: "time: %s" % int(app.construction.last_defense_time)
         Button:
             text: "Rocketlauncher"
             on_press:
-                app.display_costs(app.rocketlauncher)
+                app.construction.display_costs(app.rocketlauncher)
             RelativeLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -95,7 +95,7 @@
                 orientation: "horizontal"
                 padding: 10
                 Label:
-                    text: app.construction_name
+                    text: app.construction.name
                 TextInput:
                     id: input_construct
                 Button:
@@ -107,13 +107,13 @@
                 orientation: "horizontal"
                 size_hint_h: 0.1
                 Label:
-                    text: app.metal_cost
+                    text: app.construction.metal_cost
                 Label:
-                    text: app.crystal_cost
+                    text: app.construction.crystal_cost
                 Label:
-                    text: app.deuterium_cost
+                    text: app.construction.deuterium_cost
                 Label:
-                    text: app.time_cost
+                    text: app.construction.time_cost
 
 <BuildingsScreen@Screen>:
     BoxLayout:
@@ -136,9 +136,9 @@
             size_hint_y: None
             height: 0
             Label:
-                text: "%s" % app.construction_building_name
+                text: "%s" % app.construction.name
             Label:
-                text: "%s" % app.construction_time_left
+                text: "%s" % app.construction.time_left
             Button:
                 text: "cancel"
                 on_press:
@@ -213,18 +213,18 @@
         BoxLayout:
             orientation: "vertical"
             Label:
-                text: app.construction_name
+                text: app.construction.name
             BoxLayout:
                 orientation: "horizontal"
                 size_hint_h: 0.1
                 Label:
-                    text: app.metal_cost
+                    text: app.construction.metal_cost
                 Label:
-                    text: app.crystal_cost
+                    text: app.construction.crystal_cost
                 Label:
-                    text: app.deuterium_cost
+                    text: app.construction.deuterium_cost
                 Label:
-                    text: app.time_cost
+                    text: app.construction.time_cost
 
 <Game>:
     id: game
