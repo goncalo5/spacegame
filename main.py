@@ -18,15 +18,15 @@ from constructions import Construction
 class Defense(EventDispatcher):
     costs = kp.DictProperty()
     n = kp.NumericProperty()
-    def __init__(self, settings):
+    def __init__(self, defense_name):
         super().__init__()
-        print(settings)
-        self.name = settings.get("name")
-        self.costs = settings.get("costs")
-        self.hull = settings.get("hull")
-        self.shield = settings.get("shield")
-        self.weapen = settings.get("weapen")
-        self.time = settings.get("time")
+        self.settings = DEFENSES.get(defense_name)
+        self.name = self.settings.get("name")
+        self.costs = self.settings.get("costs")
+        self.hull = self.settings.get("hull")
+        self.shield = self.settings.get("shield")
+        self.weapen = self.settings.get("weapen")
+        self.time = self.settings.get("time")
 
     def __str__(self):
         return "Defense(name=%s)" % self.name
@@ -60,8 +60,14 @@ class GameApp(App, ScreenManager):
     # construction:
     construction = kp.ObjectProperty(Construction())
     # defenses:
-    rocketlauncher =\
-        kp.ObjectProperty(Defense(DEFENSES.get("rocketlauncher")))
+    rocketlauncher = kp.ObjectProperty(Defense("rocketlauncher"))
+    light_laser = kp.ObjectProperty(Defense("light_laser"))
+    heavy_laser = kp.ObjectProperty(Defense("heavy_laser"))
+    ion_cannon = kp.ObjectProperty(Defense("ion_cannon"))
+    gauss_cannon = kp.ObjectProperty(Defense("gauss_cannon"))
+    plasma_turret = kp.ObjectProperty(Defense("plasma_turret"))
+    small_shield_dome = kp.ObjectProperty(Defense("small_shield_dome"))
+    large_shield_dome = kp.ObjectProperty(Defense("large_shield_dome"))
 
     def build_config(self, *args):
         self.resources = [
@@ -71,6 +77,11 @@ class GameApp(App, ScreenManager):
             self.metal_mine, self.crystal_mine, self.deuterium_mine,
             self.metal_storage, self.crystal_storage, self.deuterium_storage,
             self.robotics_factory
+        ]
+        self.defenses = [
+            self.rocketlauncher, self.light_laser, self.heavy_laser,
+            self.ion_cannon, self.gauss_cannon, self.plasma_turret,
+            self.small_shield_dome, self.large_shield_dome
         ]
 
     def build(self):

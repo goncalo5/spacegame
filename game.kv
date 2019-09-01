@@ -64,6 +64,24 @@
             text: "Defenses"
             on_press: root.manager.current = "defenses_screen"
 
+<ButtonToConstruct@Button>:
+    size_hint: None, None
+    size: 250, 200
+    defense: None
+    defense_name: None
+    defense_n: None
+    on_press:
+        app.construction.display_costs(root.defense)
+    RelativeLayout:
+        pos: self.parent.pos
+        size: self.parent.size
+        Label:
+            text: "%s" % root.defense_name
+        Label:
+            text: "%s" % root.defense_n
+            size_hint: None, None
+            pos_hint: {"right": 1}
+
 <DefensesScreen@Screen>:
     BoxLayout:
         orientation: "vertical"
@@ -79,17 +97,42 @@
                     text: "time: %s" % int(app.construction.defenses_queue_time)
                 Label:
                     text: "time: %s" % int(app.construction.last_defense_time)
-        Button:
-            text: "Rocketlauncher"
-            on_press:
-                app.construction.display_costs(app.rocketlauncher)
-            RelativeLayout:
-                pos: self.parent.pos
-                size: self.parent.size
-                Label:
-                    text: "%s" % app.rocketlauncher.n
-                    size_hint: None, None
-                    pos_hint: {"right": 1}
+        RecycleView:
+            StackLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                ButtonToConstruct:
+                    defense: app.rocketlauncher
+                    defense_name: app.rocketlauncher.name
+                    defense_n: app.rocketlauncher.n
+                ButtonToConstruct:
+                    defense: app.light_laser
+                    defense_name: app.light_laser.name
+                    defense_n: app.light_laser.n
+                ButtonToConstruct:
+                    defense: app.heavy_laser
+                    defense_name: app.heavy_laser.name
+                    defense_n: app.heavy_laser.n
+                ButtonToConstruct:
+                    defense: app.ion_cannon
+                    defense_name: app.ion_cannon.name
+                    defense_n: app.ion_cannon.n
+                ButtonToConstruct:
+                    defense: app.gauss_cannon
+                    defense_name: app.gauss_cannon.name
+                    defense_n: app.gauss_cannon.n
+                ButtonToConstruct:
+                    defense: app.plasma_turret
+                    defense_name: app.plasma_turret.name
+                    defense_n: app.plasma_turret.n
+                ButtonToConstruct:
+                    defense: app.small_shield_dome
+                    defense_name: app.small_shield_dome.name
+                    defense_n: app.small_shield_dome.n
+                ButtonToConstruct:
+                    defense: app.large_shield_dome
+                    defense_name: app.large_shield_dome.name
+                    defense_n: app.large_shield_dome.n
         BoxLayout:
             orientation: "vertical"
             BoxLayout:
