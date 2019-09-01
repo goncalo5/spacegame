@@ -65,7 +65,7 @@ class GameApp(App, ScreenManager):
 
     def build_config(self, *args):
         self.resources = [
-            self.metal.current, self.crystal, self.deuterium
+            self.metal, self.crystal, self.deuterium
         ]
         self.buildings = [
             self.metal_mine, self.crystal_mine, self.deuterium_mine,
@@ -81,18 +81,11 @@ class GameApp(App, ScreenManager):
 
     def update(self, dt):
         # update resources:
-        if self.metal.current + self.metal.per_s * dt <= self.metal.cap:
-            self.metal.current += self.metal.per_s * dt
-        else:
-            self.metal = self.metal.cap
-        if self.crystal.current + self.crystal.per_s * dt <= self.crystal.cap:
-            self.crystal.current += self.crystal.per_s * dt
-        else:
-            self.crystal.current = self.crystal.cap
-        if self.deuterium.current + self.deuterium.per_s * dt <= self.deuterium.cap:
-            self.deuterium.current += self.deuterium.per_s * dt
-        else:
-            self.deuterium.current = self.deuterium.cap
+        for resource in self.resources:
+            if resource.current + resource.per_s * dt <= resource.cap:
+                resource.current += resource.per_s * dt
+            else:
+                resource = resource.cap
     
     def check_if_can_pay(self, resources, quantity=1):
         # check if can pay:

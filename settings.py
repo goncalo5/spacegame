@@ -1,18 +1,18 @@
 RESOURCES = {
     "metal": {
-        "init": 5000,
+        "init": 450,
         "per_s0": 1,
-        "cap0": 10000
+        "cap0": 460
     },
     "crystal": {
-        "init": 5000,
+        "init": 450,
         "per_s0": 1,
-        "cap0": 10000
+        "cap0": 460
     },
     "deuterium": {
-        "init": 5000,
+        "init": 450,
         "per_s0": 1,
-        "cap0": 10000
+        "cap0": 460
     }
 }
 
