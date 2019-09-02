@@ -29,7 +29,7 @@ class Research(EventDispatcher):
         return "Research(id=%s)" % self.id
 
     def upgrade(self, construction_queue):
-        print("upgrade")
+        print("upgrade Research")
         self.construction_queue = construction_queue
         self.app = App.get_running_app()
         if not self.app.check_if_can_pay(self.costs):

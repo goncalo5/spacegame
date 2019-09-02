@@ -14,6 +14,7 @@ class Building(EventDispatcher):
     time = kp.NumericProperty()
     def __init__(self):
         super().__init__()
+        self.id = self.name
         self.settings = BUILDINGS.get(self.name)
         self.level = self.settings.get("level", 0)
         self.costs0 = self.settings.get("costs0")
@@ -24,6 +25,7 @@ class Building(EventDispatcher):
         Clock.schedule_once(self.on_level, 0)
 
     def upgrade(self, construction_queue):
+        print("upgrade Building")
         self.construction_queue = construction_queue
         self.app = App.get_running_app()
         if not self.app.check_if_can_pay(self.costs):

@@ -1,4 +1,5 @@
 # kivy:
+from kivy.app import App
 from kivy.event import EventDispatcher
 from kivy import properties as kp
 from kivy.clock import Clock
@@ -20,7 +21,7 @@ class Construction(EventDispatcher):
     have_queue = kp.BooleanProperty(0)
     def __init__(self):
         super().__init__()
-    
+
     def on_time_left_s(self, *args):
         self.time_left = "%s" % int(self.time_left_s)
 
@@ -28,10 +29,18 @@ class Construction(EventDispatcher):
         print("display_costs", construction)
         self.current_selected = construction
         self.name = construction.name
+        self.id = construction.id
         self.metal_cost =  "metal: %s" % int(construction.costs.get("metal"))
         self.crystal_cost =  "crystal: %s" % int(construction.costs.get("crystal"))
         self.deuterium_cost =  "deuterium: %s" % int(construction.costs.get("deuterium"))
         self.time_cost =  "time: %s" % int(construction.time)
+
+    def upgrade(self, queue):
+        print("upgrade Construction", self.id)
+        self.app = App.get_running_app()
+        construction = getattr(self.app, self.id)
+        construction.upgrade(queue)
+
 
     def on_defenses_queue(self, *args):
         print("on_defense_queue", args)

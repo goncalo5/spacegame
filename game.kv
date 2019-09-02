@@ -85,6 +85,30 @@
             size_hint: None, None
             pos_hint: {"right": 1}
 
+<DisplayMenu@BoxLayout>:
+    orientation: "vertical"
+    construction_queue: None
+    button_to_upgrade_name: "Upgrade"
+    Label:
+        text: app.construction.name
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_h: 0.1
+        Label:
+            text: "%s" % app.construction.time_cost
+        Button:
+            text: "%s" % root.button_to_upgrade_name
+            on_press: app.construction.upgrade(root.construction_queue)
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_h: 0.1
+        Label:
+            text: app.construction.metal_cost
+        Label:
+            text: app.construction.crystal_cost
+        Label:
+            text: app.construction.deuterium_cost
+
 <DefensesScreen@Screen>:
     BoxLayout:
         orientation: "vertical"
@@ -260,47 +284,19 @@
                     building_name: app.terraformer.name
                     building_level: app.terraformer.level
                     construction_queue: construction_queue
-        BoxLayout:
-            orientation: "vertical"
-            Label:
-                text: app.construction.name
-            BoxLayout:
-                orientation: "horizontal"
-                size_hint_h: 0.1
-                Label:
-                    text: app.construction.metal_cost
-                Label:
-                    text: app.construction.crystal_cost
-                Label:
-                    text: app.construction.deuterium_cost
-                Label:
-                    text: app.construction.time_cost
+
+        DisplayMenu:
+            construction_queue: construction_queue
+            button_to_upgrade_name: "Improve"
+
 
 <ResearchScreen@Screen>:
     BoxLayout:
         orientation: "vertical"
         ResourcesBar
-        BoxLayout:
-            orientation: "vertical"
-            Label:
-                text: app.construction.name
-            BoxLayout:
-                orientation: "horizontal"
-                size_hint_h: 0.1
-                Label:
-                    text: "%s" % app.construction.time_cost
-                Button:
-                    text: "Research"
-                    on_press: app.energy_technology.upgrade(construction_queue)
-            BoxLayout:
-                orientation: "horizontal"
-                size_hint_h: 0.1
-                Label:
-                    text: app.construction.metal_cost
-                Label:
-                    text: app.construction.crystal_cost
-                Label:
-                    text: app.construction.deuterium_cost
+        DisplayMenu:
+            construction_queue: construction_queue
+            button_to_upgrade_name: "Research"
         Button:
             size_hint: None, None
             size: 250, 200
