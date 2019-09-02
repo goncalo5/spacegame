@@ -96,9 +96,11 @@
         size_hint_h: 0.1
         Label:
             text: "%s" % app.construction.time_cost
+        TextInput:
+            id: input_construct
         Button:
             text: "%s" % root.button_to_upgrade_name
-            on_press: app.construction.upgrade(root.construction_queue)
+            on_press: app.construction.upgrade(root.construction_queue, input_construct.text)
     BoxLayout:
         orientation: "horizontal"
         size_hint_h: 0.1
@@ -160,31 +162,11 @@
                     defense: app.large_shield_dome
                     defense_name: app.large_shield_dome.name
                     defense_n: app.large_shield_dome.n
-        BoxLayout:
-            orientation: "vertical"
-            BoxLayout:
-                orientation: "horizontal"
-                padding: 10
-                Label:
-                    text: app.construction.name
-                TextInput:
-                    id: input_construct
-                Button:
-                    text: "construct"
-                    on_press:
-                        app.construct_defense(input_construct.text)
 
-            BoxLayout:
-                orientation: "horizontal"
-                size_hint_h: 0.1
-                Label:
-                    text: app.construction.metal_cost
-                Label:
-                    text: app.construction.crystal_cost
-                Label:
-                    text: app.construction.deuterium_cost
-                Label:
-                    text: app.construction.time_cost
+        DisplayMenu:
+            construction_queue: construction_queue
+            button_to_upgrade_name: "Build"
+
 
 <BuildingsScreen@Screen>:
     BoxLayout:

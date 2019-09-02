@@ -35,11 +35,14 @@ class Construction(EventDispatcher):
         self.deuterium_cost =  "deuterium: %s" % int(construction.costs.get("deuterium"))
         self.time_cost =  "time: %s" % int(construction.time)
 
-    def upgrade(self, queue):
-        print("upgrade Construction", self.id)
+    def upgrade(self, queue, input_text):
+        print("upgrade Construction", self.id, input_text)
         self.app = App.get_running_app()
         construction = getattr(self.app, self.id)
-        construction.upgrade(queue)
+        if input_text:
+            self.app.construct_defense(input_text)
+        else:
+            construction.upgrade(queue)
 
 
     def on_defenses_queue(self, *args):
