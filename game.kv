@@ -111,6 +111,25 @@
         Label:
             text: app.construction.deuterium_cost
 
+<ConstructionQueue@BoxLayout>:
+    id: construction_queue
+    orientation: "horizontal"
+    size_hint_y: None
+    height: 0
+    Label:
+        text: "%s" % app.construction.name
+        opacity: app.construction.have_queue
+    Label:
+        text: "%s" % app.construction.time_left
+        opacity: app.construction.have_queue
+    Button:
+        text: "cancel"
+        opacity: app.construction.have_queue
+        disabled: not app.construction.have_queue
+        on_press:
+            print("cancel")
+            app.construction.cancel()
+
 <DefensesScreen@Screen>:
     BoxLayout:
         orientation: "vertical"
@@ -167,7 +186,6 @@
             construction_queue: construction_queue
             button_to_upgrade_name: "Build"
 
-
 <BuildingsScreen@Screen>:
     BoxLayout:
         orientation: "vertical"
@@ -182,24 +200,8 @@
                 Rectangle:
                     pos: self.pos
                     size: self.size
-        BoxLayout:
+        ConstructionQueue:
             id: construction_queue
-            orientation: "horizontal"
-            size_hint_y: None
-            height: 0
-            Label:
-                text: "%s" % app.construction.name
-                opacity: app.construction.have_queue
-            Label:
-                text: "%s" % app.construction.time_left
-                opacity: app.construction.have_queue
-            Button:
-                text: "cancel"
-                opacity: app.construction.have_queue
-                disabled: not app.construction.have_queue
-                on_press:
-                    print("cancel")
-                    app.construction.cancel()
         RecycleView:
             BoxLayout:
                 orientation: "vertical"
@@ -294,24 +296,8 @@
                     text: "%s" % app.energy_technology.level
                     size_hint: None, None
                     pos_hint: {"right": 1}
-        BoxLayout:
+        ConstructionQueue:
             id: construction_queue
-            orientation: "horizontal"
-            size_hint_y: None
-            height: 0
-            Label:
-                text: "%s" % app.construction.name
-                opacity: app.construction.have_queue
-            Label:
-                text: "%s" % app.construction.time_left
-                opacity: app.construction.have_queue
-            Button:
-                text: "cancel"
-                opacity: app.construction.have_queue
-                disabled: not app.construction.have_queue
-                on_press:
-                    print("cancel")
-                    app.construction.cancel()
 
 <Game>:
     id: game

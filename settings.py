@@ -262,7 +262,7 @@ RESEARCHES = {
             "deuterium": 400
         },
         "costs_rate": 2,
-        "time0": 10,
+        "time0": 2,
         "time_rate": 2
     },
     "laser_technology": {
