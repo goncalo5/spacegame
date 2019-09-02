@@ -36,6 +36,9 @@ class Defense(EventDispatcher):
     def on_n(self, *args):
         print("on_n")
 
+    def upgrade(self, queue):
+        return
+
 
 class Game(ScreenManager):
     pass

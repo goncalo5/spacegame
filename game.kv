@@ -99,10 +99,13 @@
             text: "%s" % app.construction.time_cost
         TextInput:
             id: input_construct
-            opacity: root.have_textinput
+            opacity: root.have_textinput and app.construction.have_textinput
         Button:
             text: "%s" % root.button_to_upgrade_name
             on_press: app.construction.upgrade(root.construction_queue, input_construct.text)
+            opacity: app.construction.have_button
+            disabled: not app.construction.have_button
+
     BoxLayout:
         orientation: "horizontal"
         size_hint_h: 0.1

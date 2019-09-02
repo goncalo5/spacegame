@@ -20,7 +20,8 @@ class Construction(EventDispatcher):
     defenses_queue_time = kp.NumericProperty()
     last_defense_time = kp.NumericProperty()
     # display
-
+    have_textinput = kp.BooleanProperty(0)
+    have_button = kp.BooleanProperty(0)
     # queue
     have_queue = kp.BooleanProperty(0)
     def __init__(self):
@@ -38,6 +39,8 @@ class Construction(EventDispatcher):
         self.crystal_cost =  "crystal: %s" % int(construction.costs.get("crystal"))
         self.deuterium_cost =  "deuterium: %s" % int(construction.costs.get("deuterium"))
         self.time_cost =  "time: %s" % int(construction.time)
+        self.have_textinput = 1
+        self.have_button = 1
 
     def upgrade(self, queue, input_text):
         print("upgrade Construction", self._id, input_text)
@@ -90,3 +93,5 @@ class Construction(EventDispatcher):
         self.crystal_cost = ""
         self.deuterium_cost = ""
         self.time_cost = ""
+        self.have_textinput = 0
+        self.have_button = 0
