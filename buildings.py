@@ -7,25 +7,14 @@ from kivy.clock import Clock
 from settings import BUILDINGS
 
 
-class Building(EventDispatcher):
+class UpgradingEvent(EventDispatcher):
     name = kp.StringProperty()
     level = kp.NumericProperty()
     costs = kp.DictProperty()
     time = kp.NumericProperty()
-    def __init__(self):
-        super().__init__()
-        self._id = self.name
-        self.settings = BUILDINGS.get(self.name)
-        self.level = self.settings.get("level", 0)
-        self.costs0 = self.settings.get("costs0")
-        self.costs_rate = self.settings.get("costs_rate")
-        self.time0 = self.settings.get("time0")
-        self.time_rate = self.settings.get("time_rate")
-
-        Clock.schedule_once(self.on_level, 0)
 
     def upgrade(self, construction_queue, quantity=1):
-        print("upgrade Building")
+        print("upgrade", self.name)
         self.construction_queue = construction_queue
         self.app = App.get_running_app()
         if not self.app.check_if_can_pay(self.costs):
@@ -43,7 +32,6 @@ class Building(EventDispatcher):
             self.hide_construction_queue()
             self.app.construction.is_cancel = False
             return False
-
         self.app.construction.time_left_s -= dt
         if self.app.construction.time_left_s <= 0:
             self.level += 1
@@ -62,7 +50,6 @@ class Building(EventDispatcher):
         self.construction_queue.height = 0
         self.app.construction.have_queue = 0
 
-
     def on_level(self, *args):
         print("on_level")
         self.app = App.get_running_app()
@@ -74,6 +61,24 @@ class Building(EventDispatcher):
             self.costs0["deuterium"] * self.costs_rate ** self.level
         self.update_time()
         Clock.schedule_once(self.update_feature, 0)
+
+    def update_feature(self, *args):
+        pass
+
+
+class Building(UpgradingEvent):
+    def __init__(self):
+        super().__init__()
+        self._id = self.name
+        self.settings = BUILDINGS.get(self.name)
+        self.level = self.settings.get("level", 0)
+        self.costs0 = self.settings.get("costs0")
+        self.costs_rate = self.settings.get("costs_rate")
+        self.time0 = self.settings.get("time0")
+        self.time_rate = self.settings.get("time_rate")
+
+        Clock.schedule_once(self.on_level, 0)
+
 
     def update_time(self):
         # update time:
@@ -89,10 +94,6 @@ class Building(EventDispatcher):
         self.time = self.time0 * self.time_rate ** self.level *\
             robotics_factory_factor * nanite_factory_factor
         print("time", self.time, robotics_factory_factor)
-
-
-    def update_feature(self, *args):
-        pass
 
 
 class Mine(Building):
