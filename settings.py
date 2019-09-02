@@ -159,7 +159,7 @@ DEFENSES = {
             "crystal": 0,
             "deuterium": 0
         },
-        "time": 10,
+        "time": 2,
         "hull": 200,
         "shield": 20,
         "weapon": 80
