@@ -84,7 +84,8 @@
             opacity: root.have_textinput and app.construction.have_textinput
         Button:
             text: "%s" % root.button_to_upgrade_name
-            on_press: app.construction.upgrade(root.construction_queue, input_construct.text)
+            on_press:
+                app.construction.current_selected.upgrade(root.construction_queue, input_construct.text)
             opacity: app.construction.have_button
             disabled: not app.construction.have_button
 
@@ -98,7 +99,7 @@
         Label:
             text: app.construction.deuterium_cost
 
-<ConstructionQueue@BoxLayout>:
+<UpgradingQueue@BoxLayout>:
     id: construction_queue
     orientation: "horizontal"
     size_hint_y: None
@@ -111,8 +112,8 @@
         opacity: app.construction.have_queue
     Button:
         text: "cancel"
-        opacity: app.construction.have_queue
-        disabled: not app.construction.have_queue
+        opacity: app.construction.have_queue and app.construction.have_cancel_button
+        disabled: not app.construction.have_queue and app.construction.have_cancel_button
         on_press:
             print("cancel")
             app.construction.cancel()
@@ -133,45 +134,58 @@
                     construction: app.rocketlauncher
                     construction_name: app.rocketlauncher.name
                     construction_n: app.rocketlauncher.n
+                    construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.light_laser
                     construction_name: app.light_laser.name
                     construction_n: app.light_laser.n
+                    construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.heavy_laser
                     construction_name: app.heavy_laser.name
                     construction_n: app.heavy_laser.n
+                    construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.ion_cannon
                     construction_name: app.ion_cannon.name
                     construction_n: app.ion_cannon.n
+                    construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.gauss_cannon
                     construction_name: app.gauss_cannon.name
                     construction_n: app.gauss_cannon.n
+                    construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.plasma_turret
                     construction_name: app.plasma_turret.name
                     construction_n: app.plasma_turret.n
+                    construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.small_shield_dome
                     construction_name: app.small_shield_dome.name
                     construction_n: app.small_shield_dome.n
+                    construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.large_shield_dome
                     construction_name: app.large_shield_dome.name
                     construction_n: app.large_shield_dome.n
+                    construction_queue: construction_queue
         BoxLayout:
             id: construction_queue
             orientation: "vertical"
+            size_hint_y: None
+            height: 0
             BoxLayout:
                 orientation: "horizontal"
                 Label:
-                    text: "Construction queue"
+                    text: "%s" % app.construction.name
+                    opacity: app.construction.have_queue
                 Label:
                     text: "time: %s" % int(app.construction.defenses_queue_time)
+                    opacity: app.construction.have_queue
                 Label:
                     text: "time: %s" % int(app.construction.last_defense_time)
+                    opacity: app.construction.have_queue
 
 <BuildingsScreen@Screen>:
     BoxLayout:
@@ -255,7 +269,7 @@
                     construction_name: app.terraformer.name
                     construction_n: app.terraformer.level
                     construction_queue: construction_queue
-        ConstructionQueue:
+        UpgradingQueue:
             id: construction_queue
 
 <ResearchScreen@Screen>:
@@ -350,7 +364,7 @@
                     construction_n: app.shielding_technology.level
                     construction_queue: construction_queue
 
-        ConstructionQueue:
+        UpgradingQueue:
             id: construction_queue
 
 <Game>:

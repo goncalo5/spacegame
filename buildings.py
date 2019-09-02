@@ -38,7 +38,7 @@ class UpgradingEvent(EventDispatcher):
             self.hide_construction_queue()
             self.app.construction.display_costs(self)
             return False
-    
+
     def show_construction_queue(self):
         print("show_construction_queue")
         self.construction_queue.size_hint_y = 0.1

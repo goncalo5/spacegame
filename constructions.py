@@ -42,16 +42,6 @@ class Construction(EventDispatcher):
         self.have_textinput = 1
         self.have_button = 1
 
-    def upgrade(self, queue, input_text):
-        print("upgrade Construction", self._id, input_text)
-        self.app = App.get_running_app()
-        try:
-            construction = getattr(self.app, self._id)
-        except AttributeError:
-            return
-        construction.upgrade(queue, input_text)
-
-
     def on_defenses_queue(self, *args):
         print("on_defense_queue", args)
         if len(self.defenses_queue) == 0:

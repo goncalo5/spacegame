@@ -27,7 +27,7 @@ class Defense(EventDispatcher):
         print("on_n")
 
     def upgrade(self, construction_queue, quantity=1):
-        print("upgrade Defense")
+        print("upgrade Defense", construction_queue)
         self.construction_queue = construction_queue
         self.app = App.get_running_app()
         try:
@@ -39,5 +39,18 @@ class Defense(EventDispatcher):
             print("cant pay")
             return
         self.app.pay_the_resources(self.costs, quantity)
+        self.show_construction_queue()
+        self.app.construction.name = self.name
         self.app.construction.defenses_queue.append([self, int(quantity)])
         print("end", self.app.construction.defenses_queue)
+
+    def show_construction_queue(self):
+        print("show_construction_queue")
+        self.construction_queue.size_hint_y = 0.1
+        self.app.construction.have_queue = 1
+
+    def hide_construction_queue(self):
+        print("hide_construction_queue")
+        self.construction_queue.size_hint_y = None
+        self.construction_queue.height = 0
+        self.app.construction.have_queue = 0
