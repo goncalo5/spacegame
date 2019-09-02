@@ -63,6 +63,9 @@
         Button:
             text: "Defenses"
             on_press: root.manager.current = "defenses_screen"
+        Button:
+            text: "Research"
+            on_press: root.manager.current = "research_screen"
 
 <ButtonToConstruct@Button>:
     size_hint: None, None
@@ -273,6 +276,65 @@
                 Label:
                     text: app.construction.time_cost
 
+<ResearchScreen@Screen>:
+    BoxLayout:
+        orientation: "vertical"
+        ResourcesBar
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: app.construction.name
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_h: 0.1
+                Label:
+                    text: "%s" % app.construction.time_cost
+                Button:
+                    text: "Research"
+                    on_press: app.energy_technology.upgrade(construction_queue)
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_h: 0.1
+                Label:
+                    text: app.construction.metal_cost
+                Label:
+                    text: app.construction.crystal_cost
+                Label:
+                    text: app.construction.deuterium_cost
+        Button:
+            size_hint: None, None
+            size: 250, 200
+            on_press:
+                print("display")
+                app.construction.display_costs(app.energy_technology)
+            RelativeLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                Label:
+                    text: "%s" % app.energy_technology.name
+                Label:
+                    text: "%s" % app.energy_technology.level
+                    size_hint: None, None
+                    pos_hint: {"right": 1}
+        BoxLayout:
+            id: construction_queue
+            orientation: "horizontal"
+            size_hint_y: None
+            height: 0
+            Label:
+                text: "%s" % app.construction.name
+                opacity: app.construction.have_queue
+            Label:
+                text: "%s" % app.construction.time_left
+                opacity: app.construction.have_queue
+            Button:
+                text: "cancel"
+                opacity: app.construction.have_queue
+                disabled: not app.construction.have_queue
+                on_press:
+                    print("cancel")
+                    app.construction.cancel()
+
 <Game>:
     id: game
     main_screen: main_screen
@@ -289,4 +351,8 @@
     DefensesScreen:
         id: defenses_screen
         name: "defenses_screen"
+        manager: game
+    ResearchScreen:
+        id: research_screen
+        name: "research_screen"
         manager: game

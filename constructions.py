@@ -24,14 +24,14 @@ class Construction(EventDispatcher):
     def on_time_left_s(self, *args):
         self.time_left = "%s" % int(self.time_left_s)
 
-    def display_costs(self, building):
-        print("display_costs", building)
-        self.current_selected = building
-        self.name = building.name
-        self.metal_cost =  "metal: %s" % int(building.costs.get("metal"))
-        self.crystal_cost =  "crystal: %s" % int(building.costs.get("crystal"))
-        self.deuterium_cost =  "deuterium: %s" % int(building.costs.get("deuterium"))
-        self.time_cost =  "time: %s" % int(building.time)
+    def display_costs(self, construction):
+        print("display_costs", construction)
+        self.current_selected = construction
+        self.name = construction.name
+        self.metal_cost =  "metal: %s" % int(construction.costs.get("metal"))
+        self.crystal_cost =  "crystal: %s" % int(construction.costs.get("crystal"))
+        self.deuterium_cost =  "deuterium: %s" % int(construction.costs.get("deuterium"))
+        self.time_cost =  "time: %s" % int(construction.time)
 
     def on_defenses_queue(self, *args):
         print("on_defense_queue", args)

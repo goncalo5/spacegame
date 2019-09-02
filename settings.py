@@ -249,3 +249,254 @@ DEFENSES = {
         "weapon": 80
     },
 }
+
+RESEARCHES = {
+    "energy_technology": {
+        "name": "Energy Technology",
+        "requirements": [
+            ["research_lab", 1]
+        ],
+        "costs0": {
+            "metal": 0,
+            "crystal": 800,
+            "deuterium": 400
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "laser_technology": {
+        "name": "Laser Technology",
+        "requirements": [
+            ["research_lab", 1],
+            ["energy_technology", 2],
+        ],
+        "costs0": {
+            "metal": 200,
+            "crystal": 100,
+            "deuterium": 0
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "ion_technology": {
+        "name": "Ion Technology",
+        "requirements": [
+            ["research_lab", 4],
+            ["energy_technology", 2],
+            ["laser_technology", 5],
+        ],
+        "costs0": {
+            "metal": 1000,
+            "crystal": 300,
+            "deuterium": 100
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "hyperspace_technology": {
+        "name": "Hyperspace Technology",
+        "requirements": [
+            ["research_lab", 7],
+            ["laser_technology", 5],
+            ["shielding_technology", 5],
+        ],
+        "costs0": {
+            "metal": 0,
+            "crystal": 4000,
+            "deuterium": 2000
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "plasma_technology": {
+        "name": "Plasma Technology",
+        "requirements": [
+            ["research_lab", 4],
+            ["energy_technology", 8],
+            ["laser_technology", 10],
+            ["ion_technology", 5],
+        ],
+        "costs0": {
+            "metal": 2000,
+            "crystal": 4000,
+            "deuterium": 1000
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "combustion_drive": {
+        "name": "Combustion Drive",
+        "requirements": [
+            ["research_lab", 1],
+            ["energy_technology", 1],
+        ],
+        "costs0": {
+            "metal": 400,
+            "crystal": 0,
+            "deuterium": 600
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "impulse_drive": {
+        "name": "Impulse Drive",
+        "requirements": [
+            ["research_lab", 2],
+            ["energy_technology", 1],
+        ],
+        "costs0": {
+            "metal": 2000,
+            "crystal": 4000,
+            "deuterium": 600
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "hyperspace_drive": {
+        "name": "Hyperspace Drive",
+        "requirements": [
+            ["research_lab", 7],
+            ["energy_technology", 5],
+            ["hyperspace_technology", 3],
+            ["shielding_technology", 6],
+        ],
+        "costs0": {
+            "metal": 10000,
+            "crystal": 20000,
+            "deuterium": 6000
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "espionage_technology": {
+        "name": "Espionage Technology",
+        "requirements": [
+            ["research_lab", 4],
+            ["energy_technology", 8],
+            ["laser_technology", 10],
+            ["ion_technology", 5],
+        ],
+        "costs0": {
+            "metal": 200,
+            "crystal": 1000,
+            "deuterium": 200
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "computer_technology": {
+        "name": "Computer Technology",
+        "requirements": [
+            ["research_lab", 1],
+        ],
+        "costs0": {
+            "metal": 0,
+            "crystal": 400,
+            "deuterium": 600
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "astrophysics": {
+        "name": "Astrophysics",
+        "requirements": [
+            ["research_lab", 3],
+            ["energy_technology", 1],
+            ["impulse_drive", 3],
+            ["espionage_technology", 4],
+        ],
+        "costs0": {
+            "metal": 4000,
+            "crystal": 8000,
+            "deuterium": 4000
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "intergalactic_research_network": {
+        "name": "Intergalactic Research Network",
+        "requirements": [
+            ["research_lab", 10],
+            ["energy_technology", 5],
+            ["hyperspace_technology", 8],
+            ["computer_technology", 8],
+            ["shielding_technology", 5],
+        ],
+        "costs0": {
+            "metal": 240000,
+            "crystal": 400000,
+            "deuterium": 160000
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "graviton_technology": {
+        "name": "Graviton Technology",
+        "requirements": [
+            ["research_lab", 12],
+        ],
+        "costs0": {
+            "metal": 0,
+            "crystal": 0,
+            "deuterium": 0
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "armour_technology": {
+        "name": "Armour Technology",
+        "requirements": [
+            ["research_lab", 2],
+        ],
+        "costs0": {
+            "metal": 1000,
+            "crystal": 0,
+            "deuterium": 0
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "weapons_technology": {
+        "name": "Weapons Technology",
+        "requirements": [
+            ["research_lab", 4],
+        ],
+        "costs0": {
+            "metal": 800,
+            "crystal": 200,
+            "deuterium": 0
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+    "shielding_technology": {
+        "name": "Shielding Technology",
+        "requirements": [
+            ["research_lab", 6],
+            ["energy_technology", 3],
+        ],
+        "costs0": {
+            "metal": 200,
+            "crystal": 600,
+            "deuterium": 600
+        },
+        "costs_rate": 2,
+        "time0": 10,
+        "time_rate": 2
+    },
+}
