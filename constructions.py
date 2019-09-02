@@ -6,35 +6,30 @@ from kivy.clock import Clock
 
 
 class Construction(EventDispatcher):
-    _id = kp.StringProperty()
-    name = kp.StringProperty()
-    time_left_s = kp.NumericProperty()
-    time_left = kp.StringProperty()
     metal_cost = kp.StringProperty()
     crystal_cost = kp.StringProperty()
     deuterium_cost = kp.StringProperty()
-    time_cost = kp.StringProperty()
     is_cancel = kp.BooleanProperty(False)
-    current_selected = kp.ObjectProperty()
     defenses_queue = kp.ListProperty()
     defenses_queue_time = kp.NumericProperty()
     last_defense_time = kp.NumericProperty()
-    # display
+    # display:
+    time_cost = kp.StringProperty()
+    current_selected = kp.ObjectProperty()
     have_textinput = kp.BooleanProperty(0)
     have_button = kp.BooleanProperty(0)
-    # queue
+    # queue:
     have_queue = kp.BooleanProperty(0)
+    time_left_s = kp.NumericProperty()
+    # both:
+    name = kp.StringProperty()
     def __init__(self):
         super().__init__()
-
-    def on_time_left_s(self, *args):
-        self.time_left = "%s" % int(self.time_left_s)
 
     def display_costs(self, construction):
         print("display_costs", construction)
         self.current_selected = construction
         self.name = construction.name
-        self._id = construction._id
         self.metal_cost =  "metal: %s" % int(construction.costs.get("metal"))
         self.crystal_cost =  "crystal: %s" % int(construction.costs.get("crystal"))
         self.deuterium_cost =  "deuterium: %s" % int(construction.costs.get("deuterium"))

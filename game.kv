@@ -94,12 +94,12 @@
         text: "%s" % app.construction.name
         opacity: app.construction.have_queue
     Label:
-        text: "%s" % app.construction.time_left
+        text: "%s" % int(app.construction.time_left_s)
         opacity: app.construction.have_queue
     Button:
         text: "cancel"
-        opacity: app.construction.have_queue and app.construction.have_cancel_button
-        disabled: not app.construction.have_queue and app.construction.have_cancel_button
+        opacity: app.construction.have_queue
+        disabled: not app.construction.have_queue
         on_press:
             print("cancel")
             app.construction.cancel()
