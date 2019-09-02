@@ -69,8 +69,8 @@ class UpgradingEvent(EventDispatcher):
 class Building(UpgradingEvent):
     def __init__(self):
         super().__init__()
-        self._id = self.name
-        self.settings = BUILDINGS.get(self.name)
+        self.settings = BUILDINGS.get(self._id)
+        self.name = self.settings.get("name")
         self.level = self.settings.get("level", 0)
         self.costs0 = self.settings.get("costs0")
         self.costs_rate = self.settings.get("costs_rate")
@@ -103,7 +103,7 @@ class Mine(Building):
 
 class MetalMine(Mine):
     def __init__(self):
-        self.name = "metal_mine"
+        self._id = "metal_mine"
         super().__init__()
         self.metal_rate = self.settings.get("metal_rate")
 
@@ -115,7 +115,7 @@ class MetalMine(Mine):
 
 class CrystalMine(Building):
     def __init__(self):
-        self.name = "crystal_mine"
+        self._id = "crystal_mine"
         super().__init__()
         self.crystal_rate = self.settings.get("crystal_rate")
 
@@ -127,7 +127,7 @@ class CrystalMine(Building):
 
 class DeuteriumMine(Building):
     def __init__(self):
-        self.name = "deuterium_mine"
+        self._id = "deuterium_mine"
         super().__init__()
         self.deuterium_rate = self.settings.get("deuterium_rate")
 
@@ -143,7 +143,7 @@ class Storage(Building):
 
 class MetalStorage(Storage):
     def __init__(self):
-        self.name = "metal_storage"
+        self._id = "metal_storage"
         super().__init__()
         self.metal_rate = self.settings.get("metal_rate")
 
@@ -155,7 +155,7 @@ class MetalStorage(Storage):
 
 class CrystalStorage(Storage):
     def __init__(self):
-        self.name = "crystal_storage"
+        self._id = "crystal_storage"
         super().__init__()
         self.crystal_rate = self.settings.get("crystal_rate")
 
@@ -167,7 +167,7 @@ class CrystalStorage(Storage):
 
 class DeuteriumStorage(Storage):
     def __init__(self):
-        self.name = "deuterium_storage"
+        self._id = "deuterium_storage"
         super().__init__()
         self.deuterium_rate = self.settings.get("deuterium_rate")
 
@@ -190,7 +190,7 @@ class Factory(Building):
 
 class RoboticsFactory(Factory):
     def __init__(self):
-        self.name = "robotics_factory"
+        self._id = "robotics_factory"
         super().__init__()
 
     def update_feature(self, *args):
@@ -202,7 +202,7 @@ class RoboticsFactory(Factory):
 
 class Shipyard(Factory):
     def __init__(self):
-        self.name = "shipyard"
+        self._id = "shipyard"
         super().__init__()
 
     def update_feature(self, *args):
@@ -214,7 +214,7 @@ class Shipyard(Factory):
 
 class NaniteFactory(Factory):
     def __init__(self):
-        self.name = "nanite_factory"
+        self._id = "nanite_factory"
         super().__init__()
 
     def update_feature(self, *args):
@@ -225,7 +225,7 @@ class NaniteFactory(Factory):
 
 class ResearchLab(Building):
     def __init__(self):
-        self.name = "research_lab"
+        self._id = "research_lab"
         super().__init__()
         self.reasearch_time_factor0 = self.settings.get("reasearch_time_factor0")
         self.update_factor()
@@ -240,7 +240,7 @@ class ResearchLab(Building):
 
 class Terraformer(Building):
     def __init__(self):
-        self.name = "terraformer"
+        self._id = "terraformer"
         super().__init__()
         self.fields_added_per_level = self.settings.get("fields_added_per_level")
         self.update_factor()
