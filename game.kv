@@ -43,7 +43,7 @@
         Label:
             text: "%s" % root.construction_name
         Label:
-            text: "level: %s" % root.construction_n
+            text: "%s" % root.construction_n
             size_hint: None, None
             pos_hint: {"right": 1}
         Button:
@@ -265,21 +265,12 @@
         DisplayMenu:
             construction_queue: construction_queue
             button_to_upgrade_name: "Research"
-        Button:
-            size_hint: None, None
-            size: 250, 200
-            on_press:
-                print("display")
-                app.construction.display_costs(app.energy_technology)
-            RelativeLayout:
-                pos: self.parent.pos
-                size: self.parent.size
-                Label:
-                    text: "%s" % app.energy_technology.name
-                Label:
-                    text: "%s" % app.energy_technology.level
-                    size_hint: None, None
-                    pos_hint: {"right": 1}
+        ButtonUpgrade:
+            construction: app.energy_technology
+            construction_name: app.energy_technology.name
+            construction_n: app.energy_technology.level
+            construction_queue: construction_queue
+
         ConstructionQueue:
             id: construction_queue
 
