@@ -53,20 +53,6 @@
             on_press:
                 root.construction.upgrade(root.construction_queue, 1)
 
-<MainScreen@Screen>:
-    BoxLayout:
-        orientation: "vertical"
-        ResourcesBar
-        Button:
-            text: "Buildings"
-            on_press: root.manager.current = "buildings_screen"
-        Button:
-            text: "Defenses"
-            on_press: root.manager.current = "defenses_screen"
-        Button:
-            text: "Research"
-            on_press: root.manager.current = "research_screen"
-
 <DisplayMenu@BoxLayout>:
     orientation: "vertical"
     construction_queue: None
@@ -366,6 +352,20 @@
 
         UpgradingQueue:
             id: construction_queue
+
+<MainScreen@Screen>:
+    BoxLayout:
+        orientation: "vertical"
+        ResourcesBar
+        Button:
+            text: "Buildings"
+            on_press: root.manager.current = "buildings_screen"
+        Button:
+            text: "Defenses"
+            on_press: root.manager.current = "defenses_screen"
+        Button:
+            text: "Research"
+            on_press: root.manager.current = "research_screen"
 
 <Game>:
     id: game
