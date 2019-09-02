@@ -1,4 +1,5 @@
 # kivy:
+from kivy.app import App
 from kivy import properties as kp
 from kivy.event import EventDispatcher
 # mine:
@@ -25,6 +26,18 @@ class Defense(EventDispatcher):
     def on_n(self, *args):
         print("on_n")
 
-    def upgrade(self, queue):
+    def upgrade(self, construction_queue, quantity=1):
         print("upgrade Defense")
-        return
+        self.construction_queue = construction_queue
+        self.app = App.get_running_app()
+        try:
+            quantity = int(quantity)
+        except ValueError:
+            print("ValueError please input an integer")
+            return
+        if not self.app.check_if_can_pay(self.costs):
+            print("cant pay")
+            return
+        self.app.pay_the_resources(self.costs, quantity)
+        self.app.construction.defenses_queue.append([self, int(quantity)])
+        print("end", self.app.construction.defenses_queue)

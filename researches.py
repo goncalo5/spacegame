@@ -28,7 +28,7 @@ class Research(EventDispatcher):
     def __repr__(self):
         return "Research(id=%s)" % self._id
 
-    def upgrade(self, construction_queue):
+    def upgrade(self, construction_queue, quantity=1):
         print("upgrade Research")
         self.construction_queue = construction_queue
         self.app = App.get_running_app()

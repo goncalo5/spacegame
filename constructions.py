@@ -49,10 +49,7 @@ class Construction(EventDispatcher):
             construction = getattr(self.app, self._id)
         except AttributeError:
             return
-        if input_text:
-            self.app.construct_defense(input_text)
-        else:
-            construction.upgrade(queue)
+        construction.upgrade(queue, input_text)
 
 
     def on_defenses_queue(self, *args):
@@ -60,6 +57,7 @@ class Construction(EventDispatcher):
         if len(self.defenses_queue) == 0:
             return
         # calc the time:
+        print("self.defenses_queue", self.defenses_queue)
         if self.last_defense_time <= 0:
             self.last_defense_time = self.defenses_queue[0][0].time
             Clock.schedule_interval(self.update_first_defense_time_left, 0.1)

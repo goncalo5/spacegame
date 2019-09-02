@@ -24,11 +24,12 @@ class Building(EventDispatcher):
 
         Clock.schedule_once(self.on_level, 0)
 
-    def upgrade(self, construction_queue):
+    def upgrade(self, construction_queue, quantity=1):
         print("upgrade Building")
         self.construction_queue = construction_queue
         self.app = App.get_running_app()
         if not self.app.check_if_can_pay(self.costs):
+            print("cant pay")
             return
         self.app.pay_the_resources(self.costs)
         self.show_construction_queue()

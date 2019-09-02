@@ -122,30 +122,6 @@ class GameApp(App, ScreenManager):
         self.crystal.current += resources["crystal"]
         self.deuterium.current += resources["deuterium"]
     
-    def construct_defense(self, quantity):
-        print("construct_defense")
-        try:
-            quantity = int(quantity)
-        except ValueError:
-            print("ValueError please input an integer")
-            return
-        try:
-            # check if can pay:
-            print(self.construction.current_selected.costs)
-            costs = self.construction.current_selected.costs
-            if self.check_if_can_pay(costs, quantity):
-                print("can pay")
-                self.pay_the_resources(costs, quantity)
-            else:
-                print("cant pay")
-                return
-        except AttributeError:
-            return
-
-        self.construction.defenses_queue.append([self.construction.current_selected, int(quantity)])
-        print(self.construction.defenses_queue)
-
-    
     def update_defense_time_left(self, dt):
         if self.construction.defenses_queue_time <= 0:
             return
