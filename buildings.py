@@ -14,7 +14,7 @@ class Building(EventDispatcher):
     time = kp.NumericProperty()
     def __init__(self):
         super().__init__()
-        self.id = self.name
+        self._id = self.name
         self.settings = BUILDINGS.get(self.name)
         self.level = self.settings.get("level", 0)
         self.costs0 = self.settings.get("costs0")

@@ -6,6 +6,7 @@ from kivy.clock import Clock
 
 
 class Construction(EventDispatcher):
+    _id = kp.StringProperty()
     name = kp.StringProperty()
     time_left_s = kp.NumericProperty()
     time_left = kp.StringProperty()
@@ -18,6 +19,9 @@ class Construction(EventDispatcher):
     defenses_queue = kp.ListProperty()
     defenses_queue_time = kp.NumericProperty()
     last_defense_time = kp.NumericProperty()
+    # display
+
+    # queue
     have_queue = kp.BooleanProperty(0)
     def __init__(self):
         super().__init__()
@@ -29,16 +33,19 @@ class Construction(EventDispatcher):
         print("display_costs", construction)
         self.current_selected = construction
         self.name = construction.name
-        self.id = construction.id
+        self._id = construction._id
         self.metal_cost =  "metal: %s" % int(construction.costs.get("metal"))
         self.crystal_cost =  "crystal: %s" % int(construction.costs.get("crystal"))
         self.deuterium_cost =  "deuterium: %s" % int(construction.costs.get("deuterium"))
         self.time_cost =  "time: %s" % int(construction.time)
 
     def upgrade(self, queue, input_text):
-        print("upgrade Construction", self.id, input_text)
+        print("upgrade Construction", self._id, input_text)
         self.app = App.get_running_app()
-        construction = getattr(self.app, self.id)
+        try:
+            construction = getattr(self.app, self._id)
+        except AttributeError:
+            return
         if input_text:
             self.app.construct_defense(input_text)
         else:

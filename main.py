@@ -21,7 +21,7 @@ class Defense(EventDispatcher):
     n = kp.NumericProperty()
     def __init__(self, defense_name):
         super().__init__()
-        self.id = defense_name
+        self._id = defense_name
         self.settings = DEFENSES.get(defense_name)
         self.name = self.settings.get("name")
         self.costs = self.settings.get("costs")

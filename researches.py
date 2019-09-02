@@ -15,8 +15,8 @@ class Research(EventDispatcher):
     def __init__(self, research_name):
         super().__init__()
         print(research_name)
-        self.id = research_name
-        self.settings = RESEARCHES.get(self.id)
+        self._id = research_name
+        self.settings = RESEARCHES.get(self._id)
         self.name = self.settings.get("name")
         self.costs0 = self.settings.get("costs0")
         self.costs_rate = self.settings.get("costs_rate")
@@ -26,7 +26,7 @@ class Research(EventDispatcher):
         Clock.schedule_once(self.on_level, 0)
     
     def __repr__(self):
-        return "Research(id=%s)" % self.id
+        return "Research(id=%s)" % self._id
 
     def upgrade(self, construction_queue):
         print("upgrade Research")

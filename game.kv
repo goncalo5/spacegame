@@ -89,6 +89,7 @@
     orientation: "vertical"
     construction_queue: None
     button_to_upgrade_name: "Upgrade"
+    have_textinput: 0
     Label:
         text: app.construction.name
     BoxLayout:
@@ -98,6 +99,7 @@
             text: "%s" % app.construction.time_cost
         TextInput:
             id: input_construct
+            opacity: root.have_textinput
         Button:
             text: "%s" % root.button_to_upgrade_name
             on_press: app.construction.upgrade(root.construction_queue, input_construct.text)
@@ -137,6 +139,7 @@
         DisplayMenu:
             construction_queue: construction_queue
             button_to_upgrade_name: "Build"
+            have_textinput: 1
         RecycleView:
             StackLayout:
                 size_hint_y: None
