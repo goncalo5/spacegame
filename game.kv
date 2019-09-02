@@ -265,11 +265,90 @@
         DisplayMenu:
             construction_queue: construction_queue
             button_to_upgrade_name: "Research"
-        ButtonUpgrade:
-            construction: app.energy_technology
-            construction_name: app.energy_technology.name
-            construction_n: app.energy_technology.level
-            construction_queue: construction_queue
+        RecycleView:
+            StackLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                ButtonUpgrade:
+                    construction: app.energy_technology
+                    construction_name: app.energy_technology.name
+                    construction_n: app.energy_technology.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.laser_technology
+                    construction_name: app.laser_technology.name
+                    construction_n: app.laser_technology.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.ion_technology
+                    construction_name: app.ion_technology.name
+                    construction_n: app.ion_technology.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.hyperspace_technology
+                    construction_name: app.hyperspace_technology.name
+                    construction_n: app.hyperspace_technology.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.plasma_technology
+                    construction_name: app.plasma_technology.name
+                    construction_n: app.plasma_technology.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.combustion_drive
+                    construction_name: app.combustion_drive.name
+                    construction_n: app.combustion_drive.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.impulse_drive
+                    construction_name: app.impulse_drive.name
+                    construction_n: app.impulse_drive.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.hyperspace_drive
+                    construction_name: app.hyperspace_drive.name
+                    construction_n: app.hyperspace_drive.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.espionage_technology
+                    construction_name: app.espionage_technology.name
+                    construction_n: app.espionage_technology.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.computer_technology
+                    construction_name: app.computer_technology.name
+                    construction_n: app.computer_technology.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.astrophysics
+                    construction_name: app.astrophysics.name
+                    construction_n: app.astrophysics.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.intergalactic_research_network
+                    construction_name: app.intergalactic_research_network.name
+                    construction_n: app.intergalactic_research_network.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.graviton_technology
+                    construction_name: app.graviton_technology.name
+                    construction_n: app.graviton_technology.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.armour_technology
+                    construction_name: app.armour_technology.name
+                    construction_n: app.armour_technology.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.weapons_technology
+                    construction_name: app.weapons_technology.name
+                    construction_n: app.weapons_technology.level
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.shielding_technology
+                    construction_name: app.shielding_technology.name
+                    construction_n: app.shielding_technology.level
+                    construction_queue: construction_queue
 
         ConstructionQueue:
             id: construction_queue
