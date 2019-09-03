@@ -30,7 +30,7 @@ BUILDINGS = {
             "deuterium": 5
         },
         "costs_rate": 1.5,
-        "time0": 10,
+        "time0": 15,
         "time_rate": 1.5,
         "metal_rate": 2
     },
@@ -336,7 +336,7 @@ RESEARCHES = {
             "deuterium": 400
         },
         "costs_rate": 2,
-        "time0": 2,
+        "time0": 15,
         "time_rate": 2
     },
     "laser_technology": {

@@ -26,7 +26,11 @@ class Construction(EventDispatcher):
         "researches": [],
         "units": []
     })
-    is_cancel = kp.BooleanProperty(False)
+    is_cancel = kp.DictProperty({
+        "buildings": False,
+        "researches": False,
+        "units": False
+    })
     name_in_queue = kp.DictProperty({
         "buildings": "",
         "researches": "",
@@ -60,15 +64,6 @@ class Construction(EventDispatcher):
         print("change_screen", queue_name)
         self.current_queue = queue_name
 
-        # self.queue_name = queue_name
-        # if len(self.queue[self.queue_name]) > 0:
-        #     self.name_in_queue = self.queue[self.queue_name][0][0].name
-        # print(self.name_in_queue)
-
-    # def on_current_selected(self, *args):
-    #     print("on_current_selected", args)
-    #     self.current_queue = self.current_selected.queue
-
     def display_costs(self, construction):
         print("display_costs", construction)
         self.current_selected = construction
@@ -94,13 +89,11 @@ class Construction(EventDispatcher):
             print("cant pay")
             return
         self.app.pay_the_resources(self.construction.costs, self.quantity)
-        # self.show_construction_queue(construction_queue)
         self.app.construction.name = self.name
         queue_name = self.construction.queue
         queue = self.queue[queue_name]
         to_add = [self.construction, int(quantity)]
         queue.append(to_add)
-        print(556, self.queue)
         self.on_queue(queue_name)
 
     def update_if_have_queue(self):
@@ -136,7 +129,6 @@ class Construction(EventDispatcher):
         queue_name = args[0]
         self.update_if_have_queue()
         if len(self.queue[queue_name]) == 0:
-            # self.hide_construction_queue(queue_name)
             return
         # calc the time:
         print("self.queue", self.queue[queue_name])
@@ -146,9 +138,9 @@ class Construction(EventDispatcher):
     
     def update_time_left(self, queue_name, dt):
         print("update_time_left", queue_name, dt)
-        if self.app.construction.is_cancel:
+        if self.app.construction.is_cancel[queue_name]:
             self.app.return_the_resources(self.construction.costs)
-            self.app.construction.is_cancel = False
+            self.app.construction.is_cancel[queue_name] = False
             self.time_left_s[queue_name] = 0
             self.queue[queue_name].pop(0)
             self.on_queue(queue_name)
@@ -160,7 +152,6 @@ class Construction(EventDispatcher):
             if self.queue[queue_name][0][1] == 0:
                 self.queue[queue_name].pop(0)
                 self.on_queue(queue_name)
-                print(554, self.queue[queue_name])
             elif self.queue[queue_name][0][1] > 0:
                 self.time_left_s[queue_name] = self.queue[queue_name][0][0].time
                 Clock.schedule_interval(partial(self.update_time_left, queue_name), 0.1)
@@ -178,9 +169,9 @@ class Construction(EventDispatcher):
             self.queue_time[queue_name] -=\
                 (self.queue[queue_name][0][0].time - self.time_left_s[queue_name])
 
-    def cancel(self):
+    def cancel(self, queue_name):
         print("cancel")
-        self.is_cancel = True
+        self.is_cancel[queue_name] = True
 
     def clean_display(self):
         self.name = ""

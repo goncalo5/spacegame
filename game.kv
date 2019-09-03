@@ -112,7 +112,7 @@
         disabled: not app.construction.have_queue[root.queue_name]
         on_press:
             print("cancel")
-            app.construction.cancel()
+            app.construction.cancel(root.queue_name)
 
 <DefenseScreen@Screen>:
     BoxLayout:
