@@ -3,29 +3,44 @@ from kivy.app import App
 from kivy import properties as kp
 from kivy.event import EventDispatcher
 # mine:
-from settings import RESOURCES, DEFENSES
+from settings import DEFENSES, SHIPS
 
 
-class Defense(EventDispatcher):
+class Unit(EventDispatcher):
     costs = kp.DictProperty()
     n = kp.NumericProperty()
-    def __init__(self, defense_name):
+    def __init__(self):
         super().__init__()
-        self._id = defense_name
-        self.settings = DEFENSES.get(defense_name)
         self.name = self.settings.get("name")
         self.costs = self.settings.get("costs")
         self.hull = self.settings.get("hull")
         self.shield = self.settings.get("shield")
         self.weapen = self.settings.get("weapen")
         self.time = self.settings.get("time")
-
-    def __str__(self):
-        return "Defense(name=%s)" % self.name
     
     def upgraded(self):
         self.n += 1
 
     def on_n(self, *args):
         print("on_n")
+
+
+class Defense(Unit):
+    def __init__(self, defense_name):
+        self._id = defense_name
+        self.settings = DEFENSES.get(self._id)
+        super().__init__()
+
+    def __str__(self):
+        return "Defense(name=%s)" % self._id
+
+
+class Ship(Unit):
+    def __init__(self, defense_name):
+        self._id = defense_name
+        self.settings = SHIPS.get(self._id)
+        super().__init__()
+
+    def __str__(self):
+        return "Ship(name=%s)" % self._id
 
