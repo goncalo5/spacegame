@@ -27,6 +27,12 @@
             text: "Deuterium"
         Label:
             text: str(int(app.deuterium.current))
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Energy"
+        Label:
+            text: str(int(app.energy.current))
 
 <ButtonUpgrade@Button>:
     size_hint: None, None

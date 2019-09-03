@@ -13,6 +13,11 @@ RESOURCES = {
         "init": 8000,
         "per_s0": 1,
         "cap0": 10000
+    },
+    "energy": {
+        "init": 8000,
+        "per_s0": 0,
+        "cap0": 0
     }
 }
 

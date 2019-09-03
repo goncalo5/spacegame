@@ -26,6 +26,7 @@ class GameApp(App, ScreenManager):
     metal = kp.ObjectProperty(Resource("metal"))
     crystal = kp.ObjectProperty(Resource("crystal"))
     deuterium = kp.ObjectProperty(Resource("deuterium"))
+    energy = kp.ObjectProperty(Resource("energy"))
     # buildings:
     metal_mine = kp.ObjectProperty(MetalMine())
     crystal_mine = kp.ObjectProperty(CrystalMine())
@@ -84,7 +85,7 @@ class GameApp(App, ScreenManager):
 
     def build_config(self, *args):
         self.resources = [
-            self.metal, self.crystal, self.deuterium
+            self.metal, self.crystal, self.deuterium, self.energy
         ]
         self.buildings = [
             self.metal_mine, self.crystal_mine, self.deuterium_mine,
