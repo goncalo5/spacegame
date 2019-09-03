@@ -6,7 +6,6 @@ from kivy.clock import Clock
 
 
 class Construction(EventDispatcher):
-    # last_defense_time = kp.NumericProperty()
     # both:
     name = kp.StringProperty()
     # display:
@@ -55,23 +54,7 @@ class Construction(EventDispatcher):
         self.app.pay_the_resources(self.construction.costs, self.quantity)
         self.show_construction_queue()
         self.app.construction.name = self.name
-        # self.app.construction.time_left_s = self.construction.time
         self.app.construction.queue.append([self.construction, int(quantity)])
-        # Clock.schedule_interval(self.update_time_left, 0.1)
-
-    # def update_time_left(self, dt):
-    #     if self.app.construction.is_cancel:
-    #         self.app.return_the_resources(self.construction.costs)
-    #         self.hide_construction_queue()
-    #         self.app.construction.is_cancel = False
-    #         return False
-    #     self.app.construction.time_left_s -= dt
-    #     if self.app.construction.time_left_s <= 0:
-    #         self.construction.upgraded()
-    #         # self.construction.level += 1
-    #         self.hide_construction_queue()
-    #         self.app.construction.display_costs(self.construction)
-    #         return False
 
     def show_construction_queue(self):
         print("show_construction_queue")
@@ -95,7 +78,6 @@ class Construction(EventDispatcher):
         if self.time_left_s <= 0:
             self.time_left_s = self.queue[0][0].time
             Clock.schedule_interval(self.update_time_left, 0.1)
-        # self.update_queue_time()
     
     def update_time_left(self, dt):
         print("update_time_left")
@@ -106,7 +88,6 @@ class Construction(EventDispatcher):
             self.queue.pop(0)
             self.time_left_s = 0
             return False
-        # self.update_queue_time()
         self.time_left_s -= dt
         if self.time_left_s <= 0:
             self.queue[0][0].upgraded()
