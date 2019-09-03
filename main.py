@@ -92,7 +92,7 @@ class GameApp(App, ScreenManager):
 
     def build(self):
         Clock.schedule_interval(self.update, 0.1)
-        Clock.schedule_interval(self.update_defense_time_left, 0.1)
+        # Clock.schedule_interval(self.update_defense_time_left, 0.1)
         self.game = Game()
         return self.game
 
@@ -121,12 +121,6 @@ class GameApp(App, ScreenManager):
         self.metal.current += resources["metal"]
         self.crystal.current += resources["crystal"]
         self.deuterium.current += resources["deuterium"]
-    
-    def update_defense_time_left(self, dt):
-        if self.construction.defenses_queue_time <= 0:
-            return
-        self.construction.defenses_queue_time -= dt
-
 
 
 if __name__ == "__main__":

@@ -22,6 +22,9 @@ class Defense(EventDispatcher):
 
     def __str__(self):
         return "Defense(name=%s)" % self.name
+    
+    def upgraded(self):
+        self.n += 1
 
     def on_n(self, *args):
         print("on_n")
@@ -41,16 +44,16 @@ class Defense(EventDispatcher):
         self.app.pay_the_resources(self.costs, quantity)
         self.show_construction_queue()
         self.app.construction.name = self.name
-        self.app.construction.defenses_queue.append([self, int(quantity)])
-        print("end", self.app.construction.defenses_queue)
+        self.app.construction.queue.append([self, int(quantity)])
+        print("end", self.app.construction.queue)
 
-    def show_construction_queue(self):
-        print("show_construction_queue")
-        self.construction_queue.size_hint_y = 0.1
-        self.app.construction.have_queue = 1
+    # def show_construction_queue(self):
+    #     print("show_construction_queue")
+    #     self.construction_queue.size_hint_y = 0.1
+    #     self.app.construction.have_queue = 1
 
-    def hide_construction_queue(self):
-        print("hide_construction_queue")
-        self.construction_queue.size_hint_y = None
-        self.construction_queue.height = 0
-        self.app.construction.have_queue = 0
+    # def hide_construction_queue(self):
+    #     print("hide_construction_queue")
+    #     self.construction_queue.size_hint_y = None
+    #     self.construction_queue.height = 0
+    #     self.app.construction.have_queue = 0

@@ -51,7 +51,8 @@
             size_hint: None, None
             pos_hint: {"top": 1}
             on_press:
-                root.construction.upgrade(root.construction_queue, 1)
+                app.construction.upgrade(root.construction, root.construction_queue, 1)
+                # root.construction.upgrade(root.construction_queue, 1)
 
 <DisplayMenu@BoxLayout>:
     orientation: "vertical"
@@ -67,14 +68,15 @@
             text: "%s" % app.construction.time_cost
         TextInput:
             id: input_construct
+            text: "1"
             opacity: root.have_textinput and app.construction.have_textinput
         Button:
             text: "%s" % root.button_to_upgrade_name
             on_press:
-                app.construction.current_selected.upgrade(root.construction_queue, input_construct.text)
+                app.construction.upgrade(app.construction.current_selected, root.construction_queue, input_construct.text)
+                # app.construction.current_selected.upgrade(root.construction_queue, input_construct.text)
             opacity: app.construction.have_button
             disabled: not app.construction.have_button
-
     BoxLayout:
         orientation: "horizontal"
         size_hint_h: 0.1
@@ -91,7 +93,7 @@
     size_hint_y: None
     height: 0
     Label:
-        text: "%s" % app.construction.name
+        text: "%s" % app.construction.name_in_queue
         opacity: app.construction.have_queue
     Label:
         text: "%s" % int(app.construction.time_left_s)
@@ -167,10 +169,10 @@
                     text: "%s" % app.construction.name
                     opacity: app.construction.have_queue
                 Label:
-                    text: "time: %s" % int(app.construction.defenses_queue_time)
+                    text: "time: %s" % int(app.construction.queue_time)
                     opacity: app.construction.have_queue
                 Label:
-                    text: "time: %s" % int(app.construction.last_defense_time)
+                    text: "time: %s" % int(app.construction.time_left_s)
                     opacity: app.construction.have_queue
 
 <BuildingsScreen@Screen>:

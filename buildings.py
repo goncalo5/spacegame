@@ -13,42 +13,45 @@ class UpgradingEvent(EventDispatcher):
     costs = kp.DictProperty()
     time = kp.NumericProperty()
 
-    def upgrade(self, construction_queue, quantity=1):
-        print("upgrade", self.name)
-        self.construction_queue = construction_queue
-        self.app = App.get_running_app()
-        if not self.app.check_if_can_pay(self.costs):
-            print("cant pay")
-            return
-        self.app.pay_the_resources(self.costs)
-        self.show_construction_queue()
-        self.app.construction.name = self.name
-        self.app.construction.time_left_s = self.time
-        Clock.schedule_interval(self.update_time_left, 0.1)
+    # def upgrade(self, construction_queue, quantity=1):
+    #     print("upgrade", self.name)
+    #     self.construction_queue = construction_queue
+    #     self.app = App.get_running_app()
+    #     if not self.app.check_if_can_pay(self.costs):
+    #         print("cant pay")
+    #         return
+    #     self.app.pay_the_resources(self.costs)
+    #     self.show_construction_queue()
+    #     self.app.construction.name = self.name
+    #     self.app.construction.time_left_s = self.time
+    #     Clock.schedule_interval(self.update_time_left, 0.1)
 
-    def update_time_left(self, dt):
-        if self.app.construction.is_cancel:
-            self.app.return_the_resources(self.costs)
-            self.hide_construction_queue()
-            self.app.construction.is_cancel = False
-            return False
-        self.app.construction.time_left_s -= dt
-        if self.app.construction.time_left_s <= 0:
-            self.level += 1
-            self.hide_construction_queue()
-            self.app.construction.display_costs(self)
-            return False
+    # def update_time_left(self, dt):
+    #     if self.app.construction.is_cancel:
+    #         self.app.return_the_resources(self.costs)
+    #         self.hide_construction_queue()
+    #         self.app.construction.is_cancel = False
+    #         return False
+    #     self.app.construction.time_left_s -= dt
+    #     if self.app.construction.time_left_s <= 0:
+    #         self.level += 1
+    #         self.hide_construction_queue()
+    #         self.app.construction.display_costs(self)
+    #         return False
 
-    def show_construction_queue(self):
-        print("show_construction_queue")
-        self.construction_queue.size_hint_y = 0.1
-        self.app.construction.have_queue = 1
+    # def show_construction_queue(self):
+    #     print("show_construction_queue")
+    #     self.construction_queue.size_hint_y = 0.1
+    #     self.app.construction.have_queue = 1
 
-    def hide_construction_queue(self):
-        print("hide_construction_queue")
-        self.construction_queue.size_hint_y = None
-        self.construction_queue.height = 0
-        self.app.construction.have_queue = 0
+    # def hide_construction_queue(self):
+    #     print("hide_construction_queue")
+    #     self.construction_queue.size_hint_y = None
+    #     self.construction_queue.height = 0
+    #     self.app.construction.have_queue = 0
+
+    def upgraded(self):
+        self.level += 1
 
     def on_level(self, *args):
         print("on_level")
@@ -78,7 +81,6 @@ class Building(UpgradingEvent):
         self.time_rate = self.settings.get("time_rate")
 
         Clock.schedule_once(self.on_level, 0)
-
 
     def update_time(self):
         # update time:
