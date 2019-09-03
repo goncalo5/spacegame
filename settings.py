@@ -607,7 +607,7 @@ SHIPS = {
         "fuel_consumption": 1000,
         "cargo_capacity": 2000
     },
-    "Deathstar": {
+    "deathstar": {
         "name": "Deathstar",
         "costs": {
             "metal": 5000000,
@@ -697,7 +697,7 @@ SHIPS = {
         "fuel_consumption": 1,
         "cargo_capacity": 5
     },
-    "Solar Satellite": {
+    "solar_satellite": {
         "name": "Solar Satellite",
         "costs": {
             "metal": 0,

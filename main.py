@@ -12,7 +12,7 @@ from buildings import MetalMine, CrystalMine, DeuteriumMine,\
     RoboticsFactory, Shipyard, NaniteFactory, ResearchLab, Terraformer
 from resources import Resource
 from constructions import Construction
-from defenses import Defense
+from units import Defense, Ship
 from researches import Research
 
 
@@ -66,7 +66,21 @@ class GameApp(App, ScreenManager):
     armour_technology = kp.ObjectProperty(Research("armour_technology"))
     weapons_technology = kp.ObjectProperty(Research("weapons_technology"))
     shielding_technology = kp.ObjectProperty(Research("shielding_technology"))
-
+    # Ships:
+    light_fighter = kp.ObjectProperty(Ship("light_fighter"))
+    heavy_fighter = kp.ObjectProperty(Ship("heavy_fighter"))
+    cruiser = kp.ObjectProperty(Ship("cruiser"))
+    battleship = kp.ObjectProperty(Ship("battleship"))
+    battlecruiser = kp.ObjectProperty(Ship("battlecruiser"))
+    bomber = kp.ObjectProperty(Ship("bomber"))
+    destroyer = kp.ObjectProperty(Ship("destroyer"))
+    deathstar = kp.ObjectProperty(Ship("deathstar"))
+    small_cargo_ship = kp.ObjectProperty(Ship("small_cargo_ship"))
+    large_cargo_ship = kp.ObjectProperty(Ship("large_cargo_ship"))
+    colony_ship = kp.ObjectProperty(Ship("colony_ship"))
+    recycler = kp.ObjectProperty(Ship("recycler"))
+    espionage_probe = kp.ObjectProperty(Ship("espionage_probe"))
+    solar_satellite = kp.ObjectProperty(Ship("solar_satellite"))
 
     def build_config(self, *args):
         self.resources = [
@@ -89,10 +103,15 @@ class GameApp(App, ScreenManager):
             self.astrophysics, self.intergalactic_research_network, self.graviton_technology,
             self.armour_technology, self.weapons_technology, self.shielding_technology
         ]
+        self.ships = [
+            self.light_fighter, self.heavy_fighter, self.cruiser, self.battleship,
+            self.battlecruiser, self.bomber, self.destroyer, self.deathstar,
+            self.small_cargo_ship, self.large_cargo_ship, self.colony_ship,
+            self.recycler, self.espionage_probe, self.solar_satellite
+        ]
 
     def build(self):
         Clock.schedule_interval(self.update, 0.1)
-        # Clock.schedule_interval(self.update_defense_time_left, 0.1)
         self.game = Game()
         return self.game
 
