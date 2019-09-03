@@ -98,6 +98,9 @@
     Label:
         text: "%s" % int(app.construction.time_left_s)
         opacity: app.construction.have_queue
+    Label:
+        text: "time: %s" % int(app.construction.queue_time)
+        opacity: app.construction.have_queue
     Button:
         text: "cancel"
         opacity: app.construction.have_queue
@@ -158,22 +161,8 @@
                     construction_name: app.large_shield_dome.name
                     construction_n: app.large_shield_dome.n
                     construction_queue: construction_queue
-        BoxLayout:
+        UpgradingQueue:
             id: construction_queue
-            orientation: "vertical"
-            size_hint_y: None
-            height: 0
-            BoxLayout:
-                orientation: "horizontal"
-                Label:
-                    text: "%s" % app.construction.name
-                    opacity: app.construction.have_queue
-                Label:
-                    text: "time: %s" % int(app.construction.queue_time)
-                    opacity: app.construction.have_queue
-                Label:
-                    text: "time: %s" % int(app.construction.time_left_s)
-                    opacity: app.construction.have_queue
 
 <BuildingsScreen@Screen>:
     BoxLayout:

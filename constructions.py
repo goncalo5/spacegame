@@ -6,9 +6,8 @@ from kivy.clock import Clock
 
 
 class Construction(EventDispatcher):
-    # both:
-    name = kp.StringProperty()
     # display:
+    name = kp.StringProperty()
     time_cost = kp.StringProperty()
     current_selected = kp.ObjectProperty()
     have_textinput = kp.BooleanProperty(0)
@@ -83,10 +82,9 @@ class Construction(EventDispatcher):
         print("update_time_left")
         if self.app.construction.is_cancel:
             self.app.return_the_resources(self.construction.costs)
-            self.hide_construction_queue()
             self.app.construction.is_cancel = False
-            self.queue.pop(0)
             self.time_left_s = 0
+            self.queue.pop(0)
             return False
         self.time_left_s -= dt
         if self.time_left_s <= 0:
@@ -101,6 +99,7 @@ class Construction(EventDispatcher):
             return False
 
     def on_time_left_s(self, *args):
+        print("on_time_left_s")
         self.queue_time = 0
         for construction, quantity in self.queue:
             self.queue_time += construction.time * quantity
