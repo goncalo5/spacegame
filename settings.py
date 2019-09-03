@@ -500,3 +500,216 @@ RESEARCHES = {
         "time_rate": 2
     },
 }
+
+SHIPS = {
+    "light_fighter": {
+        "name": "Light Fighter",
+        "costs": {
+            "metal": 3000,
+            "crystal": 1000,
+            "deuterium": 0
+        },
+        "time": 2,
+        "hull": 400,
+        "shield": 20,
+        "weapon": 80,
+        "speed": 12500,
+        "fuel_consumption": 20,
+        "cargo_capacity": 50
+    },
+    "heavy_fighter": {
+        "name": "Heavy Fighter",
+        "costs": {
+            "metal": 6000,
+            "crystal": 4000,
+            "deuterium": 0
+        },
+        "time": 2,
+        "hull": 1000,
+        "shield": 25,
+        "weapon": 150,
+        "speed": 12500,
+        "fuel_consumption": 75,
+        "cargo_capacity": 100
+    },
+    "cruiser": {
+        "name": "Cruiser",
+        "costs": {
+            "metal": 20000,
+            "crystal": 7000,
+            "deuterium": 2000
+        },
+        "time": 2,
+        "hull": 2700,
+        "shield": 50,
+        "weapon": 400,
+        "speed": 15000,
+        "fuel_consumption": 300,
+        "cargo_capacity": 800
+    },
+    "battleship": {
+        "name": "Battleship",
+        "costs": {
+            "metal": 45000,
+            "crystal": 15000,
+            "deuterium": 0
+        },
+        "time": 2,
+        "hull": 6000,
+        "shield": 200,
+        "weapon": 1000,
+        "speed": 10000,
+        "fuel_consumption": 500,
+        "cargo_capacity": 1500
+    },
+    "battlecruiser": {
+        "name": "Battlecruiser",
+        "costs": {
+            "metal": 30000,
+            "crystal": 40000,
+            "deuterium": 15000
+        },
+        "time": 2,
+        "hull": 7000,
+        "shield": 400,
+        "weapon": 700,
+        "speed": 10000,
+        "fuel_consumption": 250,
+        "cargo_capacity": 750
+    },
+    "bomber": {
+        "name": "Bomber",
+        "costs": {
+            "metal": 50000,
+            "crystal": 25000,
+            "deuterium": 15000
+        },
+        "time": 2,
+        "hull": 7500,
+        "shield": 500,
+        "weapon": 1000,
+        "speed": 4000,
+        "fuel_consumption": 1000,
+        "cargo_capacity": 500
+    },
+    "destroyer": {
+        "name": "Destroyer",
+        "costs": {
+            "metal": 60000,
+            "crystal": 50000,
+            "deuterium": 15000
+        },
+        "time": 2,
+        "hull": 11000,
+        "shield": 500,
+        "weapon": 2000,
+        "speed": 5000,
+        "fuel_consumption": 1000,
+        "cargo_capacity": 2000
+    },
+    "Deathstar": {
+        "name": "Deathstar",
+        "costs": {
+            "metal": 5000000,
+            "crystal": 4000000,
+            "deuterium": 1000000
+        },
+        "time": 2,
+        "hull": 900000,
+        "shield": 50000,
+        "weapon": 200000,
+        "speed": 100,
+        "fuel_consumption": 1,
+        "cargo_capacity": 1000000
+    },
+    "small_cargo_ship": {
+        "name": "Small Cargo Ship",
+        "costs": {
+            "metal": 2000,
+            "crystal": 2000,
+            "deuterium": 0
+        },
+        "time": 2,
+        "hull": 400,
+        "shield": 10,
+        "weapon": 5,
+        "speed": 5000,
+        "fuel_consumption": 10,
+        "cargo_capacity": 5000
+    },
+    "large_cargo_ship": {
+        "name": "Large Cargo Ship",
+        "costs": {
+            "metal": 6000,
+            "crystal": 6000,
+            "deuterium": 0
+        },
+        "time": 2,
+        "hull": 1200,
+        "shield": 25,
+        "weapon": 5,
+        "speed": 7500,
+        "fuel_consumption": 50,
+        "cargo_capacity": 25000
+    },
+    "colony_ship": {
+        "name": "Colony Ship",
+        "costs": {
+            "metal": 10000,
+            "crystal": 20000,
+            "deuterium": 10000
+        },
+        "time": 2,
+        "hull": 3000,
+        "shield": 100,
+        "weapon": 50,
+        "speed": 2500,
+        "fuel_consumption": 1000,
+        "cargo_capacity": 7500
+    },
+    "recycler": {
+        "name": "Recycler",
+        "costs": {
+            "metal": 10000,
+            "crystal": 6000,
+            "deuterium": 2000
+        },
+        "time": 2,
+        "hull": 1600,
+        "shield": 10,
+        "weapon": 1,
+        "speed": 2000,
+        "fuel_consumption": 300,
+        "cargo_capacity": 20000
+    },
+    "espionage_probe": {
+        "name": "Espionage Probe",
+        "costs": {
+            "metal": 0,
+            "crystal": 1000,
+            "deuterium": 0
+        },
+        "time": 2,
+        "hull": 100,
+        "shield": 0.01,
+        "weapon": 0.01,
+        "speed": 100000000,
+        "fuel_consumption": 1,
+        "cargo_capacity": 5
+    },
+    "Solar Satellite": {
+        "name": "Solar Satellite",
+        "costs": {
+            "metal": 0,
+            "crystal": 2000,
+            "deuterium": 500
+        },
+        "time": 2,
+        "hull": 200,
+        "shield": 1,
+        "weapon": 1,
+        "speed": 0,
+        "fuel_consumption": 0,
+        "cargo_capacity": 0
+    },
+}
