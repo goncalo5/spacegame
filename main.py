@@ -119,10 +119,8 @@ class GameApp(App, ScreenManager):
     def update(self, dt):
         # update resources:
         for resource in self.resources:
-            if resource.current + resource.per_s * dt <= resource.cap:
+            if resource.current < resource.cap:
                 resource.current += resource.per_s * dt
-            else:
-                resource = resource.cap
     
     def check_if_can_pay(self, resources, quantity=1):
         # check if can pay:
