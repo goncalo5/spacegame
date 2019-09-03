@@ -109,7 +109,7 @@
             print("cancel")
             app.construction.cancel()
 
-<DefensesScreen@Screen>:
+<DefenseScreen@Screen>:
     BoxLayout:
         orientation: "vertical"
         ResourcesBar
@@ -344,6 +344,92 @@
         UpgradingQueue:
             id: construction_queue
 
+<ShipyardScreen@Screen>:
+    BoxLayout:
+        orientation: "vertical"
+        ResourcesBar
+        DisplayMenu:
+            construction_queue: construction_queue
+            button_to_upgrade_name: "Build"
+            have_textinput: 1
+        RecycleView:
+            StackLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                ButtonUpgrade:
+                    construction: app.light_fighter
+                    construction_name: app.light_fighter.name
+                    construction_n: app.light_fighter.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.heavy_fighter
+                    construction_name: app.heavy_fighter.name
+                    construction_n: app.heavy_fighter.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.cruiser
+                    construction_name: app.cruiser.name
+                    construction_n: app.cruiser.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.battleship
+                    construction_name: app.battleship.name
+                    construction_n: app.battleship.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.battlecruiser
+                    construction_name: app.battlecruiser.name
+                    construction_n: app.battlecruiser.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.bomber
+                    construction_name: app.bomber.name
+                    construction_n: app.bomber.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.destroyer
+                    construction_name: app.destroyer.name
+                    construction_n: app.destroyer.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.deathstar
+                    construction_name: app.deathstar.name
+                    construction_n: app.deathstar.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.small_cargo_ship
+                    construction_name: app.small_cargo_ship.name
+                    construction_n: app.small_cargo_ship.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.large_cargo_ship
+                    construction_name: app.large_cargo_ship.name
+                    construction_n: app.large_cargo_ship.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.colony_ship
+                    construction_name: app.colony_ship.name
+                    construction_n: app.colony_ship.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.recycler
+                    construction_name: app.recycler.name
+                    construction_n: app.recycler.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.espionage_probe
+                    construction_name: app.espionage_probe.name
+                    construction_n: app.espionage_probe.n
+                    construction_queue: construction_queue
+                ButtonUpgrade:
+                    construction: app.solar_satellite
+                    construction_name: app.solar_satellite.name
+                    construction_n: app.solar_satellite.n
+                    construction_queue: construction_queue
+        UpgradingQueue:
+            id: construction_queue
+
+
 <MainScreen@Screen>:
     BoxLayout:
         orientation: "vertical"
@@ -352,17 +438,20 @@
             text: "Buildings"
             on_press: root.manager.current = "buildings_screen"
         Button:
-            text: "Defenses"
-            on_press: root.manager.current = "defenses_screen"
+            text: "Defense"
+            on_press: root.manager.current = "defense_screen"
         Button:
             text: "Research"
             on_press: root.manager.current = "research_screen"
+        Button:
+            text: "Shipyard"
+            on_press: root.manager.current = "shipyard_screen"
 
 <Game>:
     id: game
     main_screen: main_screen
     buildings_screen: buildings_screen
-    defenses_screen: defenses_screen
+    defense_screen: defense_screen
     MainScreen:
         id: main_screen
         name: "main_screen"
@@ -371,11 +460,15 @@
         id: buildings_screen
         name: "buildings_screen"
         manager: game
-    DefensesScreen:
-        id: defenses_screen
-        name: "defenses_screen"
+    DefenseScreen:
+        id: defense_screen
+        name: "defense_screen"
         manager: game
     ResearchScreen:
         id: research_screen
         name: "research_screen"
+        manager: game
+    ShipyardScreen:
+        id: shipyard_screen
+        name: "shipyard_screen"
         manager: game
