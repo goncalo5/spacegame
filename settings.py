@@ -30,7 +30,7 @@ BUILDINGS = {
             "deuterium": 5
         },
         "costs_rate": 1.5,
-        "time0": 5,
+        "time0": 10,
         "time_rate": 1.5,
         "metal_rate": 2
     },

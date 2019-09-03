@@ -96,20 +96,20 @@
     orientation: "horizontal"
     size_hint_y: None
     height: 0
-    queue_name: None
+    queue_name: "buildings"
     Label:
-        text: "%s" % app.construction.name_in_queue
-        opacity: app.construction.have_queue
+        text: "%s" % app.construction.name_in_queue[root.queue_name]
+        opacity: app.construction.have_queue[root.queue_name]
     Label:
         text: "%s" % int(app.construction.time_left_s[app.construction.current_queue])
-        opacity: app.construction.have_queue
+        opacity: app.construction.have_queue[root.queue_name]
     Label:
         text: "time: %s" % int(app.construction.queue_time[app.construction.current_queue])
-        opacity: app.construction.have_queue
+        opacity: app.construction.have_queue[root.queue_name]
     Button:
         text: "cancel"
-        opacity: app.construction.have_queue
-        disabled: not app.construction.have_queue
+        opacity: app.construction.have_queue[root.queue_name]
+        disabled: not app.construction.have_queue[root.queue_name]
         on_press:
             print("cancel")
             app.construction.cancel()
@@ -168,9 +168,10 @@
                     construction_queue: construction_queue
         UpgradingQueue:
             id: construction_queue
-            queue_name: "defenses"
+            queue_name: "units"
 
 <BuildingsScreen@Screen>:
+    construction_queue: construction_queue
     BoxLayout:
         orientation: "vertical"
         ResourcesBar
@@ -444,16 +445,24 @@
         ResourcesBar
         Button:
             text: "Buildings"
-            on_press: root.manager.current = "buildings_screen"
+            on_press:
+                app.construction.change_screen("buildings")
+                root.manager.current = "buildings_screen"
         Button:
             text: "Defense"
-            on_press: root.manager.current = "defense_screen"
+            on_press:
+                app.construction.change_screen("units")
+                root.manager.current = "defense_screen"
         Button:
             text: "Research"
-            on_press: root.manager.current = "research_screen"
+            on_press:
+                app.construction.change_screen("researches")
+                root.manager.current = "research_screen"
         Button:
             text: "Shipyard"
-            on_press: root.manager.current = "shipyard_screen"
+            on_press:
+                app.construction.change_screen("units")
+                root.manager.current = "shipyard_screen"
 
 <Game>:
     id: game
