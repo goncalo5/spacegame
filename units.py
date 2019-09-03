@@ -9,6 +9,7 @@ from settings import DEFENSES, SHIPS
 class Unit(EventDispatcher):
     costs = kp.DictProperty()
     n = kp.NumericProperty()
+    queue = kp.StringProperty("units")
     def __init__(self):
         super().__init__()
         self.name = self.settings.get("name")

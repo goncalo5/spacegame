@@ -33,6 +33,7 @@ class UpgradingEvent(EventDispatcher):
 
 
 class Building(UpgradingEvent):
+    queue = kp.StringProperty("buildings")
     def __init__(self):
         super().__init__()
         self.settings = BUILDINGS.get(self._id)

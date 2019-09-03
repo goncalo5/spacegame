@@ -9,6 +9,7 @@ from buildings import UpgradingEvent
 
 
 class Research(UpgradingEvent):
+    queue = kp.StringProperty("researches")
     def __init__(self, research_name):
         super().__init__()
         print(research_name)

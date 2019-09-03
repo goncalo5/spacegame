@@ -1,3 +1,4 @@
+from functools import partial
 # kivy:
 from kivy.app import App
 from kivy.event import EventDispatcher
@@ -16,15 +17,33 @@ class Construction(EventDispatcher):
     crystal_cost = kp.StringProperty()
     deuterium_cost = kp.StringProperty()
     # queue:
-    queue = kp.ListProperty()
+    queue = kp.DictProperty({
+        "buildings": [],
+        "researches": [],
+        "units": []
+    })
     is_cancel = kp.BooleanProperty(False)
     name_in_queue = kp.StringProperty()
     have_queue = kp.BooleanProperty(0)
-    time_left_s = kp.NumericProperty()
-    queue_time = kp.NumericProperty()
+    time_left_s = kp.DictProperty({
+        "buildings": 0,
+        "researches": 0,
+        "units": 0
+    })
+
+    queue_time = kp.DictProperty({
+        "buildings": 0,
+        "researches": 0,
+        "units": 0
+    })
+    current_queue = kp.StringProperty("buildings")
 
     def __init__(self):
         super().__init__()
+
+    def on_current_selected(self, *args):
+        print("on_current_selected", args)
+        self.current_queue = self.current_selected.queue
 
     def display_costs(self, construction):
         print("display_costs", construction)
@@ -53,7 +72,11 @@ class Construction(EventDispatcher):
         self.app.pay_the_resources(self.construction.costs, self.quantity)
         self.show_construction_queue()
         self.app.construction.name = self.name
-        self.app.construction.queue.append([self.construction, int(quantity)])
+        queue_name = self.construction.queue
+        queue = self.queue[queue_name]
+        to_add = [self.construction, int(quantity)]
+        queue.append(to_add)
+        self.on_queue(queue_name)
 
     def show_construction_queue(self):
         print("show_construction_queue")
@@ -69,42 +92,49 @@ class Construction(EventDispatcher):
 
     def on_queue(self, *args):
         print("on_queue", args)
-        if len(self.queue) <= 0:
+        queue_name = args[0]
+        if len(self.queue[queue_name]) == 0:
             self.hide_construction_queue()
             return
         # calc the time:
-        print("self.queue", self.queue)
-        if self.time_left_s <= 0:
-            self.time_left_s = self.queue[0][0].time
-            Clock.schedule_interval(self.update_time_left, 0.1)
+        print("self.queue", self.queue[queue_name])
+        if self.time_left_s[queue_name] <= 0:
+            self.time_left_s[queue_name] = self.queue[queue_name][0][0].time
+            Clock.schedule_interval(partial(self.update_time_left, queue_name), 0.1)
     
-    def update_time_left(self, dt):
-        print("update_time_left")
+    def update_time_left(self, queue_name, dt):
+        print("update_time_left", queue_name, dt)
         if self.app.construction.is_cancel:
             self.app.return_the_resources(self.construction.costs)
             self.app.construction.is_cancel = False
-            self.time_left_s = 0
-            self.queue.pop(0)
+            self.time_left_s[queue_name] = 0
+            self.queue[queue_name].pop(0)
+            self.on_queue(queue_name)
             return False
-        self.time_left_s -= dt
-        if self.time_left_s <= 0:
-            self.queue[0][0].upgraded()
-            self.queue[0][1] -= 1
-            if self.queue[0][1] == 0:
-                self.queue.pop(0)
-            elif self.queue[0][1] > 0:
-                self.time_left_s = self.queue[0][0].time
-                Clock.schedule_interval(self.update_time_left, 0.1)
-
+        self.time_left_s[queue_name] -= dt
+        if self.time_left_s[queue_name] <= 0:
+            self.queue[queue_name][0][0].upgraded()
+            self.queue[queue_name][0][1] -= 1
+            if self.queue[queue_name][0][1] == 0:
+                self.queue[queue_name].pop(0)
+                self.on_queue(queue_name)
+                print(554, self.queue[queue_name])
+            elif self.queue[queue_name][0][1] > 0:
+                self.time_left_s[queue_name] = self.queue[queue_name][0][0].time
+                Clock.schedule_interval(partial(self.update_time_left, queue_name), 0.1)
             return False
 
     def on_time_left_s(self, *args):
         print("on_time_left_s")
-        self.queue_time = 0
-        for construction, quantity in self.queue:
-            self.queue_time += construction.time * quantity
-        self.queue_time -=\
-            (self.queue[0][0].time - self.time_left_s)
+        for queue_name in ["buildings", "researches", "units"]:
+            print(queue_name, self.queue_time[queue_name])
+            if self.queue[queue_name] == []:
+                continue
+            self.queue_time[queue_name] = 0
+            for construction, quantity in self.queue[queue_name]:
+                self.queue_time[queue_name] += construction.time * quantity
+            self.queue_time[queue_name] -=\
+                (self.queue[queue_name][0][0].time - self.time_left_s[queue_name])
 
     def cancel(self):
         print("cancel")

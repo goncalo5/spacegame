@@ -58,7 +58,6 @@
             pos_hint: {"top": 1}
             on_press:
                 app.construction.upgrade(root.construction, root.construction_queue, 1)
-                # root.construction.upgrade(root.construction_queue, 1)
 
 <DisplayMenu@BoxLayout>:
     orientation: "vertical"
@@ -80,7 +79,6 @@
             text: "%s" % root.button_to_upgrade_name
             on_press:
                 app.construction.upgrade(app.construction.current_selected, root.construction_queue, input_construct.text)
-                # app.construction.current_selected.upgrade(root.construction_queue, input_construct.text)
             opacity: app.construction.have_button
             disabled: not app.construction.have_button
     BoxLayout:
@@ -98,14 +96,15 @@
     orientation: "horizontal"
     size_hint_y: None
     height: 0
+    queue_name: None
     Label:
         text: "%s" % app.construction.name_in_queue
         opacity: app.construction.have_queue
     Label:
-        text: "%s" % int(app.construction.time_left_s)
+        text: "%s" % int(app.construction.time_left_s[app.construction.current_queue])
         opacity: app.construction.have_queue
     Label:
-        text: "time: %s" % int(app.construction.queue_time)
+        text: "time: %s" % int(app.construction.queue_time[app.construction.current_queue])
         opacity: app.construction.have_queue
     Button:
         text: "cancel"
@@ -169,6 +168,7 @@
                     construction_queue: construction_queue
         UpgradingQueue:
             id: construction_queue
+            queue_name: "defenses"
 
 <BuildingsScreen@Screen>:
     BoxLayout:
@@ -254,6 +254,7 @@
                     construction_queue: construction_queue
         UpgradingQueue:
             id: construction_queue
+            queue_name: "buildings"
 
 <ResearchScreen@Screen>:
     BoxLayout:
@@ -349,6 +350,7 @@
 
         UpgradingQueue:
             id: construction_queue
+            queue_name: "researches"
 
 <ShipyardScreen@Screen>:
     BoxLayout:
