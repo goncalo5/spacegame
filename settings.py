@@ -53,6 +53,34 @@ BUILDINGS = {
         "time_rate": 1.5,
         "deuterium_rate": 2
     },
+    "solar_plant": {
+        "name": "Solar Plant",
+        "costs0": {
+            "metal": 20,
+            "crystal": 15,
+            "deuterium": 5
+        },
+        "costs_rate": 1.5,
+        "time0": 2,
+        "time_rate": 1.5,
+        "energy_rate": 2
+    },
+    "fusion_reactor": {
+        "name": "Fusion Reactor",
+        "costs0": {
+            "metal": 900,
+            "crystal": 360,
+            "deuterium": 180
+        },
+        "costs_rate": 1.5,
+        "time0": 2,
+        "time_rate": 1.5,
+        "requirements": [
+            ["deuterium_mine", 5],
+            ["energy_technology", 3]
+        ],
+        "energy_rate": 2
+    },
     "metal_storage": {
         "name": "Metal Storage",
         "costs0": {
@@ -111,18 +139,9 @@ BUILDINGS = {
         "costs_rate": 2,
         "time0": 3,
         "time_rate": 2,
-        "building_time_factor0": 0.5
-    },
-    "nanite_factory":{
-        "name": "Nanite Factory",
-        "costs0": {
-            "metal": 50,
-            "crystal": 50,
-            "deuterium": 0
-        },
-        "costs_rate": 2,
-        "time0": 3,
-        "time_rate": 2,
+        "requirements": [
+            ["robotics_factory", 2]
+        ],
         "building_time_factor0": 0.5
     },
     "research_lab":{
@@ -137,8 +156,20 @@ BUILDINGS = {
         "time_rate": 2,
         "reasearch_time_factor0": 0.5
     },
-    "terraformer":{
-        "name": "Terraformer",
+    "missile_silo":{
+        "name": "Missile Silo",
+        "costs0": {
+            "metal": 20000,
+            "crystal": 20000,
+            "deuterium": 1000
+        },
+        "costs_rate": 2,
+        "time0": 3,
+        "time_rate": 2,
+        "reasearch_time_factor0": 0.5
+    },
+    "nanite_factory":{
+        "name": "Nanite Factory",
         "costs0": {
             "metal": 50,
             "crystal": 50,
@@ -147,6 +178,44 @@ BUILDINGS = {
         "costs_rate": 2,
         "time0": 3,
         "time_rate": 2,
+        "requirements": [
+            ["robotics_factory", 10],
+            ["computer_technology", 10]
+        ],
+        "building_time_factor0": 0.5
+    },
+    "terraformer":{
+        "name": "Terraformer",
+        "costs0": {
+            "metal": 50,
+            "crystal": 50,
+            "deuterium": 0,
+            "energy": 1000
+        },
+        "costs_rate": 2,
+        "time0": 3,
+        "time_rate": 2,
+        "requirements": [
+            ["nanite_factory", 1],
+            ["energy_technology", 12]
+        ],
+        "fields_added_per_level": 5
+    },
+    "space_dock":{
+        "name": "Space Dock",
+        "costs0": {
+            "metal": 200,
+            "crystal": 0,
+            "deuterium": 50,
+            "energy": 50
+        },
+        "costs_rate": 2,
+        "time0": 3,
+        "time_rate": 2,
+        "requirements": [
+            ["nanite_factory", 1],
+            ["energy_technology", 12]
+        ],
         "fields_added_per_level": 5
     },
 }
