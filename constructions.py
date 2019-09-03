@@ -119,8 +119,10 @@ class Construction(EventDispatcher):
         print("show_construction_queue", queue_name)
         if not self.construction_queue[queue_name]:
             return
+        if not self.queue[queue_name]:
+            return
         self.construction_queue[queue_name].size_hint_y = 0.1
-        self.name_in_queue[queue_name] = self.construction.name
+        self.name_in_queue[queue_name] = self.queue[queue_name][0][0].name
 
     def hide_construction_queue(self, queue_name):
         print("hide_construction_queue")
