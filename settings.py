@@ -882,6 +882,7 @@ SHIPS = {
     },
     "solar_satellite": {
         "name": "Solar Satellite",
+        "img": "Imgs/Example_ships/spaceStation_021.png",
         "costs": {
             "metal": 0,
             "crystal": 2000,
