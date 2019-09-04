@@ -12,13 +12,18 @@ class UpgradingEvent(EventDispatcher):
     level = kp.NumericProperty()
     costs = kp.DictProperty()
     time = kp.NumericProperty()
+    def __init__(self):
+        super().__init__()
+        Clock.schedule_once(self.get_app, 0)
+
+    def get_app(self, dt):
+        self.app = App.get_running_app()
 
     def upgraded(self):
         self.level += 1
 
     def on_level(self, *args):
         print("on_level")
-        self.app = App.get_running_app()
         # update resources:
         self.costs["metal"] = self.costs0["metal"] * self.costs_rate ** self.level
         self.costs["crystal"] =\
@@ -74,7 +79,6 @@ class MetalMine(Mine):
         self.metal_rate = self.settings.get("metal_rate")
 
     def update_feature(self, *args):
-        self.app = App.get_running_app()
         self.app.metal.per_s =\
             self.app.metal.per_s0 * self.metal_rate ** self.level
 
@@ -86,7 +90,6 @@ class CrystalMine(Building):
         self.crystal_rate = self.settings.get("crystal_rate")
 
     def update_feature(self, *args):
-        self.app = App.get_running_app()
         self.app.crystal.per_s =\
             self.app.crystal.per_s0 * self.crystal_rate ** self.level
 
@@ -98,7 +101,6 @@ class DeuteriumMine(Building):
         self.deuterium_rate = self.settings.get("deuterium_rate")
 
     def update_feature(self, *args):
-        self.app = App.get_running_app()
         self.app.deuterium.per_s =\
             self.app.deuterium.per_s0 * self.deuterium_rate ** self.level
 
@@ -114,7 +116,6 @@ class MetalStorage(Storage):
         self.metal_rate = self.settings.get("metal_rate")
 
     def update_feature(self, *args):
-        self.app = App.get_running_app()
         self.app.metal.cap =\
             self.app.metal.cap0 * self.metal_rate ** self.level
 
@@ -126,7 +127,6 @@ class CrystalStorage(Storage):
         self.crystal_rate = self.settings.get("crystal_rate")
 
     def update_feature(self, *args):
-        self.app = App.get_running_app()
         self.app.crystal.cap =\
             self.app.crystal.cap0 * self.crystal_rate ** self.level
 
@@ -138,7 +138,6 @@ class DeuteriumStorage(Storage):
         self.deuterium_rate = self.settings.get("deuterium_rate")
 
     def update_feature(self, *args):
-        self.app = App.get_running_app()
         self.app.deuterium.cap =\
             self.app.deuterium.cap0 * self.deuterium_rate ** self.level
 
@@ -160,7 +159,6 @@ class RoboticsFactory(Factory):
         super().__init__()
 
     def update_feature(self, *args):
-        self.app = App.get_running_app()
         self.building_time_factor = self.building_time_factor0 ** self.level
         for building in self.app.buildings:
             building.update_time()
@@ -172,7 +170,6 @@ class Shipyard(Factory):
         super().__init__()
 
     def update_feature(self, *args):
-        self.app = App.get_running_app()
         self.building_time_factor = self.building_time_factor0 ** self.level
         for building in self.app.buildings:
             building.update_time()
@@ -184,7 +181,6 @@ class NaniteFactory(Factory):
         super().__init__()
 
     def update_feature(self, *args):
-        self.app = App.get_running_app()
         for building in self.app.buildings:
             building.update_time()
 
@@ -201,7 +197,7 @@ class ResearchLab(Building):
             self.reasearch_time_factor0 ** self.level
 
     def update_feature(self, *args):
-        self.app = App.get_running_app()
+        pass
 
 
 class Terraformer(Building):
@@ -216,4 +212,4 @@ class Terraformer(Building):
             self.fields_added_per_level * self.level
 
     def update_feature(self, *args):
-        self.app = App.get_running_app()
+        pass
