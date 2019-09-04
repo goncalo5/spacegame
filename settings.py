@@ -24,6 +24,7 @@ RESOURCES = {
 BUILDINGS = {
     "metal_mine": {
         "name": "Metal Mine",
+        "img": "Imgs/Buildings/spr_building_ironmine_0.png",
         "costs0": {
             "metal": 20,
             "crystal": 15,
@@ -36,6 +37,7 @@ BUILDINGS = {
     },
     "crystal_mine": {
         "name": "Crystal Mine",
+        "img": "Imgs/Buildings/spr_building_stonemine_1.png",
         "costs0": {
             "metal": 20,
             "crystal": 15,
@@ -48,6 +50,7 @@ BUILDINGS = {
     },
     "deuterium_mine": {
         "name": "Deuterium Mine",
+        "img": "Imgs/Buildings/metal_mine.png",
         "costs0": {
             "metal": 20,
             "crystal": 15,
@@ -60,6 +63,7 @@ BUILDINGS = {
     },
     "solar_plant": {
         "name": "Solar Plant",
+        "img": "Imgs/Buildings/spr_building_burnerhut_0.png",
         "costs0": {
             "metal": 20,
             "crystal": 15,
@@ -89,6 +93,7 @@ BUILDINGS = {
     },
     "metal_storage": {
         "name": "Metal Storage",
+        "img": "Imgs/Buildings/spr_building_grainfarm_0.png",
         "costs0": {
             "metal": 50,
             "crystal": 0,
@@ -101,6 +106,7 @@ BUILDINGS = {
     },
     "crystal_storage": {
         "name": "Crystal Storage",
+        "img": "Imgs/Buildings/spr_building_grainfarm_0.png",
         "costs0": {
             "metal": 50,
             "crystal": 25,
@@ -113,6 +119,7 @@ BUILDINGS = {
     },
     "deuterium_storage": {
         "name": "Deuterium Storage",
+        "img": "Imgs/Buildings/spr_building_grainfarm_0.png",
         "costs0": {
             "metal": 50,
             "crystal": 50,
@@ -125,6 +132,7 @@ BUILDINGS = {
     },
     "robotics_factory":{
         "name": "Robotics Factory",
+        "img": "Imgs/Buildings/spr_building_armory_2.png",
         "costs0": {
             "metal": 50,
             "crystal": 50,
@@ -152,6 +160,7 @@ BUILDINGS = {
     },
     "research_lab":{
         "name": "Research Lab",
+        "img": "Imgs/Buildings/spr_building_schoolhouse_0.png",
         "costs0": {
             "metal": 50,
             "crystal": 50,
@@ -164,6 +173,7 @@ BUILDINGS = {
     },
     "missile_silo":{
         "name": "Missile Silo",
+        "img": "Imgs/Buildings/tower.png",
         "costs0": {
             "metal": 20000,
             "crystal": 20000,
@@ -175,6 +185,7 @@ BUILDINGS = {
     },
     "nanite_factory":{
         "name": "Nanite Factory",
+        "img": "Imgs/Buildings/spr_building_metal_furnace_1.png",
         "costs0": {
             "metal": 50,
             "crystal": 50,

@@ -51,7 +51,7 @@
             text: "%s" % root.construction_name
             canvas.before:
                 Color:
-                    rgba: 1, 1, 1, 1 if root.construction_img else 0
+                    rgba: 1, 1, 1, 0.8 if root.construction_img else 0
                 Rectangle:
                     source: root.construction_img
                     pos: self.width / 4, self.height / 4
@@ -210,76 +210,91 @@
                 ButtonUpgrade:
                     construction: app.metal_mine
                     construction_name: app.metal_mine.name
+                    construction_img: app.metal_mine.img
                     construction_n: app.metal_mine.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.crystal_mine
                     construction_name: app.crystal_mine.name
+                    construction_img: app.crystal_mine.img
                     construction_n: app.crystal_mine.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.deuterium_mine
                     construction_name: app.deuterium_mine.name
+                    construction_img: app.deuterium_mine.img
                     construction_n: app.deuterium_mine.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.solar_plant
                     construction_name: app.solar_plant.name
+                    construction_img: app.solar_plant.img
                     construction_n: app.solar_plant.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.fusion_reactor
                     construction_name: app.fusion_reactor.name
+                    construction_img: app.fusion_reactor.img
                     construction_n: app.fusion_reactor.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.metal_storage
                     construction_name: app.metal_storage.name
+                    construction_img: app.metal_storage.img
                     construction_n: app.metal_storage.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.crystal_storage
                     construction_name: app.crystal_storage.name
+                    construction_img: app.crystal_storage.img
                     construction_n: app.crystal_storage.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.deuterium_storage
                     construction_name: app.deuterium_storage.name
+                    construction_img: app.deuterium_storage.img
                     construction_n: app.deuterium_storage.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.robotics_factory
                     construction_name: app.robotics_factory.name
+                    construction_img: app.robotics_factory.img
                     construction_n: app.robotics_factory.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.shipyard
                     construction_name: app.shipyard.name
+                    construction_img: app.shipyard.img
                     construction_n: app.shipyard.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.research_lab
                     construction_name: app.research_lab.name
+                    construction_img: app.research_lab.img
                     construction_n: app.research_lab.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.missile_silo
                     construction_name: app.missile_silo.name
+                    construction_img: app.missile_silo.img
                     construction_n: app.missile_silo.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.nanite_factory
                     construction_name: app.nanite_factory.name
+                    construction_img: app.nanite_factory.img
                     construction_n: app.nanite_factory.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.terraformer
                     construction_name: app.terraformer.name
+                    construction_img: app.terraformer.img
                     construction_n: app.terraformer.level
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.space_dock
                     construction_name: app.space_dock.name
+                    construction_img: app.space_dock.img
                     construction_n: app.space_dock.level
                     construction_queue: construction_queue
         UpgradingQueue:

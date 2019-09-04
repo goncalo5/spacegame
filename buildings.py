@@ -14,6 +14,7 @@ class UpgradingEvent(EventDispatcher):
     time = kp.NumericProperty()
     def __init__(self):
         super().__init__()
+        self.img = self.settings.get("img")
         self.requirements = self.settings.get("requirements")
 
         Clock.schedule_once(self.get_app, 0)
