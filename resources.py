@@ -7,6 +7,8 @@ from settings import RESOURCES
 
 class Resource(EventDispatcher):
     current = kp.NumericProperty()
+    per_s = kp.NumericProperty()
+    cap = kp.NumericProperty()
     def __init__(self, resource_name):
         super().__init__()
         self.name = resource_name

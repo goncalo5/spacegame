@@ -444,6 +444,10 @@
         orientation: "vertical"
         ResourcesBar
         Button:
+            text: "Resources"
+            on_press:
+                root.manager.current = "resources_screen"
+        Button:
             text: "Buildings"
             on_press:
                 app.construction.change_screen("buildings")
@@ -464,14 +468,110 @@
                 app.construction.change_screen("units")
                 root.manager.current = "shipyard_screen"
 
+<ResourcesScreen@Screen>:
+    BoxLayout:
+        orientation: "vertical"
+        ResourcesBar
+        BoxLayout:
+            orientation: "vertical"
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                Label:
+                    text: "Metal"
+                Label:
+                    text: "Crystal"
+                Label:
+                    text: "Deuterium"
+                Label:
+                    text: "Energy"
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    text: "Basic Income"
+                Label:
+                    text: "%s" % app.metal.per_s0
+                Label:
+                    text: "%s" % app.crystal.per_s0
+                Label:
+                    text: "%s" % app.deuterium.per_s0
+                Label:
+                    text: "%s" % app.energy.per_s0
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    text: "Capacity"
+                Label:
+                    text: "%s" % app.human_format(app.metal.cap)
+                Label:
+                    text: "%s" % app.human_format(app.crystal.cap)
+                Label:
+                    text: "%s" % app.human_format(app.deuterium.cap)
+                Label:
+                    text: "%s" % app.human_format(app.energy.cap)
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    text: "Total per s"
+                Label:
+                    text: "%s" % app.human_format(app.metal.per_s)
+                Label:
+                    text: "%s" % app.human_format(app.crystal.per_s)
+                Label:
+                    text: "%s" % app.human_format(app.deuterium.per_s)
+                Label:
+                    text: "%s" % app.human_format(app.energy.per_s)
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    text: "Total per min"
+                Label:
+                    text: "%s" % app.human_format((app.metal.per_s * 60))
+                Label:
+                    text: "%s" % app.human_format((app.crystal.per_s * 60))
+                Label:
+                    text: "%s" % app.human_format((app.deuterium.per_s * 60))
+                Label:
+                    text: "%s" % app.human_format((app.energy.per_s * 60))
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    text: "Total per hour"
+                Label:
+                    text: "%s" % app.human_format((app.metal.per_s * 3600))
+                Label:
+                    text: "%s" % app.human_format((app.crystal.per_s * 3600))
+                Label:
+                    text: "%s" % app.human_format((app.deuterium.per_s * 3600))
+                Label:
+                    text: "%s" % app.human_format((app.energy.per_s * 3600))
+            BoxLayout:
+                orientation: "horizontal"
+                Label:
+                    text: "Total per day"
+                Label:
+                    text: "%s" % app.human_format((app.metal.per_s * 86400))
+                Label:
+                    text: "%s" % app.human_format((app.crystal.per_s * 86400))
+                Label:
+                    text: "%s" % app.human_format((app.deuterium.per_s * 86400))
+                Label:
+                    text: "%s" % app.human_format((app.energy.per_s * 86400))
+
+
 <Game>:
     id: game
     main_screen: main_screen
+    resources_screen: resources_screen
     buildings_screen: buildings_screen
     defense_screen: defense_screen
     MainScreen:
         id: main_screen
         name: "main_screen"
+        manager: game
+    ResourcesScreen:
+        id: resources_screen
+        name: "resources_screen"
         manager: game
     BuildingsScreen:
         id: buildings_screen
