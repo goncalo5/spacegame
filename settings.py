@@ -234,6 +234,9 @@ DEFENSES = {
             "deuterium": 0
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 1],
+        ],
         "hull": 200,
         "shield": 20,
         "weapon": 80
@@ -246,6 +249,11 @@ DEFENSES = {
             "deuterium": 0
         },
         "time": 10,
+        "requirements": [
+            ["shipyard", 2],
+            ["energy_technology", 1],
+            ["laser_technology", 3],
+        ],
         "hull": 200,
         "shield": 25,
         "weapon": 100
@@ -258,6 +266,11 @@ DEFENSES = {
             "deuterium": 0
         },
         "time": 10,
+        "requirements": [
+            ["shipyard", 4],
+            ["energy_technology", 3],
+            ["laser_technology", 6],
+        ],
         "hull": 800,
         "shield": 100,
         "weapon": 250
@@ -270,6 +283,10 @@ DEFENSES = {
             "deuterium": 0
         },
         "time": 10,
+        "requirements": [
+            ["shipyard", 4],
+            ["ion_technology", 4],
+        ],
         "hull": 800,
         "shield": 500,
         "weapon": 150
@@ -282,6 +299,12 @@ DEFENSES = {
             "deuterium": 2000
         },
         "time": 10,
+        "requirements": [
+            ["shipyard", 6],
+            ["energy_technology", 6],
+            ["weapons_technology", 3],
+            ["shielding_technology", 1],
+        ],
         "hull": 3500,
         "shield": 200,
         "weapon": 1100
@@ -294,6 +317,10 @@ DEFENSES = {
             "deuterium": 30000
         },
         "time": 10,
+        "requirements": [
+            ["shipyard", 8],
+            ["plasma_technology", 7],
+        ],
         "hull": 10000,
         "shield": 300,
         "weapon": 3000
@@ -306,6 +333,10 @@ DEFENSES = {
             "deuterium": 0
         },
         "time": 10,
+        "requirements": [
+            ["shipyard", 1],
+            ["shielding_technology", 2],
+        ],
         "hull": 2000,
         "shield": 2000,
         "weapon": 1
@@ -318,6 +349,10 @@ DEFENSES = {
             "deuterium": 0
         },
         "time": 10,
+        "requirements": [
+            ["shipyard", 6],
+            ["shielding_technology", 6],
+        ],
         "hull": 10000,
         "shield": 10000,
         "weapon": 80
