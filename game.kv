@@ -40,6 +40,7 @@
     construction: None
     construction_name: None
     construction_n: None
+    construction_img: None
     on_press:
         print("main")
         app.construction.display_costs(root.construction)
@@ -52,6 +53,8 @@
             text: "%s" % root.construction_n
             size_hint: None, None
             pos_hint: {"right": 1}
+        Image:
+            source: root.construction_img
         Button:
             text: "+1"
             size_hint: None, None
@@ -390,72 +393,72 @@
                 height: self.minimum_height
                 ButtonUpgrade:
                     construction: app.light_fighter
-                    construction_name: app.light_fighter.name
+                    construction_img: app.light_fighter.img
                     construction_n: app.light_fighter.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.heavy_fighter
-                    construction_name: app.heavy_fighter.name
+                    construction_img: app.heavy_fighter.img
                     construction_n: app.heavy_fighter.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.cruiser
-                    construction_name: app.cruiser.name
+                    construction_img: app.cruiser.img
                     construction_n: app.cruiser.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.battleship
-                    construction_name: app.battleship.name
+                    construction_img: app.battleship.img
                     construction_n: app.battleship.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.battlecruiser
-                    construction_name: app.battlecruiser.name
+                    construction_img: app.battlecruiser.img
                     construction_n: app.battlecruiser.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.bomber
-                    construction_name: app.bomber.name
+                    construction_img: app.bomber.img
                     construction_n: app.bomber.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.destroyer
-                    construction_name: app.destroyer.name
+                    construction_img: app.destroyer.img
                     construction_n: app.destroyer.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.deathstar
-                    construction_name: app.deathstar.name
+                    construction_img: app.deathstar.img
                     construction_n: app.deathstar.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.small_cargo_ship
-                    construction_name: app.small_cargo_ship.name
+                    construction_img: app.small_cargo_ship.img
                     construction_n: app.small_cargo_ship.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.large_cargo_ship
-                    construction_name: app.large_cargo_ship.name
+                    construction_img: app.large_cargo_ship.img
                     construction_n: app.large_cargo_ship.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.colony_ship
-                    construction_name: app.colony_ship.name
+                    construction_img: app.colony_ship.img
                     construction_n: app.colony_ship.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.recycler
-                    construction_name: app.recycler.name
+                    construction_img: app.recycler.img
                     construction_n: app.recycler.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.espionage_probe
-                    construction_name: app.espionage_probe.name
+                    construction_img: app.espionage_probe.img
                     construction_n: app.espionage_probe.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.solar_satellite
-                    construction_name: app.solar_satellite.name
+                    construction_img: app.solar_satellite.name
                     construction_n: app.solar_satellite.n
                     construction_queue: construction_queue
         UpgradingQueue:

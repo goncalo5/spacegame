@@ -612,6 +612,7 @@ RESEARCHES = {
 SHIPS = {
     "light_fighter": {
         "name": "Light Fighter",
+        "img": "Imgs/Example_ships/1.png",
         "costs": {
             "metal": 3000,
             "crystal": 1000,
@@ -631,6 +632,7 @@ SHIPS = {
     },
     "heavy_fighter": {
         "name": "Heavy Fighter",
+        "img": "Imgs/Example_ships/6.png",
         "costs": {
             "metal": 6000,
             "crystal": 4000,
@@ -651,6 +653,7 @@ SHIPS = {
     },
     "cruiser": {
         "name": "Cruiser",
+        "img": "Imgs/Example_ships/11.png",
         "costs": {
             "metal": 20000,
             "crystal": 7000,
@@ -671,6 +674,7 @@ SHIPS = {
     },
     "battleship": {
         "name": "Battleship",
+        "img": "Imgs/Example_ships/13.png",
         "costs": {
             "metal": 45000,
             "crystal": 15000,
@@ -690,6 +694,7 @@ SHIPS = {
     },
     "battlecruiser": {
         "name": "Battlecruiser",
+        "img": "Imgs/Example_ships/8.png",
         "costs": {
             "metal": 30000,
             "crystal": 40000,
@@ -711,6 +716,7 @@ SHIPS = {
     },
     "bomber": {
         "name": "Bomber",
+        "img": "Imgs/Example_ships/2.png",
         "costs": {
             "metal": 50000,
             "crystal": 25000,
@@ -731,6 +737,7 @@ SHIPS = {
     },
     "destroyer": {
         "name": "Destroyer",
+        "img": "Imgs/Example_ships/3.png",
         "costs": {
             "metal": 60000,
             "crystal": 50000,
@@ -751,6 +758,7 @@ SHIPS = {
     },
     "deathstar": {
         "name": "Deathstar",
+        "img": "Imgs/Example_ships/9.png",
         "costs": {
             "metal": 5000000,
             "crystal": 4000000,
@@ -772,6 +780,7 @@ SHIPS = {
     },
     "small_cargo_ship": {
         "name": "Small Cargo Ship",
+        "img": "Imgs/Example_ships/11.png",
         "costs": {
             "metal": 2000,
             "crystal": 2000,
@@ -791,6 +800,7 @@ SHIPS = {
     },
     "large_cargo_ship": {
         "name": "Large Cargo Ship",
+        "img": "Imgs/Example_ships/12.png",
         "costs": {
             "metal": 6000,
             "crystal": 6000,
@@ -810,6 +820,7 @@ SHIPS = {
     },
     "colony_ship": {
         "name": "Colony Ship",
+        "img": "Imgs/Example_ships/4.png",
         "costs": {
             "metal": 10000,
             "crystal": 20000,
@@ -829,6 +840,7 @@ SHIPS = {
     },
     "recycler": {
         "name": "Recycler",
+        "img": "Imgs/Example_ships/7.png",
         "costs": {
             "metal": 10000,
             "crystal": 6000,
@@ -849,6 +861,7 @@ SHIPS = {
     },
     "espionage_probe": {
         "name": "Espionage Probe",
+        "img": "Imgs/Example_ships/10.png",
         "costs": {
             "metal": 0,
             "crystal": 1000,

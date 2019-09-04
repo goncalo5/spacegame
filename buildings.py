@@ -55,6 +55,7 @@ class Building(UpgradingEvent):
 
     def update_time(self):
         # update time:
+        self.app = App.get_running_app()
         print("time", self.time, self._id)
         print(self.app.robotics_factory.building_time_factor)
         print(self.app.robotics_factory.level)
