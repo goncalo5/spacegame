@@ -7,9 +7,10 @@ from kivy.event import EventDispatcher
 # kivy.uix:
 from kivy.uix.screenmanager import ScreenManager
 # mine:
-from buildings import MetalMine, CrystalMine, DeuteriumMine,\
+from buildings import MetalMine, CrystalMine, DeuteriumMine, SolarPlant, FusionReactor,\
     MetalStorage, CrystalStorage, DeuteriumStorage,\
-    RoboticsFactory, Shipyard, NaniteFactory, ResearchLab, Terraformer
+    RoboticsFactory, Shipyard, ResearchLab, MissileSilo, \
+    NaniteFactory, Terraformer, SpaceDock
 from resources import Resource
 from constructions import Construction
 from units import Defense, Ship
@@ -31,14 +32,18 @@ class GameApp(App, ScreenManager):
     metal_mine = kp.ObjectProperty(MetalMine())
     crystal_mine = kp.ObjectProperty(CrystalMine())
     deuterium_mine = kp.ObjectProperty(DeuteriumMine())
+    solar_plant = kp.ObjectProperty(SolarPlant())
+    fusion_reactor = kp.ObjectProperty(FusionReactor())
     metal_storage = kp.ObjectProperty(MetalStorage())
     crystal_storage = kp.ObjectProperty(CrystalStorage())
     deuterium_storage = kp.ObjectProperty(DeuteriumStorage())
     robotics_factory = kp.ObjectProperty(RoboticsFactory())
     shipyard = kp.ObjectProperty(Shipyard())
-    nanite_factory = kp.ObjectProperty(NaniteFactory())
     research_lab = kp.ObjectProperty(ResearchLab())
+    missile_silo = kp.ObjectProperty(MissileSilo())
+    nanite_factory = kp.ObjectProperty(NaniteFactory())
     terraformer = kp.ObjectProperty(Terraformer())
+    space_dock = kp.ObjectProperty(SpaceDock())
     # construction:
     construction = kp.ObjectProperty(Construction())
     # defenses:
@@ -88,9 +93,10 @@ class GameApp(App, ScreenManager):
             self.metal, self.crystal, self.deuterium, self.energy
         ]
         self.buildings = [
-            self.metal_mine, self.crystal_mine, self.deuterium_mine,
+            self.metal_mine, self.crystal_mine, self.deuterium_mine, self.solar_plant, self.fusion_reactor,
             self.metal_storage, self.crystal_storage, self.deuterium_storage,
-            self.robotics_factory
+            self.robotics_factory, self.shipyard, self.research_lab, self.missile_silo,
+            self.nanite_factory, self.terraformer, self.space_dock
         ]
         self.defenses = [
             self.rocketlauncher, self.light_laser, self.heavy_laser,

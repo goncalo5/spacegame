@@ -55,7 +55,7 @@ class Building(UpgradingEvent):
 
     def update_time(self):
         # update time:
-        print("time", self.time)
+        print("time", self.time, self._id)
         print(self.app.robotics_factory.building_time_factor)
         print(self.app.robotics_factory.level)
         robotics_factory_factor =\
@@ -83,7 +83,7 @@ class MetalMine(Mine):
             self.app.metal.per_s0 * self.metal_rate ** self.level
 
 
-class CrystalMine(Building):
+class CrystalMine(Mine):
     def __init__(self):
         self._id = "crystal_mine"
         super().__init__()
@@ -94,7 +94,7 @@ class CrystalMine(Building):
             self.app.crystal.per_s0 * self.crystal_rate ** self.level
 
 
-class DeuteriumMine(Building):
+class DeuteriumMine(Mine):
     def __init__(self):
         self._id = "deuterium_mine"
         super().__init__()
@@ -103,6 +103,31 @@ class DeuteriumMine(Building):
     def update_feature(self, *args):
         self.app.deuterium.per_s =\
             self.app.deuterium.per_s0 * self.deuterium_rate ** self.level
+
+
+class SolarPlant(Mine):
+    def __init__(self):
+        self._id = "solar_plant"
+        super().__init__()
+        self.energy_rate = self.settings.get("energy_rate")
+
+    def update_feature(self, *args):
+        self.app.deuterium.per_s =\
+            self.app.deuterium.per_s0 * self.energy_rate ** self.level
+
+
+class FusionReactor(Mine):
+    def __init__(self):
+        self._id = "fusion_reactor"
+        super().__init__()
+        self.deuterium_rate = self.settings.get("deuterium_rate")
+        self.energy_rate = self.settings.get("energy_rate")
+
+    def update_feature(self, *args):
+        self.app.deuterium.per_s =\
+            self.app.deuterium.per_s0 * self.deuterium_rate ** self.level
+        self.app.energy.per_s =\
+            self.app.energy.per_s0 * self.energy_rate ** self.level
 
 
 class Storage(Building):
@@ -147,7 +172,7 @@ class Factory(Building):
         super().__init__()
         self.building_time_factor0 = self.settings.get("building_time_factor0")
         self.update_factor()
-        Clock.schedule_once(self.update_feature, 0)
+        Clock.schedule_once(self.update_feature, 1)  # needs to be 1 because it must give time to all the buildings are done
 
     def update_factor(self):
         self.building_time_factor = self.building_time_factor0 ** self.level
@@ -213,6 +238,24 @@ class Terraformer(Building):
     def update_factor(self):
         self.fields_added =\
             self.fields_added_per_level * self.level
+
+    def update_feature(self, *args):
+        pass
+
+
+class MissileSilo(Building):
+    def __init__(self):
+        self._id = "missile_silo"
+        super().__init__()
+
+    def update_feature(self, *args):
+        pass
+
+
+class SpaceDock(Building):
+    def __init__(self):
+        self._id = "space_dock"
+        super().__init__()
 
     def update_feature(self, *args):
         pass

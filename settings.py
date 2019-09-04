@@ -84,7 +84,8 @@ BUILDINGS = {
             ["deuterium_mine", 5],
             ["energy_technology", 3]
         ],
-        "energy_rate": 2
+        "deuterium_rate": 2,
+        "energy_rate": 2,
     },
     "metal_storage": {
         "name": "Metal Storage",
@@ -171,7 +172,6 @@ BUILDINGS = {
         "costs_rate": 2,
         "time0": 3,
         "time_rate": 2,
-        "reasearch_time_factor0": 0.5
     },
     "nanite_factory":{
         "name": "Nanite Factory",
@@ -221,7 +221,6 @@ BUILDINGS = {
             ["nanite_factory", 1],
             ["energy_technology", 12]
         ],
-        "fields_added_per_level": 5
     },
 }
 
