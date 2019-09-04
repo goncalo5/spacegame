@@ -453,11 +453,6 @@
                 app.construction.change_screen("buildings")
                 root.manager.current = "buildings_screen"
         Button:
-            text: "Defense"
-            on_press:
-                app.construction.change_screen("units")
-                root.manager.current = "defense_screen"
-        Button:
             text: "Research"
             on_press:
                 app.construction.change_screen("researches")
@@ -467,6 +462,11 @@
             on_press:
                 app.construction.change_screen("units")
                 root.manager.current = "shipyard_screen"
+        Button:
+            text: "Defense"
+            on_press:
+                app.construction.change_screen("units")
+                root.manager.current = "defense_screen"
 
 <ResourcesScreen@Screen>:
     BoxLayout:
