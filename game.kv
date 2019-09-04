@@ -115,6 +115,7 @@
             app.construction.cancel(root.queue_name)
 
 <DefenseScreen@Screen>:
+    construction_queue: construction_queue
     BoxLayout:
         orientation: "vertical"
         ResourcesBar
@@ -258,6 +259,7 @@
             queue_name: "buildings"
 
 <ResearchScreen@Screen>:
+    construction_queue: construction_queue
     BoxLayout:
         orientation: "vertical"
         ResourcesBar
@@ -354,6 +356,7 @@
             queue_name: "researches"
 
 <ShipyardScreen@Screen>:
+    construction_queue: construction_queue
     BoxLayout:
         orientation: "vertical"
         ResourcesBar
@@ -437,6 +440,7 @@
                     construction_queue: construction_queue
         UpgradingQueue:
             id: construction_queue
+            queue_name: "units"
 
 
 <MainScreen@Screen>:
@@ -450,22 +454,22 @@
         Button:
             text: "Buildings"
             on_press:
-                app.construction.change_screen("buildings")
+                app.construction.change_screen("buildings", root.manager.buildings_screen.construction_queue)
                 root.manager.current = "buildings_screen"
         Button:
             text: "Research"
             on_press:
-                app.construction.change_screen("researches")
+                app.construction.change_screen("researches", root.manager.research_screen.construction_queue)
                 root.manager.current = "research_screen"
         Button:
             text: "Shipyard"
             on_press:
-                app.construction.change_screen("units")
+                app.construction.change_screen("units", root.manager.shipyard_screen.construction_queue)
                 root.manager.current = "shipyard_screen"
         Button:
             text: "Defense"
             on_press:
-                app.construction.change_screen("units")
+                app.construction.change_screen("units", root.manager.defense_screen.construction_queue)
                 root.manager.current = "defense_screen"
 
 <ResourcesScreen@Screen>:
@@ -564,6 +568,8 @@
     main_screen: main_screen
     resources_screen: resources_screen
     buildings_screen: buildings_screen
+    research_screen: research_screen
+    shipyard_screen: shipyard_screen
     defense_screen: defense_screen
     MainScreen:
         id: main_screen

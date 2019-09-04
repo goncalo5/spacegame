@@ -52,17 +52,25 @@ class Construction(EventDispatcher):
         "units": 0
     })
     construction_queue = kp.DictProperty({
-        "buildings": None,
-        "researches": None,
-        "units": None
+        "buildings": [],
+        "researches": [],
+        "units": []
     })
 
     def __init__(self):
         super().__init__()
+        Clock.schedule_once(self.get_app, 0)
 
-    def change_screen(self, queue_name):
-        print("change_screen", queue_name)
+    def get_app(self, dt):
+        self.app = App.get_running_app()
+
+    def change_screen(self, queue_name, construction_queue):
+        print("change_screen", queue_name, construction_queue)
         self.current_queue = queue_name
+        if construction_queue not in self.construction_queue[queue_name]:
+            self.construction_queue[queue_name].append(construction_queue)
+        print("self.construction_queue", self.construction_queue)
+        self.update_if_have_queue()
 
     def display_costs(self, construction):
         print("display_costs", construction)
@@ -78,8 +86,8 @@ class Construction(EventDispatcher):
     def upgrade(self, construction, construction_queue, quantity=1):
         print("upgrade", self.name)
         self.construction = self.current_selected = construction
-        self.construction_queue[self.current_queue] = construction_queue
-        self.app = App.get_running_app()
+        if construction_queue not in self.construction_queue[self.current_queue]:
+            self.construction_queue[self.current_queue].append(construction_queue)
         try:
             self.quantity = int(quantity)
         except ValueError:
@@ -97,7 +105,7 @@ class Construction(EventDispatcher):
         self.on_queue(queue_name)
 
     def update_if_have_queue(self):
-        print(self.all_queues)
+        print("update_if_have_queue", self.all_queues)
         for queue_name in self.all_queues:
             print(queue_name)
             if self.queue[queue_name]:
@@ -114,15 +122,19 @@ class Construction(EventDispatcher):
             return
         if not self.queue[queue_name]:
             return
-        self.construction_queue[queue_name].size_hint_y = 0.1
+        print("self.construction_queue", self.construction_queue)
+        for construction_queue in self.construction_queue[queue_name]:
+            construction_queue.size_hint_y = 0.1
         self.name_in_queue[queue_name] = self.queue[queue_name][0][0].name
+        print("end show_construction_queue")
 
     def hide_construction_queue(self, queue_name):
         print("hide_construction_queue")
         if not self.construction_queue[queue_name]:
             return
-        self.construction_queue[queue_name].size_hint_y = None
-        self.construction_queue[queue_name].height = 0
+        for construction_queue in self.construction_queue[queue_name]:
+            construction_queue.size_hint_y = None
+            construction_queue.height = 0
 
     def on_queue(self, *args):
         print("on_queue", args)

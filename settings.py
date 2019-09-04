@@ -1,21 +1,21 @@
 RESOURCES = {
     "metal": {
-        "init": 8000,
+        "init": 50000,
         "per_s0": 1,
         "cap0": 10000
     },
     "crystal": {
-        "init": 8000,
+        "init": 50000,
         "per_s0": 1,
         "cap0": 10000
     },
     "deuterium": {
-        "init": 8000,
+        "init": 50000,
         "per_s0": 1,
         "cap0": 10000
     },
     "energy": {
-        "init": 8000,
+        "init": 50000,
         "per_s0": 0,
         "cap0": 0
     }
@@ -598,7 +598,7 @@ SHIPS = {
             "crystal": 4000,
             "deuterium": 0
         },
-        "time": 2,
+        "time": 10,
         "hull": 1000,
         "shield": 25,
         "weapon": 150,
