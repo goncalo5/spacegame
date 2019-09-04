@@ -603,6 +603,11 @@ SHIPS = {
             "deuterium": 0
         },
         "time": 10,
+        "requirements": [
+            ["shipyard", 3],
+            ["armour_technology", 2],
+            ["impulse_drive", 1],
+        ],
         "hull": 1000,
         "shield": 25,
         "weapon": 150,
@@ -618,6 +623,11 @@ SHIPS = {
             "deuterium": 2000
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 5],
+            ["impulse_drive", 4],
+            ["ion_technology", 2],
+        ],
         "hull": 2700,
         "shield": 50,
         "weapon": 400,
@@ -633,6 +643,10 @@ SHIPS = {
             "deuterium": 0
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 7],
+            ["hyperspace_drive", 4],
+        ],
         "hull": 6000,
         "shield": 200,
         "weapon": 1000,
@@ -648,6 +662,12 @@ SHIPS = {
             "deuterium": 15000
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 8],
+            ["hyperspace_technology", 5],
+            ["hyperspace_drive", 5],
+            ["laser_technology", 12],
+        ],
         "hull": 7000,
         "shield": 400,
         "weapon": 700,
@@ -663,6 +683,11 @@ SHIPS = {
             "deuterium": 15000
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 8],
+            ["impulse_drive", 6],
+            ["plasma_technology", 5],
+        ],
         "hull": 7500,
         "shield": 500,
         "weapon": 1000,
@@ -678,6 +703,11 @@ SHIPS = {
             "deuterium": 15000
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 9],
+            ["hyperspace_drive", 6],
+            ["hyperspace_technology", 5],
+        ],
         "hull": 11000,
         "shield": 500,
         "weapon": 2000,
@@ -693,6 +723,12 @@ SHIPS = {
             "deuterium": 1000000
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 12],
+            ["graviton_technology", 1],
+            ["hyperspace_drive", 7],
+            ["hyperspace_technology", 6],
+        ],
         "hull": 900000,
         "shield": 50000,
         "weapon": 200000,
@@ -708,6 +744,10 @@ SHIPS = {
             "deuterium": 0
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 2],
+            ["combustion_drive", 2],
+        ],
         "hull": 400,
         "shield": 10,
         "weapon": 5,
@@ -723,6 +763,10 @@ SHIPS = {
             "deuterium": 0
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 4],
+            ["combustion_drive", 6],
+        ],
         "hull": 1200,
         "shield": 25,
         "weapon": 5,
@@ -738,6 +782,10 @@ SHIPS = {
             "deuterium": 10000
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 4],
+            ["impulse_drive", 3],
+        ],
         "hull": 3000,
         "shield": 100,
         "weapon": 50,
@@ -753,6 +801,11 @@ SHIPS = {
             "deuterium": 2000
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 4],
+            ["combustion_drive", 6],
+            ["shielding_technology", 2],
+        ],
         "hull": 1600,
         "shield": 10,
         "weapon": 1,
@@ -768,6 +821,11 @@ SHIPS = {
             "deuterium": 0
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 3],
+            ["combustion_drive", 3],
+            ["espionage_technology", 2],
+        ],
         "hull": 100,
         "shield": 0.01,
         "weapon": 0.01,
@@ -783,6 +841,9 @@ SHIPS = {
             "deuterium": 500
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 1],
+        ],
         "hull": 200,
         "shield": 1,
         "weapon": 1,
