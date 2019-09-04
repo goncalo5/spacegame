@@ -59,11 +59,9 @@ class Building(UpgradingEvent):
         print(self.app.robotics_factory.building_time_factor)
         print(self.app.robotics_factory.level)
         robotics_factory_factor =\
-            self.app.robotics_factory.building_time_factor **\
-                self.app.robotics_factory.level
+            self.app.robotics_factory.building_time_factor
         nanite_factory_factor =\
-            self.app.nanite_factory.building_time_factor **\
-                self.app.nanite_factory.level
+            self.app.nanite_factory.building_time_factor
         self.time = self.time0 * self.time_rate ** self.level *\
             robotics_factory_factor * nanite_factory_factor
         print("time", self.time, robotics_factory_factor)
@@ -161,7 +159,9 @@ class RoboticsFactory(Factory):
         super().__init__()
 
     def update_feature(self, *args):
-        self.building_time_factor = self.building_time_factor0 ** self.level
+        print("update_feature", self.name)
+        self.update_factor()
+        print("self.building_time_factor", self.building_time_factor)
         for building in self.app.buildings:
             building.update_time()
 
@@ -183,6 +183,7 @@ class NaniteFactory(Factory):
         super().__init__()
 
     def update_feature(self, *args):
+        self.update_factor()
         for building in self.app.buildings:
             building.update_time()
 
