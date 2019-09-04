@@ -18,7 +18,13 @@ class Unit(EventDispatcher):
         self.shield = self.settings.get("shield")
         self.weapen = self.settings.get("weapen")
         self.time = self.settings.get("time")
-    
+        self.requirements = self.settings.get("requirements")
+
+    def check_if_it_have_the_necessary_requirements(self):
+        if not self.requirements:
+            return True
+        print(self.requirements)
+
     def upgraded(self):
         self.n += 1
 

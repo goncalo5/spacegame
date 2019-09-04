@@ -14,6 +14,8 @@ class UpgradingEvent(EventDispatcher):
     time = kp.NumericProperty()
     def __init__(self):
         super().__init__()
+        self.requirements = self.settings.get("requirements")
+
         Clock.schedule_once(self.get_app, 0)
 
     def get_app(self, dt):
@@ -40,8 +42,8 @@ class UpgradingEvent(EventDispatcher):
 class Building(UpgradingEvent):
     queue = kp.StringProperty("buildings")
     def __init__(self):
-        super().__init__()
         self.settings = BUILDINGS.get(self._id)
+        super().__init__()
         self.name = self.settings.get("name")
         self.level = self.settings.get("level", 0)
         self.costs0 = self.settings.get("costs0")

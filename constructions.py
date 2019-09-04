@@ -83,11 +83,25 @@ class Construction(EventDispatcher):
         self.have_textinput = 1
         self.have_button = 1
 
+    def check_if_it_have_the_necessary_requirements(self, construction):
+        print("check_if_it_have_the_necessary_requirements")
+        if not construction.requirements:
+            return True
+        for requirement_name, requirement_level in construction.requirements:
+            print(requirement_name, requirement_level)
+            requirement = getattr(self.app, requirement_name)
+            print(requirement.level, requirement_level)
+            if requirement_level > requirement.level:
+                print("False")
+                return False
+        print("True", construction.requirements)
+        return True
+
     def upgrade(self, construction, construction_queue, quantity=1):
         print("upgrade", self.name)
         self.construction = self.current_selected = construction
-        if construction_queue not in self.construction_queue[self.current_queue]:
-            self.construction_queue[self.current_queue].append(construction_queue)
+        if not self.check_if_it_have_the_necessary_requirements(construction):
+            return
         try:
             self.quantity = int(quantity)
         except ValueError:
@@ -149,7 +163,7 @@ class Construction(EventDispatcher):
             Clock.schedule_interval(partial(self.update_time_left, queue_name), 0.1)
     
     def update_time_left(self, queue_name, dt):
-        print("update_time_left", queue_name, dt)
+        # print("update_time_left", queue_name, dt)
         if self.app.construction.is_cancel[queue_name]:
             self.app.return_the_resources(self.construction.costs)
             self.app.construction.is_cancel[queue_name] = False
@@ -170,9 +184,8 @@ class Construction(EventDispatcher):
             return False
 
     def on_time_left_s(self, *args):
-        print("on_time_left_s")
+        # print("on_time_left_s")
         for queue_name in ["buildings", "researches", "units"]:
-            print(queue_name, self.queue_time[queue_name])
             if self.queue[queue_name] == []:
                 continue
             self.queue_time[queue_name] = 0

@@ -11,10 +11,9 @@ from buildings import UpgradingEvent
 class Research(UpgradingEvent):
     queue = kp.StringProperty("researches")
     def __init__(self, research_name):
-        super().__init__()
-        print(research_name)
         self._id = research_name
         self.settings = RESEARCHES.get(self._id)
+        super().__init__()
         self.name = self.settings.get("name")
         self.costs0 = self.settings.get("costs0")
         self.costs_rate = self.settings.get("costs_rate")

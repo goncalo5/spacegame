@@ -584,6 +584,10 @@ SHIPS = {
             "deuterium": 0
         },
         "time": 2,
+        "requirements": [
+            ["shipyard", 1],
+            ["combustion_drive", 1],
+        ],
         "hull": 400,
         "shield": 20,
         "weapon": 80,
