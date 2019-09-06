@@ -63,7 +63,7 @@ BUILDINGS = {
     },
     "solar_plant": {
         "name": "Solar Plant",
-        "img": "Imgs/Buildings/spr_building_burnerhut_0.png",
+        "img": "Imgs/Buildings/Orange Powerplant04.png",
         "costs0": {
             "metal": 20,
             "crystal": 15,
@@ -76,6 +76,7 @@ BUILDINGS = {
     },
     "fusion_reactor": {
         "name": "Fusion Reactor",
+        "img": "Imgs/Buildings/orange extraction rig04.png",
         "costs0": {
             "metal": 900,
             "crystal": 360,
@@ -145,6 +146,7 @@ BUILDINGS = {
     },
     "shipyard":{
         "name": "Shipyard",
+        "img": "Imgs/Buildings/manufactory02.png",
         "costs0": {
             "metal": 50,
             "crystal": 50,
@@ -202,6 +204,7 @@ BUILDINGS = {
     },
     "terraformer":{
         "name": "Terraformer",
+        "img": "Imgs/Buildings/orangebarracks01.png",
         "costs0": {
             "metal": 50,
             "crystal": 50,
@@ -238,6 +241,8 @@ BUILDINGS = {
 DEFENSES = {
     "rocketlauncher": {
         "name": "Rocketlauncher",
+        # "img": "Imgs/Defenses/MK3 Defense Cannon 05 front screens.jpg",
+        "img": "Imgs/Defenses/orange defense base.png",
         "costs": {
             "metal": 2000,
             "crystal": 0,

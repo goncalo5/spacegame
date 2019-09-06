@@ -49,6 +49,7 @@
         size: self.parent.size
         Label:
             text: "%s" % root.construction_name
+            color: 1, 1, 1, 0.8
             canvas.before:
                 Color:
                     rgba: 1, 1, 1, 0.8 if root.construction_img else 0
@@ -138,41 +139,49 @@
                 ButtonUpgrade:
                     construction: app.rocketlauncher
                     construction_name: app.rocketlauncher.name
+                    construction_img: app.rocketlauncher.img
                     construction_n: app.rocketlauncher.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.light_laser
                     construction_name: app.light_laser.name
+                    construction_img: app.light_laser.img
                     construction_n: app.light_laser.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.heavy_laser
                     construction_name: app.heavy_laser.name
+                    construction_img: app.heavy_laser.img
                     construction_n: app.heavy_laser.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.ion_cannon
                     construction_name: app.ion_cannon.name
+                    construction_img: app.ion_cannon.img
                     construction_n: app.ion_cannon.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.gauss_cannon
                     construction_name: app.gauss_cannon.name
+                    construction_img: app.gauss_cannon.img
                     construction_n: app.gauss_cannon.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.plasma_turret
                     construction_name: app.plasma_turret.name
+                    construction_img: app.plasma_turret.img
                     construction_n: app.plasma_turret.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.small_shield_dome
                     construction_name: app.small_shield_dome.name
+                    construction_img: app.small_shield_dome.img
                     construction_n: app.small_shield_dome.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.large_shield_dome
                     construction_name: app.large_shield_dome.name
+                    construction_img: app.large_shield_dome.img
                     construction_n: app.large_shield_dome.n
                     construction_queue: construction_queue
         UpgradingQueue:
@@ -414,71 +423,85 @@
                 ButtonUpgrade:
                     construction: app.light_fighter
                     construction_img: app.light_fighter.img
+                    construction_name: app.light_fighter.name
                     construction_n: app.light_fighter.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.heavy_fighter
                     construction_img: app.heavy_fighter.img
+                    construction_name: app.heavy_fighter.name
                     construction_n: app.heavy_fighter.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.cruiser
                     construction_img: app.cruiser.img
+                    construction_name: app.cruiser.name
                     construction_n: app.cruiser.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.battleship
                     construction_img: app.battleship.img
+                    construction_name: app.battleship.name
                     construction_n: app.battleship.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.battlecruiser
                     construction_img: app.battlecruiser.img
+                    construction_name: app.battlecruiser.name
                     construction_n: app.battlecruiser.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.bomber
                     construction_img: app.bomber.img
+                    construction_name: app.bomber.name
                     construction_n: app.bomber.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.destroyer
                     construction_img: app.destroyer.img
+                    construction_name: app.destroyer.name
                     construction_n: app.destroyer.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.deathstar
                     construction_img: app.deathstar.img
+                    construction_name: app.deathstar.name
                     construction_n: app.deathstar.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.small_cargo_ship
                     construction_img: app.small_cargo_ship.img
+                    construction_name: app.small_cargo_ship.name
                     construction_n: app.small_cargo_ship.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.large_cargo_ship
                     construction_img: app.large_cargo_ship.img
+                    construction_name: app.large_cargo_ship.name
                     construction_n: app.large_cargo_ship.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.colony_ship
                     construction_img: app.colony_ship.img
+                    construction_name: app.colony_ship.name
                     construction_n: app.colony_ship.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.recycler
                     construction_img: app.recycler.img
+                    construction_name: app.recycler.name
                     construction_n: app.recycler.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.espionage_probe
                     construction_img: app.espionage_probe.img
+                    construction_name: app.espionage_probe.name
                     construction_n: app.espionage_probe.n
                     construction_queue: construction_queue
                 ButtonUpgrade:
                     construction: app.solar_satellite
                     construction_img: app.solar_satellite.img
+                    construction_name: app.solar_satellite.name
                     construction_n: app.solar_satellite.n
                     construction_queue: construction_queue
         UpgradingQueue:
